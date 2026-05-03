@@ -1,0 +1,26 @@
+# Netlify configuration for prismaianalytics.com
+#
+# Tells Netlify where to find the serverless functions that handle the
+# contact-form "submission-created" webhook.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# If you add a build command later (e.g. to minify HTML), put it here.
+# [build]
+#   command = "npm run build"
+
+[functions]
+  # Node 18+ gives us native fetch, which submission-created.js uses.
+  node_bundler = "esbuild"
+
+# Clean URL for the privacy policy — serves /privacy.html when users visit /privacy
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+# Required environment variables (set in Netlify UI, not here):
+#   DASHBOARD_API_URL       — Railway URL of your dashboard, no trailing slash
+#   DASHBOARD_LEADS_SECRET  — optional shared secret for X-Lead-Forwarder header

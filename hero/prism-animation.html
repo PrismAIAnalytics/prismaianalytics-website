@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prism AI — Logo Animation Test</title>
+  <style>
+    :root {
+      --bg-edge: #e6ecf5;
+      --bg-center: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse at center, var(--bg-center) 0%, var(--bg-edge) 80%);
+      color: #5a6278;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    #stage {
+      width: min(92vw, 92vh);
+      aspect-ratio: 1 / 1;
+      display: block;
+    }
+    .label {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6a7494;
+      opacity: 0.7;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="stage"></canvas>
+  <div class="label">Prism AI · Logo Animation</div>
+  <script type="module">
+    import { mountPrismAnimation } from './prism-animation.js';
+    const canvas = document.getElementById('stage');
+    mountPrismAnimation(canvas);
+  </script>
+</body>
+</html>
