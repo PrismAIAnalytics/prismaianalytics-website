@@ -4,12 +4,9 @@
 # contact-form "submission-created" webhook.
 
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "_site"
   functions = "netlify/functions"
-
-# If you add a build command later (e.g. to minify HTML), put it here.
-# [build]
-#   command = "npm run build"
 
 [functions]
   # Node 18+ gives us native fetch, which submission-created.js uses.

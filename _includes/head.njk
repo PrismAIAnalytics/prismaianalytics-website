@@ -1,0 +1,16 @@
+{# Shared <head> partial. Per-page meta passed in via frontmatter. #}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>{{ title or site.name }}</title>
+<meta name="description" content="{{ description or site.tagline }}"/>
+<meta property="og:title" content="{{ ogTitle or title or site.name }}"/>
+<meta property="og:description" content="{{ ogDescription or description or site.tagline }}"/>
+<meta property="og:type" content="{{ ogType or 'website' }}"/>
+<meta property="og:url" content="{{ site.url }}{{ page.url }}"/>
+{% if site.ogImage %}<meta property="og:image" content="{{ site.url }}{{ site.ogImage }}"/>{% endif %}
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="canonical" href="{{ site.url }}{{ page.url }}"/>
+<link rel="icon" type="image/png" href="/PRISM_Logo.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/assets/css/main.css"/>
+{% if extraHead %}{{ extraHead | safe }}{% endif %}

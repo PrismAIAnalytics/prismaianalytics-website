@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include "head.njk" %}
+{% if pageStyles %}<style>{{ pageStyles | safe }}</style>{% endif %}
+</head>
+<body>
+
+{% include "nav.njk" %}
+
+{{ content | safe }}
+
+{% include "footer.njk" %}
+
+<script>
+  // Scroll-triggered reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav shrink on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('topnav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('mobileNav').classList.remove('active');
+        document.getElementById('hamburger').classList.remove('active');
+      }
+    });
+  });
+
+  // Hamburger menu
+  const hb = document.getElementById('hamburger');
+  if (hb) hb.addEventListener('click', () => {
+    hb.classList.toggle('active');
+    document.getElementById('mobileNav').classList.toggle('active');
+  });
+</script>
+
+{% if pageScripts %}{{ pageScripts | safe }}{% endif %}
+</body>
+</html>

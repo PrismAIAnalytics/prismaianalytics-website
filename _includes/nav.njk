@@ -1,0 +1,21 @@
+{# Shared top nav + mobile-nav overlay. Renders site.nav from _data/site.json. #}
+<nav id="topnav">
+  <a href="/" class="nav-logo">
+    <img src="/PRISM_Logo.png" alt="Prism AI Analytics Logo" onerror="this.style.display='none'"/>
+    <div class="nav-logo-text">{{ site.name }}<span>{{ site.tagline }}</span></div>
+  </a>
+  <ul class="nav-links">
+    {% for item in site.nav %}<li><a href="{{ item.href }}">{{ item.label }}</a></li>{% endfor %}
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="/login/" class="nav-login">Client Login</a>
+  <a href="/#contact" class="nav-cta">Work With Us</a>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  {% for item in site.nav %}<a href="{{ item.href }}">{{ item.label }}</a>{% endfor %}
+  <a href="/login/">Client Login</a>
+  <a href="/#contact" style="color:var(--gold);font-weight:700;">Work With Us</a>
+</div>
