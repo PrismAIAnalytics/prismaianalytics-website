@@ -41,13 +41,55 @@ eleventyExcludeFromCollections: true
     </div>
 
     <div class="hero-video-wrap">
-      <video autoplay muted loop playsinline poster="">
-         <source src="iStock-2153051604.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline poster="" id="hero-video">
+         <source src="/iStock-2153051604.mp4" type="video/mp4">
       </video>
+      {# Stream F7: Three.js prism animation, gated behind ?hero=v2 flag.
+         Default visit (no flag) = video as before. Flag on AND not reduced-motion
+         AND not mobile = canvas mounts via dynamic import. June 8 unflag = remove
+         the flag check below so canvas is the default. #}
+      <canvas id="hero-prism-canvas" style="display:none;width:100%;height:100%;" aria-hidden="true"></canvas>
       <div class="hero-video-badge">AI &middot; Data &middot; Intelligence</div>
     </div>
   </div>
 </section>
+
+<script>
+  // Hero media flag: ?hero=v2 swaps the iStock video for the Three.js prism.
+  // Skips on reduced-motion preference, mobile (perf budget + layout collapses
+  // to single-column at the same 900px breakpoint as main.css), or import failure.
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('hero') !== 'v2') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(max-width: 900px)').matches) return;
+
+    const canvas = document.getElementById('hero-prism-canvas');
+    const video = document.getElementById('hero-video');
+    if (!canvas || !video) return;
+
+    import('/hero/prism-animation.js').then(function (mod) {
+      video.style.display = 'none';
+      canvas.style.display = 'block';
+      return mod.mountPrismAnimation(canvas, { svgUrl: '/hero/prism-logo.svg' });
+    }).then(function (handle) {
+      // Pause the WebGL loop when the canvas scrolls out of view; resume on re-entry.
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) handle.play();
+          else handle.pause();
+        });
+      }, { threshold: 0.01 });
+      io.observe(canvas);
+    }).catch(function (err) {
+      // Defensive: if Three.js fails to load, restore video as fallback so the
+      // hero never renders empty.
+      video.style.display = 'block';
+      canvas.style.display = 'none';
+      console.warn('[hero] Three.js failed; falling back to video:', err);
+    });
+  })();
+</script>
 
 <!-- TRUST BAR -->
 <div id="trust-bar">
