@@ -23,13 +23,18 @@ const SVG_INNER_PX = {
   cx: 49.0, cy: 32.6,
 };
 
-export async function mountPrismAnimation(canvas) {
+export async function mountPrismAnimation(canvas, opts = {}) {
+  // Resolve SVG path: opts.svgUrl wins (used when mounted from /); falls back
+  // to the module-relative ./prism-logo.svg used by the standalone test page.
+  const svgUrl = opts.svgUrl || SVG_URL;
+
   const renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: true,
     alpha: true,
     powerPreference: 'high-performance',
-    preserveDrawingBuffer: true,
+    // preserveDrawingBuffer removed — only needed for canvas-to-image capture,
+    // not for animation. Saves memory.
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -49,7 +54,7 @@ export async function mountPrismAnimation(canvas) {
   const root = new THREE.Group();
   scene.add(root);
 
-  const logoTexture = await loadSvgTextureWithMask(SVG_URL);
+  const logoTexture = await loadSvgTextureWithMask(svgUrl);
   const outerPrism = buildOuterPrism(logoTexture);
   root.add(outerPrism);
 
@@ -86,16 +91,6 @@ export async function mountPrismAnimation(canvas) {
   }
 
   const state = { frozen: null };
-  if (typeof window !== 'undefined') {
-    window.__prism = {
-      freeze(angleDeg = 0) {
-        state.frozen = (angleDeg * Math.PI) / 180;
-      },
-      play() {
-        state.frozen = null;
-      },
-    };
-  }
 
   const MAX_YAW = THREE.MathUtils.degToRad(26);
   const MAX_PITCH = THREE.MathUtils.degToRad(6);
@@ -104,7 +99,11 @@ export async function mountPrismAnimation(canvas) {
   const CHROME_SPIN = THREE.MathUtils.degToRad(35);
 
   const clock = new THREE.Clock();
-  renderer.setAnimationLoop(() => {
+
+  // Tick stored as a named function so pause()/play() can stop and resume the
+  // loop without rebuilding the scene. Also lets the IntersectionObserver path
+  // pause the animation when the canvas scrolls out of view (saves CPU/battery).
+  const tick = () => {
     const t = clock.getElapsedTime();
     let yaw, pitch, sweepPhase, leanAmt, omega;
     if (state.frozen !== null) {
@@ -137,7 +136,9 @@ export async function mountPrismAnimation(canvas) {
     );
 
     renderer.render(scene, camera);
-  });
+  };
+
+  renderer.setAnimationLoop(tick);
 
   return {
     dispose() {
@@ -146,6 +147,12 @@ export async function mountPrismAnimation(canvas) {
       logoTexture.dispose();
       pmrem.dispose();
       renderer.dispose();
+    },
+    pause() {
+      renderer.setAnimationLoop(null);
+    },
+    play() {
+      renderer.setAnimationLoop(tick);
     },
   };
 }
