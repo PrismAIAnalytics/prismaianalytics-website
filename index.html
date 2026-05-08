@@ -145,7 +145,13 @@
     .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--gold); border-radius: 1px; }
     .hero-title { font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.08; color: var(--white); margin-bottom: 1rem; letter-spacing: -0.02em; }
     .hero-title strong { font-weight: 800; background: linear-gradient(135deg, var(--sky), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; }
-    .hero-tagline { font-size: 1rem; color: var(--sky); font-weight: 400; margin-bottom: 2.5rem; line-height: 1.7; max-width: 440px; }
+    .hero-subhead {
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem); font-weight: 600; line-height: 1.35;
+      margin-bottom: 1.5rem; max-width: 560px; letter-spacing: -0.01em;
+      background: linear-gradient(135deg, var(--sky), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-tagline { font-size: 1rem; color: var(--sky); font-weight: 400; margin-bottom: 2.5rem; line-height: 1.7; max-width: 480px; }
     .hero-tagline em { color: var(--gold); font-style: normal; font-weight: 600; }
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn-primary { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--navy); padding: 0.9rem 2.2rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; transition: all 0.25s; display: inline-flex; align-items: center; gap: 0.5rem; }
@@ -601,10 +607,8 @@
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-eyebrow">AI Adoption &mdash; Strategy + Execution</div>
-      <h1 class="hero-title">
-        AI adoption, end to end.
-        <strong>From first assessment through production operations &mdash; sized to where you are.</strong>
-      </h1>
+      <h1 class="hero-title">AI adoption, end to end.</h1>
+      <p class="hero-subhead">From first assessment through production operations &mdash; sized to where you are.</p>
       <p class="hero-tagline">
         Prism AI Analytics delivers AI adoption strategy and execution across analytics, automation, and compliance engineering. Engagements scale from a two-week diagnostic to a full managed operations partnership &mdash; structured by where the business is in the adoption journey, not by an arbitrary tier.
       </p>
