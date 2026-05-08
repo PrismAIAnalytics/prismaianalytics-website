@@ -25,3 +25,10 @@ npm-debug.log*
 
 # Pre-edit snapshots
 *.bak
+
+# Eleventy build output
+_site/
+
+# Windows folder-icon noise
+desktop.ini
+**/desktop.ini

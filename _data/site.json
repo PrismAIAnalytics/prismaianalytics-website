@@ -1,0 +1,30 @@
+{
+  "name": "Prism AI Analytics",
+  "tagline": "Illuminating Data. Empowering Decisions.",
+  "url": "https://prismaianalytics.com",
+  "email": "michele@prismaianalytics.com",
+  "phone": "980-346-8368",
+  "phoneHref": "+19803468368",
+  "location": "Charlotte, North Carolina",
+  "twitterHandle": "",
+  "ogImage": "/PRISM_Logo.png",
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/#about" },
+    { "label": "Services", "href": "/#services" },
+    { "label": "Blog", "href": "/blog/" },
+    { "label": "Contact", "href": "/#contact" }
+  ],
+  "footer": {
+    "links": [
+      { "label": "Home", "href": "/" },
+      { "label": "About", "href": "/#about" },
+      { "label": "Services", "href": "/#services" },
+      { "label": "Blog", "href": "/blog/" },
+      { "label": "Contact", "href": "/#contact" },
+      { "label": "Client Login", "href": "/login/" },
+      { "label": "Privacy Policy", "href": "/privacy", "rel": "nofollow" }
+    ],
+    "copyright": "© 2026 Prism AI Analytics. All rights reserved."
+  }
+}

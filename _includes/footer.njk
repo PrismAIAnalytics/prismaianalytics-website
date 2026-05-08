@@ -1,0 +1,11 @@
+{# Shared footer. Tagline is brand signature here per Decision 7 (footer-only). #}
+<footer>
+  <div class="footer-brand">
+    <img src="/PRISM_Logo.png" alt="Prism AI Analytics Logo" onerror="this.style.display='none'"/>
+    <div class="footer-brand-text">{{ site.name }}<span>{{ site.tagline }}</span></div>
+  </div>
+  <div class="footer-copy">{{ site.footer.copyright }}</div>
+  <div class="footer-links">
+    {% for link in site.footer.links %}<a href="{{ link.href }}"{% if link.rel %} rel="{{ link.rel }}"{% endif %}>{{ link.label }}</a>{% endfor %}
+  </div>
+</footer>

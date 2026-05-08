@@ -1,0 +1,17 @@
+{
+  "name": "prismaianalytics-website",
+  "version": "1.0.0",
+  "description": "Prism AI Analytics marketing site (prismaianalytics.com). Static HTML rendered by Eleventy.",
+  "private": true,
+  "scripts": {
+    "build": "eleventy",
+    "watch": "eleventy --watch",
+    "serve": "eleventy --serve --port=8080"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}
