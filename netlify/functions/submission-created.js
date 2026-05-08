@@ -29,14 +29,16 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: JSON.stringify({ ok: true, skipped: 'not contact form' }) };
     }
 
-    // Map website field names → dashboard API field names
+    // Map website field names → dashboard API field names.
+    // adoption_stage is the canonical handshake field with /api/leads (homepage v2,
+    // 2026-05-07): values are exploring | assess | architect | operate | compliance.
     const body = {
-      first_name:          data.first_name  || '',
-      last_name:           data.last_name   || '',
-      email:               data.email       || '',
-      company:             data.company     || '',
-      service_of_interest: data.service     || '',    // ← website uses 'service', dashboard uses 'service_of_interest'
-      message:             data.message     || '',
+      first_name:          data.first_name      || '',
+      last_name:           data.last_name       || '',
+      email:               data.email           || '',
+      company:             data.company         || '',
+      adoption_stage:      data.adoption_stage  || '',
+      message:             data.message         || '',
       source:              'website_contact_form',
     };
 
