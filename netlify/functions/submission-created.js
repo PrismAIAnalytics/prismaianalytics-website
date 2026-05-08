@@ -39,7 +39,11 @@ exports.handler = async (event) => {
       company:             data.company         || '',
       adoption_stage:      data.adoption_stage  || '',
       message:             data.message         || '',
-      source:              'website_contact_form',
+      // Honor source from the form when present (lets dedicated landing pages
+      // attribute their leads, e.g. ai_readiness_landing from /ai-readiness/).
+      // Default to website_contact_form for the homepage form which has no
+      // source field on the markup.
+      source:              data.source || 'website_contact_form',
     };
 
     const url = process.env.DASHBOARD_API_URL;
