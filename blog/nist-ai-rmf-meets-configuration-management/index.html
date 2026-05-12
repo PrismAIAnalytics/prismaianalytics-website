@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mapping NIST AI RMF to Configuration Management: A Crosswalk for Compliance Teams | Prism AI Analytics</title>
   <meta name="description" content="This post is the fourth in a series on configuration management for AI agents. The first three posts made the case that AI governance, as currently practiced, has an operational gap — a latency gap be..."/>
+  <meta name="robots" content="noindex, follow"/>
   <meta property="og:title" content="Mapping NIST AI RMF to Configuration Management: A Crosswalk for Compliance Teams | Prism AI Analytics"/>
   <meta property="og:description" content="This post is the fourth in a series on configuration management for AI agents. The first three posts made the case that AI governance, as currently practiced, has an operational gap — a latency gap be..."/>
   <meta property="og:type" content="article"/>
@@ -25,6 +26,11 @@
     footer{background:var(--navy);color:var(--sky);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(200,164,90,0.2)}.footer-brand{display:flex;align-items:center;gap:.8rem}.footer-brand img{height:36px;mix-blend-mode:lighten}.footer-brand-text{font-size:1rem;color:var(--white);font-weight:700}.footer-brand-text span{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);font-weight:400;margin-top:2px}.footer-copy{font-size:.75rem;color:var(--sky);opacity:.7}.footer-links{display:flex;gap:1.5rem}.footer-links a{color:var(--sky);text-decoration:none;font-size:.8rem;font-weight:500;transition:color .2s}.footer-links a:hover{color:white}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
     @media(max-width:900px){nav{padding:1rem 1.5rem}nav.scrolled{padding:.7rem 1.5rem}.nav-links{display:none}.hamburger{display:flex}.article-hero{padding:7rem 1.5rem 3rem}.article-body{padding:3rem 1.5rem}.article-meta{flex-direction:column;gap:.5rem}footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem}}
+    .stub-card{max-width:640px;margin:0 auto;padding:3rem 2rem;text-align:center}
+    .stub-card .stub-badge{display:inline-block;background:rgba(200,164,90,0.15);color:var(--gold);padding:.35rem 1rem;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
+    .stub-card h2{font-size:1.05rem;font-weight:600;color:var(--text-muted);margin-bottom:1rem;letter-spacing:.02em;text-transform:uppercase}
+    .stub-card .stub-date{font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:1.5rem;letter-spacing:-.01em}
+    .stub-card .stub-desc{font-size:1rem;line-height:1.75;color:var(--text-muted);margin-bottom:2rem}
   </style>
 </head>
 <body>
@@ -55,108 +61,17 @@
   <div class="article-hero-inner">
     <div class="article-category">AI Agent Governance</div>
     <h1>Mapping NIST AI RMF to Configuration Management: A Crosswalk for Compliance Teams</h1>
-    <div class="article-meta">
-      <span>&#128197; June 11, 2026</span>
-      <span>&#9202; 11 min</span>
-      <span>By Michele Fisher</span>
-    </div>
   </div>
 </header>
 
 <article class="article-body">
   <a href="/blog/" class="back-to-blog">&larr; Back to Blog</a>
-
-  <p>This post is the fourth in a series on configuration management for AI agents. The first three posts made the case that AI governance, as currently practiced, has an operational gap — a latency gap between the speed at which autonomous agents act and the speed at which humans intervene — and that the four-discipline configuration management framework, anchored by a Key Risk Indicator tier model from financial services, closes it.</p>
-
-  <p>A fair question at this point: where does this fit with the standards a compliance team is already accountable to? Specifically, how does it map to the NIST AI Risk Management Framework, which is the most-cited AI governance reference in the United States and the framework most enterprise compliance teams are using as their north star?</p>
-
-  <p>The short answer is that the Prism CM-AI Framework is the operational implementation layer for what NIST AI RMF defines as policy outcomes. NIST tells you what governance is supposed to achieve. Configuration management tells you how the work gets done day to day. They are complementary, not competing. This post provides the crosswalk.</p>
-
-  <h2>What NIST AI RMF actually is</h2>
-
-  <p>NIST published the <a href="https://www.nist.gov/itl/ai-risk-management-framework">AI Risk Management Framework version 1.0</a> in January 2023, with subsequent additions including the <a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf">Generative AI Profile (NIST AI 600-1)</a> in 2024. The framework is voluntary, but it has become the de facto baseline for AI governance in U.S. enterprises and federal contractors. It is structured around four functions, each with a set of categories and subcategories that describe what an organization should be doing.</p>
-
-  <ul><li><strong>Govern</strong> — establishing the policies, structures, processes, and practices that enable a culture of risk management for AI systems.</li><li><strong>Map</strong> — establishing context for AI risks by inventorying systems, identifying impacts, and characterizing dependencies.</li><li><strong>Measure</strong> — analyzing, assessing, benchmarking, and monitoring AI risks and related impacts.</li><li><strong>Manage</strong> — allocating risk resources to mapped and measured risks regularly and as defined.</li></ul>
-
-  <p>Each function is broken into categories. Govern covers things like organizational policies, accountability, workforce competencies, and stakeholder engagement. Map covers system inventory, intended use, data and input characterization, and dependency mapping. Measure covers metrics, evaluations, monitoring, and tracking. Manage covers risk response, treatment, and ongoing improvement.</p>
-
-  <p>The framework is policy-led by design. It tells the organization what outcomes its governance program needs to produce. It does not prescribe how to produce those outcomes. That prescriptive layer is exactly what most organizations are missing — and exactly what a configuration management framework provides.</p>
-
-  <h2>The crosswalk</h2>
-
-  <figure class="post-figure">
-    <img src="/assets/img/blog/cm-ai-deck/image15.png" alt="Translating static policy into auditable evidence" loading="lazy" />
-    <figcaption>Translating static policy into auditable evidence</figcaption>
-  </figure>
-
-  <p>The four configuration management disciplines map cleanly to the four NIST functions. Each NIST function corresponds to a primary CM discipline, with secondary mappings where the disciplines overlap.</p>
-
-  <table class="article-table"><thead><tr><th>NIST AI RMF function</th><th>Primary CM discipline</th><th>What it looks like in practice</th></tr></thead><tbody><tr><td><strong>Govern</strong></td><td>Change Control</td><td>Policy authority for baselines, approval workflows, role definitions, accountability lines for who can change what</td></tr><tr><td><strong>Map</strong></td><td>Baseline</td><td>Agent inventory, tool inventory, data scope mapping, dependency documentation, baseline definition for each production agent</td></tr><tr><td><strong>Measure</strong></td><td>Drift Detection + KRI tier model</td><td>Continuous monitoring with predefined thresholds and tiered escalation; KPIs measured separately for value tracking</td></tr><tr><td><strong>Manage</strong></td><td>Audit &amp; Remediation</td><td>Incident response, rollback procedures, post-incident review, risk treatment, audit trail maintenance</td></tr></tbody></table>
-
-  <p>The mapping is not metaphorical. Each NIST subcategory has a corresponding operational practice in the CM framework, and most of them are practices the AI governance market is currently underserving.</p>
-
-  <h3>Govern → Change Control</h3>
-
-  <p>NIST GOVERN 1.1 requires legal and regulatory requirements involving AI to be understood, managed, and documented. GOVERN 1.4 requires risk management processes and outcomes to be established through transparent policies, procedures, and other controls based on organizational risk priorities. GOVERN 2.1 requires roles, responsibilities, and lines of communication related to mapping, measuring, and managing AI risks to be documented and clear to individuals and teams throughout the organization.</p>
-
-  <p>What this means operationally: somebody has to be accountable for approving every change to a production agent’s baseline. The accountability has to be documented, the approval path has to be defined, and the practice has to be auditable. That is change control. Most organizations gate model upgrades through some version of this. Almost none gate prompt revisions, tool inventory expansions, or data-scope changes through the same discipline. The gap is where most AI governance failures live.</p>
-
-  <h3>Map → Baseline</h3>
-
-  <p>NIST MAP 1 covers context establishment. MAP 2 covers AI system categorization and intended use. MAP 3 covers AI capabilities, targeted usage, goals, and expected benefits. MAP 4 covers risk and benefit mapping for third-party software and data. MAP 5 covers impact characterization.</p>
-
-  <p>What this means operationally: the organization needs a documented description of what each agent is, what it does, what it depends on, and what <em>good</em> looks like for it in production. That description is the baseline. Without a baseline, the next three functions — measuring, managing, and responding to risk — have nothing to measure against. NIST does not use the word <em>baseline</em>. Configuration management has been using it for thirty years. The concept is the same.</p>
-
-  <p>The Map function also requires dependency characterization. In CM terms, that is the agent’s tool inventory, its data scopes, its identity and access posture, and its model and prompt versions. The framework treats those as first-class baseline components, not as implementation details that live in someone’s local environment.</p>
-
-  <h3>Measure → Drift Detection + KRIs</h3>
-
-  <p>NIST MEASURE 1 covers identifying appropriate metrics and tracking them. MEASURE 2 covers evaluating AI systems for trustworthy characteristics — validity, reliability, safety, security, accountability, transparency, explainability, privacy, fairness. MEASURE 3 covers monitoring identified risks. MEASURE 4 covers feedback mechanisms for assessment.</p>
-
-  <p>What this means operationally: the organization needs continuous monitoring, defined thresholds, and a feedback loop that detects when an agent’s behavior has drifted from the approved baseline. NIST is explicit that measurement should be ongoing, not point-in-time. The framework’s Drift Detection discipline implements that requirement directly, and the KRI tier model — covered in the third post in this series — is what turns measurement into an actual control rather than a dashboard.</p>
-
-  <p>This is where the crosswalk produces the largest practical lift. Many organizations stop their NIST implementation at MEASURE 1, with a metric catalog. The catalog without thresholds is descriptive, not protective. NIST does not specify what the thresholds should be — that is a deliberate choice on NIST’s part, because thresholds are context-dependent. The CM framework provides the methodology for setting them: 14- to 30-day observation window, tier definitions at the 95th and 99th percentiles, validation against historical incidents, quarterly review.</p>
-
-  <h3>Manage → Audit &amp; Remediation</h3>
-
-  <p>NIST MANAGE 1 covers risk treatment based on assessment. MANAGE 2 covers strategies to maximize AI benefits and minimize negative impacts. MANAGE 3 covers responsibility for AI risks. MANAGE 4 covers incident response, recovery, and communication.</p>
-
-  <p>What this means operationally: the organization needs documented incident response procedures, tested rollback paths, post-incident review processes, and an audit trail that supports both the response itself and the regulatory or board-level reporting that follows. The Audit &amp; Remediation discipline implements all of these.</p>
-
-  <p>The discipline that NIST makes most explicit and that the AI governance market least delivers is <em>tested rollback</em>. NIST MANAGE 2.4 addresses the reversibility of deployment decisions and the mechanisms for decommissioning AI systems &amp;mdash; in plain terms, an organization needs to be able to undo a deployment, and that capability needs to actually exist before it is required. Most organizations deploying AI agents have not tested whether they can reverse a deployment under pressure. The first time the rollback procedure runs is the time it has to work. Configuration management treats rollback as a routine operational procedure, exercised periodically before it is needed.</p>
-
-  <h2>Where the crosswalk gets interesting</h2>
-
-  <p>NIST AI RMF and the CM framework agree on every important question. They diverge on language and on level of abstraction. NIST is policy-led and prescriptive about outcomes; CM is operational and prescriptive about practices. That divergence is what makes them complementary rather than competing.</p>
-
-  <p>The interesting cases are the places where NIST defines an outcome and CM is the operational mechanic that produces it.</p>
-
-  <p>NIST GOVERN 1.5 calls for ongoing monitoring and periodic review of risk management processes. CM provides the quarterly KRI review cadence and the change control audit trail that satisfy this requirement. NIST MEASURE 2.7 requires evaluations of AI system performance to be informed by inputs from domain experts and other relevant stakeholders. CM provides the change advisory board and the documented authority structures that ensure the right people are informed and accountable. NIST MANAGE 4.3 requires incident response and recovery plans for AI systems to be in place. CM provides the kill-switch, the rollback procedure, and the post-incident review process that operationalize that requirement.</p>
-
-  <p>In each case, NIST tells you what to produce. CM tells you how to produce it.</p>
-
-  <h2>What this means for compliance teams</h2>
-
-  <p>If your team is working through a NIST AI RMF implementation, the framework is not asking you to start over. It is offering an operational mechanic that bolts onto the policy structure you have already built. The NIST language stays in your governance documents. The CM language goes into your operational procedures. They reference each other through the crosswalk.</p>
-
-  <p>The same approach works in reverse for organizations that are already running configuration management for their non-AI infrastructure. Your CMDB, change advisory board, and audit trail processes are not new investments — they are existing capabilities that need to be extended to a new class of asset. AI agents are configuration items. Treat them accordingly.</p>
-
-  <p>The crosswalk also works against <a href="https://www.iso.org/standard/81230.html">ISO/IEC 42001:2023</a> &amp;mdash; the new international standard for AI management systems &amp;mdash; and the post-market monitoring requirements of the <a href="https://artificialintelligenceact.eu/the-act/">EU AI Act</a>. The white paper that accompanies this series provides the full crosswalk against all three standards plus the IAPP AIGP Body of Knowledge.</p>
-
-  <p>Two posts remain in the main thread of the series. The next is the bonus piece on Microsoft&rsquo;s Agent Governance Toolkit and where configuration management sits relative to runtime kernels. The closer crosswalks the discipline against the IAPP AIGP Body of Knowledge for governance professionals studying for the certification. A separate follow-up post will walk through the framework&rsquo;s working implementation in the Prism dashboard once the agent monitoring extension is in production.</p>
-
-  <p>The argument of the series, restated: AI governance frameworks define policy outcomes. Configuration management is the discipline that produces them. The two are not in tension. The mistake is treating either one as sufficient on its own.</p>
-
-  <p><em>This is part 4 of a six-part series on Configuration Management for AI Agents. Part 1 stakes out the latency gap. Part 2 introduces the four-discipline framework. Part 3 details the KRI tier model. The bonus piece responds to Microsoft&rsquo;s Agent Governance Toolkit, and Part 6 crosswalks the framework against the IAPP AIGP Body of Knowledge. A separate follow-up post walks through the framework&rsquo;s working implementation in the Prism dashboard once the agent monitoring extension is in production.</em></p>
-
-  <h2>Sources cited</h2>
-
-  <ul><li>NIST, <em>AI Risk Management Framework 1.0</em> (January 2023). <a href="https://www.nist.gov/itl/ai-risk-management-framework">nist.gov/itl/ai-risk-management-framework</a></li><li>NIST, <em>AI 600-1: Artificial Intelligence Risk Management Framework: Generative AI Profile</em> (2024). <a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf">nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf</a></li><li>NIST, <em>AI RMF Playbook</em>. <a href="https://airc.nist.gov/airmf-resources/playbook/">airc.nist.gov/airmf-resources/playbook</a></li><li>ISO/IEC 42001:2023, <em>Information technology &amp;mdash; Artificial intelligence &amp;mdash; Management system</em>. <a href="https://www.iso.org/standard/81230.html">iso.org/standard/81230.html</a></li><li>EU AI Act (Regulation (EU) 2024/1689). Article 72 covers post-market monitoring. <a href="https://artificialintelligenceact.eu/the-act/">artificialintelligenceact.eu/the-act</a></li><li>IAPP, <em>AIGP Body of Knowledge v2.1</em> (effective 2026-02-02). <a href="https://iapp.org/certify/aigp">iapp.org/certify/aigp</a></li></ul>
-
-  <div class="article-cta">
-    <h3>Working Through a NIST AI RMF Implementation?</h3>
-    <p>Prism AI Analytics provides the operational layer between NIST AI RMF policy and production AI systems. We design baselines, KRI tiers, change control workflows, and audit trails that satisfy NIST requirements while running at the speed of the agents you are governing.</p>
-    <a href="/#contact">Schedule a NIST AI RMF Crosswalk Session</a>
+  <div class="stub-card">
+    <div class="stub-badge">Coming Soon</div>
+    <h2>Publishing</h2>
+    <div class="stub-date">June 11, 2026</div>
+    <p class="stub-desc">This post is the fourth in a series on configuration management for AI agents. The first three posts made the case that AI governance, as currently practiced, has an operational gap — a latency gap be...</p>
+    <p class="stub-desc" style="font-size:.92rem;">Check back on the publish date for the full article.</p>
   </div>
 </article>
 

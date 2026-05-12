@@ -29,6 +29,9 @@ npm-debug.log*
 # Eleventy build output
 _site/
 
+# Build script artifact (regenerated on every npm run build)
+_blog_build_summary.json
+
 # Windows folder-icon noise
 desktop.ini
 **/desktop.ini
