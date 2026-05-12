@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Configuration Management and the AIGP Body of Knowledge: The Operational Layer the Curriculum Implies | Prism AI Analytics</title>
   <meta name="description" content="This is the closing post in the main thread of a six-part series on configuration management for AI agents. The preceding posts staked out the latency gap in agentic AI governance, introduced a four-d..."/>
+  <meta name="robots" content="noindex, follow"/>
   <meta property="og:title" content="Configuration Management and the AIGP Body of Knowledge: The Operational Layer the Curriculum Implies | Prism AI Analytics"/>
   <meta property="og:description" content="This is the closing post in the main thread of a six-part series on configuration management for AI agents. The preceding posts staked out the latency gap in agentic AI governance, introduced a four-d..."/>
   <meta property="og:type" content="article"/>
@@ -25,6 +26,11 @@
     footer{background:var(--navy);color:var(--sky);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(200,164,90,0.2)}.footer-brand{display:flex;align-items:center;gap:.8rem}.footer-brand img{height:36px;mix-blend-mode:lighten}.footer-brand-text{font-size:1rem;color:var(--white);font-weight:700}.footer-brand-text span{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);font-weight:400;margin-top:2px}.footer-copy{font-size:.75rem;color:var(--sky);opacity:.7}.footer-links{display:flex;gap:1.5rem}.footer-links a{color:var(--sky);text-decoration:none;font-size:.8rem;font-weight:500;transition:color .2s}.footer-links a:hover{color:white}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
     @media(max-width:900px){nav{padding:1rem 1.5rem}nav.scrolled{padding:.7rem 1.5rem}.nav-links{display:none}.hamburger{display:flex}.article-hero{padding:7rem 1.5rem 3rem}.article-body{padding:3rem 1.5rem}.article-meta{flex-direction:column;gap:.5rem}footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem}}
+    .stub-card{max-width:640px;margin:0 auto;padding:3rem 2rem;text-align:center}
+    .stub-card .stub-badge{display:inline-block;background:rgba(200,164,90,0.15);color:var(--gold);padding:.35rem 1rem;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
+    .stub-card h2{font-size:1.05rem;font-weight:600;color:var(--text-muted);margin-bottom:1rem;letter-spacing:.02em;text-transform:uppercase}
+    .stub-card .stub-date{font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:1.5rem;letter-spacing:-.01em}
+    .stub-card .stub-desc{font-size:1rem;line-height:1.75;color:var(--text-muted);margin-bottom:2rem}
   </style>
 </head>
 <body>
@@ -55,114 +61,17 @@
   <div class="article-hero-inner">
     <div class="article-category">AI Agent Governance</div>
     <h1>Configuration Management and the AIGP Body of Knowledge: The Operational Layer the Curriculum Implies</h1>
-    <div class="article-meta">
-      <span>&#128197; June 25, 2026</span>
-      <span>&#9202; 11 min</span>
-      <span>By Michele Fisher</span>
-    </div>
   </div>
 </header>
 
 <article class="article-body">
   <a href="/blog/" class="back-to-blog">&larr; Back to Blog</a>
-
-  <p>This is the closing post in the main thread of a six-part series on configuration management for AI agents. The preceding posts staked out the latency gap in agentic AI governance, introduced a four-discipline framework that closes it, detailed the Key Risk Indicator tier model that turns measurement into actual control, mapped the framework to the NIST AI Risk Management Framework, and (in the bonus installment) sited the framework relative to Microsoft&rsquo;s Agent Governance Toolkit. A separate follow-up post walks through the framework&rsquo;s working implementation in the Prism dashboard; that one publishes once the agent monitoring extension is live, so the walkthrough describes actual governance of AI agents rather than the architectural blueprint for extending to them.</p>
-
-  <p>This post is for a specific audience: the people studying for the IAPP Artificial Intelligence Governance Professional certification, and the people who already hold it.</p>
-
-  <p>The argument is straightforward. The AIGP Body of Knowledge defines what AI governance professionals are accountable for. The community study material covers law, policy, and risk assessment thoroughly. What it covers thinly — and what configuration management provides directly — is the operational mechanic that turns governance accountabilities into runtime control. If you are studying for the cert and looking for the part of the curriculum that makes the work feel concrete rather than theoretical, the framework in this series is one practitioner’s answer.</p>
-
-  <h2>What the AIGP is, and why it matters</h2>
-
-  <p>The IAPP launched the <a href="https://iapp.org/certify/aigp">AIGP certification</a> in 2023 to formalize the AI governance role as a profession distinct from privacy or security. The certification is policy-neutral, vendor-neutral, and aligned to the standards governance professionals are most often accountable to &amp;mdash; NIST AI RMF, ISO/IEC 42001, the EU AI Act, sectoral regulations including healthcare, financial services, and federal contracting requirements.</p>
-
-  <p>The Body of Knowledge version 2.1, effective February 2, 2026, defines four domains:</p>
-
-  <ul><li><strong>Domain I:</strong> Foundations of AI governance.</li><li><strong>Domain II:</strong> How laws, standards, and frameworks apply to AI.</li><li><strong>Domain III:</strong> Governing AI development.</li><li><strong>Domain IV:</strong> Governing AI deployment and use.</li></ul>
-
-  <p>The certification has grown quickly. AIGP holders work in compliance, risk, legal, privacy, and operations functions across regulated industries. The exam tests whether the candidate can describe the AI lifecycle, identify and categorize risks, apply the relevant legal and ethical frameworks, and reason through deployment decisions. The work the certification credentials is real, important, and not yet fully scoped at the operational level.</p>
-
-  <h2>The gap in the community study material</h2>
-
-  <p>The community study reference for the AIGP &amp;mdash; <a href="https://oliverpatel.substack.com/p/the-unofficial-aigp-resource-guide">Oliver Patel&rsquo;s unofficial resource guide</a>, maintained as IAPP faculty &amp;mdash; is a curated list of roughly 100 resources covering legal frameworks, risk assessment methodologies, AI ethics literature, sectoral regulations, and the major standards. It is foundational and policy-centric. Read carefully against the BoK, it is also explicitly thin on operational governance mechanics.</p>
-
-  <p>Configuration management vocabulary does not appear in the curated resources. Drift thresholds do not appear. Key Risk Indicator frameworks do not appear. Agentic-specific governance, as distinct from static-model governance, is largely absent. The standards the BoK references — NIST AI RMF, ISO/IEC 42001 — are catalogued but not crosswalked. Patel’s guide is not failing the candidates. It is reflecting the state of the field accurately. The operational layer has not yet been written into the canon.</p>
-
-  <p>This is not unusual for a young profession. The privacy field went through the same evolution. CIPP material in the early 2000s was heavy on law and light on the operational practices — privacy impact assessments, data inventories, breach response runbooks — that became standard later. The standards came first; the operational discipline followed. AI governance is in the same phase. The framework in this series is one attempt at the operational discipline.</p>
-
-  <h2>Where the framework slots in</h2>
-
-  <p>The Prism CM-AI Framework consists of four configuration management disciplines — Baseline, Change Control, Drift Detection, Audit &amp; Remediation, abbreviated BCDA — applied across three delivery layers, with the Key Risk Indicator tier model layered over the whole. The framework maps most cleanly to BoK Domains III and IV, which together describe the operational scope of the AI governance role.</p>
-
-  <h3>Domain III — Governing AI development</h3>
-
-  <p>Domain III covers what governance looks like during the build phase of the AI lifecycle. The subdomains include data governance, design specifications, documentation, model selection and design, and pre-deployment evaluation.</p>
-
-  <p>The framework’s contributions to Domain III are:</p>
-
-  <p><strong>Baseline definition as a development artifact.</strong> The BoK is explicit that AI governance must establish documentation throughout the lifecycle. The framework treats the baseline — model version, system prompt content hash, tool inventory, data scope, expected behavior distribution, latency band, refusal rate, cost-per-action target — as a first-class development artifact, version-controlled alongside the code. Most current AI development practice treats prompts as configuration that lives in someone’s local environment or in a deployment YAML that no one has reviewed. The framework treats them as auditable artifacts.</p>
-
-  <p><strong>Change control extended to prompts and tools.</strong> Domain III names policies and procedures throughout the AI life cycle as a governance accountability. Most organizations have change control for code and model upgrades. Few have change control for prompt revisions, tool inventory changes, or data-scope expansions. The framework requires a defined approval path for every change to any baseline element, with documented authority and audit trail. This is the operational mechanic the BoK implies but does not specify.</p>
-
-  <p><strong>Pre-deployment baseline validation.</strong> Domain III covers pre-deployment assessment. The framework requires the development team to validate that the agent’s behavior, evaluated against its planned baseline, meets the thresholds the organization is willing to defend. This is not optional. Without it, the deployment phase has no reference point against which to measure drift.</p>
-
-  <h3>Domain IV — Governing AI deployment and use</h3>
-
-  <p>Domain IV is where the framework lands hardest. The subdomains cover operational monitoring, incident response, post-market activities, and ongoing risk management.</p>
-
-  <p>The framework’s contributions to Domain IV are:</p>
-
-  <p><strong>Drift detection as operational discipline, not dashboard.</strong> Domain IV requires ongoing monitoring of deployed AI systems. The framework specifies what that monitoring looks like in practice: continuous comparison of live agent behavior against the documented baseline, with predefined thresholds and predefined responses, running at the speed of the agent rather than the speed of human attention. The third post in this series details the KRI tier model that operationalizes this requirement — Tier 1 warnings investigated within 24 hours, Tier 2 actions triggering auto-throttle and human review, Tier 3 interventions activating kill-switch and rollback.</p>
-
-  <p><strong>Incident response with tested rollback.</strong> Domain IV covers incident handling and recovery. The framework requires that the rollback procedure for each production agent be documented, tested before it is needed, and rehearsed periodically. Most current AI deployments have logs, which support post-hoc forensics. Few have a tested rollback path, which is what allows the organization to actually recover. The first time the rollback procedure runs is the time it has to work.</p>
-
-  <p><strong>Audit trail that satisfies the regulator’s question.</strong> The BoK is explicit that AI governance produces evidence. The framework requires that any agent action be traceable to the baseline that authorized it — model version, prompt hash, tool inventory, data scope, change history, approval record. This is the artifact that answers the question every auditor and regulator eventually asks: <em>was the agent that took this action operating within the configuration the organization approved?</em> Most current AI deployments cannot produce this artifact. The framework makes producing it routine.</p>
-
-  <h3>Domain II — Standards crosswalk</h3>
-
-  <p>Domain II tests how the major standards apply to AI. The fourth post in this series provides the explicit crosswalk between the framework and NIST AI RMF (Govern → Change Control, Map → Baseline, Measure → Drift Detection + KRIs, Manage → Audit &amp; Remediation). The full white paper extends the crosswalk to ISO/IEC 42001:2023 — where the framework operationalizes the Plan-Do-Check-Act cycle — and the EU AI Act’s post-market monitoring requirements under Article 72.</p>
-
-  <p>For AIGP candidates, the crosswalk is study-aid material in addition to operational reference. The standards are the curriculum’s testable surface. The framework is one way to remember how the surfaces connect.</p>
-
-  <h3>Domain I — Foundations</h3>
-
-  <p>Domain I covers the foundational concepts of AI governance — what AI is, why governance is needed, who the stakeholders are, what the lifecycle looks like. The framework does not extend Domain I directly. It assumes the candidate has the foundational vocabulary and is looking for the operational layer that sits on top of it. If you are studying for the AIGP and Domain I is where you are spending most of your time, the framework will land more usefully after you have moved into Domains III and IV.</p>
-
-  <h2>What this means for AIGP candidates</h2>
-
-  <p>If you are preparing for the exam, the framework is most useful as a structural memory aid for Domains III and IV. The BCDA acronym — Baseline, Change Control, Drift Detection, Audit &amp; Remediation — captures the four operational practices that produce the governance outcomes the BoK requires. The KRI tier model captures how monitoring becomes a control rather than a dashboard. The crosswalks against NIST AI RMF, ISO/IEC 42001, and the EU AI Act tie the operational practices back to the standards Domain II asks you to apply.</p>
-
-  <p>The framework is a practitioner’s attempt to give the operational layer the same structure the policy layer already has. It is not affiliated with or endorsed by IAPP and does not replace the official body of knowledge — it is offered alongside it as the operational mechanic the curriculum implies.</p>
-
-  <h2>What this means for AIGP holders</h2>
-
-  <p>If you already hold the certification and are now responsible for implementing AI governance in your organization, the framework is the operational scaffolding. The five posts that precede this one walk through how the disciplines work in practice — what to baseline, what to change-control, what to monitor, what thresholds to set, what to put in the audit trail, what to test before you need it.</p>
-
-  <p>The framework is published with two companion documents available on request: the Prism CM-AI Framework reference, which documents the disciplines and the delivery model, and the Prism CM-AI KRI Starter Set, which provides default thresholds and tier mappings for the most common categories of risk indicator. Both are designed to be implementable by a working AI governance team without requiring tooling investment beyond what most organizations already have.</p>
-
-  <h2>Closing the series</h2>
-
-  <figure class="post-figure">
-    <img src="/assets/img/blog/cm-ai-deck/image18.png" alt="Governance drives delivery — only when built into the operational layer" loading="lazy" />
-    <figcaption>Governance drives delivery — only when built into the operational layer</figcaption>
-  </figure>
-
-  <p>The argument of this series, restated for the last time: AI governance frameworks define policy outcomes. Configuration management is the discipline that produces them. The two are not in tension, and neither is sufficient on its own. The latency gap between agent speed and human attention is closed by combining the two — policy at the top, configuration management at the bottom, KRIs and tiered escalation as the connective tissue.</p>
-
-  <p>For AIGP candidates and certified professionals, the framework is offered as the operational layer the curriculum implies but does not yet fully detail. For everyone else, the framework is offered as a way to govern AI agents at the speed they actually operate. Either audience is welcome. Both are reading the same series.</p>
-
-  <p>Thank you for reading.</p>
-
-  <p><em>This closes the main thread of the series on Configuration Management for AI Agents. A follow-up implementation post &amp;mdash; walking through the framework as applied to AI agents in production &amp;mdash; publishes when the Prism dashboard&rsquo;s agent monitoring extension goes live. The framework reference, the KRI starter set, and the supporting white paper are available through the Prism Resources hub.</em></p>
-
-  <h2>Sources cited</h2>
-
-  <ul><li>IAPP, <em>Artificial Intelligence Governance Professional (AIGP)</em> certification. <a href="https://iapp.org/certify/aigp">iapp.org/certify/aigp</a></li><li>IAPP, <em>AIGP Body of Knowledge v2.1</em> (effective 2026-02-02). PDF reference linked from the IAPP cert page.</li><li>Oliver Patel (IAPP faculty), <em>The Unofficial AIGP Resource Guide</em>. <a href="https://oliverpatel.substack.com/p/the-unofficial-aigp-resource-guide">oliverpatel.substack.com/p/the-unofficial-aigp-resource-guide</a></li><li>NIST, <em>AI Risk Management Framework 1.0</em>. <a href="https://www.nist.gov/itl/ai-risk-management-framework">nist.gov/itl/ai-risk-management-framework</a></li><li>ISO/IEC 42001:2023, <em>AI management systems</em>. <a href="https://www.iso.org/standard/81230.html">iso.org/standard/81230.html</a></li><li>EU AI Act (Regulation (EU) 2024/1689). <a href="https://artificialintelligenceact.eu/the-act/">artificialintelligenceact.eu/the-act</a></li></ul>
-
-  <div class="article-cta">
-    <h3>Studying for the AIGP, or Implementing One?</h3>
-    <p>Prism AI Analytics provides AIGP-aligned operational governance for AI agent deployments. The Prism CM-AI Framework is the implementation layer for what the AIGP Body of Knowledge defines as governance accountabilities — usable as a study reference and as a working operational scaffold.</p>
-    <a href="/#contact">Request the Framework + KRI Starter Set</a>
+  <div class="stub-card">
+    <div class="stub-badge">Coming Soon</div>
+    <h2>Publishing</h2>
+    <div class="stub-date">June 25, 2026</div>
+    <p class="stub-desc">This is the closing post in the main thread of a six-part series on configuration management for AI agents. The preceding posts staked out the latency gap in agentic AI governance, introduced a four-d...</p>
+    <p class="stub-desc" style="font-size:.92rem;">Check back on the publish date for the full article.</p>
   </div>
 </article>
 

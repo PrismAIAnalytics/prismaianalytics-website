@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KRIs vs KPIs for Autonomous Agents: Borrowing 30 Years of Discipline from Financial Services | Prism AI Analytics</title>
   <meta name="description" content="The most common failure mode I see in production AI deployments is treating a Key Performance Indicator as if it were a Key Risk Indicator. The two are not the same. They answer different questions, t..."/>
+  <meta name="robots" content="noindex, follow"/>
   <meta property="og:title" content="KRIs vs KPIs for Autonomous Agents: Borrowing 30 Years of Discipline from Financial Services | Prism AI Analytics"/>
   <meta property="og:description" content="The most common failure mode I see in production AI deployments is treating a Key Performance Indicator as if it were a Key Risk Indicator. The two are not the same. They answer different questions, t..."/>
   <meta property="og:type" content="article"/>
@@ -25,6 +26,11 @@
     footer{background:var(--navy);color:var(--sky);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(200,164,90,0.2)}.footer-brand{display:flex;align-items:center;gap:.8rem}.footer-brand img{height:36px;mix-blend-mode:lighten}.footer-brand-text{font-size:1rem;color:var(--white);font-weight:700}.footer-brand-text span{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);font-weight:400;margin-top:2px}.footer-copy{font-size:.75rem;color:var(--sky);opacity:.7}.footer-links{display:flex;gap:1.5rem}.footer-links a{color:var(--sky);text-decoration:none;font-size:.8rem;font-weight:500;transition:color .2s}.footer-links a:hover{color:white}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
     @media(max-width:900px){nav{padding:1rem 1.5rem}nav.scrolled{padding:.7rem 1.5rem}.nav-links{display:none}.hamburger{display:flex}.article-hero{padding:7rem 1.5rem 3rem}.article-body{padding:3rem 1.5rem}.article-meta{flex-direction:column;gap:.5rem}footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem}}
+    .stub-card{max-width:640px;margin:0 auto;padding:3rem 2rem;text-align:center}
+    .stub-card .stub-badge{display:inline-block;background:rgba(200,164,90,0.15);color:var(--gold);padding:.35rem 1rem;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
+    .stub-card h2{font-size:1.05rem;font-weight:600;color:var(--text-muted);margin-bottom:1rem;letter-spacing:.02em;text-transform:uppercase}
+    .stub-card .stub-date{font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:1.5rem;letter-spacing:-.01em}
+    .stub-card .stub-desc{font-size:1rem;line-height:1.75;color:var(--text-muted);margin-bottom:2rem}
   </style>
 </head>
 <body>
@@ -55,131 +61,17 @@
   <div class="article-hero-inner">
     <div class="article-category">AI Agent Governance</div>
     <h1>KRIs vs KPIs for Autonomous Agents: Borrowing 30 Years of Discipline from Financial Services</h1>
-    <div class="article-meta">
-      <span>&#128197; June 4, 2026</span>
-      <span>&#9202; 12 min</span>
-      <span>By Michele Fisher</span>
-    </div>
   </div>
 </header>
 
 <article class="article-body">
   <a href="/blog/" class="back-to-blog">&larr; Back to Blog</a>
-
-  <p>The most common failure mode I see in production AI deployments is treating a Key Performance Indicator as if it were a Key Risk Indicator. The two are not the same. They answer different questions, they get reviewed by different people, and they trigger different responses. When organizations conflate them, they end up with dashboards that show an agent producing a high volume of output and assume that means the agent is operating safely. It does not mean that.</p>
-
-  <p>This post is the third in a series on configuration management for AI agents. The first post staked out the latency gap between the speed at which agents act and the speed at which humans intervene. The second introduced the four-discipline framework &amp;mdash; Baseline, Change Control, Drift Detection, Audit &amp; Remediation &amp;mdash; that closes that gap. This post goes deep on the signature element of the framework: the Key Risk Indicator tier model, adapted from financial-services operational risk practice.</p>
-
-  <p>I spent the first decade of my career building Key Risk Indicator frameworks at Fortune 500 financial institutions. The discipline is older than the AI governance conversation by more than two decades. It works. It transfers to AI agents almost without translation. The reason it has not yet shown up in mainstream AI governance frameworks is that the AI governance conversation has been led by ML practitioners, not by people who have run operational risk programs in regulated industries.</p>
-
-  <h2>What a KPI is</h2>
-
-  <figure class="post-figure">
-    <img src="/assets/img/blog/cm-ai-deck/image10.png" alt="KPIs measure system value. KRIs measure system survival" loading="lazy" />
-    <figcaption>KPIs measure system value. KRIs measure system survival</figcaption>
-  </figure>
-
-  <p>A Key Performance Indicator measures whether the agent is producing value. Output volume, conversion lift, hours saved, cost reduction, deal velocity, ticket resolution rate, customer satisfaction score. KPIs answer a business question: <em>is this agent worth what it costs to run?</em> They get reviewed weekly or monthly. The audience is the business owner and the executive sponsor. When a KPI moves the wrong way, the response is usually optimization — tune the prompt, expand the tool inventory, retrain on better data, adjust the routing logic.</p>
-
-  <p>KPIs are necessary. They are how the organization decides whether to keep funding the agent. But they are not, by themselves, safety signals. A high-performing agent producing harmful or out-of-policy outputs is the worst possible failure mode, and it is largely invisible to a KPI dashboard.</p>
-
-  <h2>What a KRI is</h2>
-
-  <p>A Key Risk Indicator measures whether the agent is still operating within the boundaries the organization approved. Hallucination rate, refusal-rate inversion, tool-call error rate, output distribution shift, cost-per-action drift, authentication failure rate, baseline configuration drift. KRIs answer a different question: <em>is the agent currently behaving the way it was approved to behave?</em> They get monitored continuously. The audience is risk, compliance, and operations. When a KRI threshold is breached, the response is escalation — not optimization, not tuning, but a defined action that runs at the speed of the agent rather than the speed of human attention.</p>
-
-  <p>The distinction matters because the responses are different in kind, not in degree. A KPI miss prompts a meeting. A KRI breach prompts a control. If the only metric the organization is watching is a KPI, then by definition the response to a problem will arrive at human meeting speed, which is not fast enough to govern a system that operates at machine speed.</p>
-
-  <table class="article-table"><thead><tr><th></th><th>KPI</th><th>KRI</th></tr></thead><tbody><tr><td>Question</td><td>Is the agent producing value?</td><td>Is the agent still within approved boundaries?</td></tr><tr><td>Direction</td><td>Higher is usually better</td><td>Threshold breach is the signal</td></tr><tr><td>Audience</td><td>Business owners, executives</td><td>Risk, compliance, operations</td></tr><tr><td>Cadence</td><td>Reviewed weekly or monthly</td><td>Monitored continuously</td></tr><tr><td>Action</td><td>Optimize</td><td>Escalate per tier</td></tr><tr><td>Example</td><td>"Agent resolved 1,200 tickets this week"</td><td>"Agent’s hallucination rate exceeded 2% — Tier 2 triggered"</td></tr></tbody></table>
-
-  <h2>What financial services figured out</h2>
-
-  <p>Banks have been required for more than two decades to operate KRI frameworks under various regulatory regimes &amp;mdash; the Basel Committee&rsquo;s operational risk framework (published 2003, revised 2014 and 2021), the Federal Reserve&rsquo;s <a href="https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm">SR 11-7 guidance on model risk management</a> (2011), and the <a href="https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html">OCC&rsquo;s parallel 2011-12 bulletin</a>. The requirement is not that banks measure operational metrics. The requirement is that they detect deviation from approved operating parameters and intervene before deviation becomes loss.</p>
-
-  <p>The discipline that emerged from those decades of practice has three structural properties that AI governance, as currently practiced, does not yet have.</p>
-
-  <p>First, every KRI is paired with a defined threshold. The threshold is not chosen arbitrarily. It is derived from the metric’s observed baseline distribution, the operational tolerance the organization has documented as acceptable, and the level beyond which the organization cannot defensibly explain the behavior to an auditor or regulator. Without thresholds, KRIs are decoration.</p>
-
-  <p>Second, every threshold is paired with a defined response. The response specifies what happens automatically when the threshold is breached, who is notified, what authority they have to act, and how long they have to act. The response is documented, tested before it is needed, and rehearsed periodically. Without responses, thresholds are alarms that nobody answers.</p>
-
-  <p>Third, the responses are tiered. Not every breach is an emergency. A statistical drift outside the expected band is a warning that warrants investigation. A material breach of operational tolerance requires immediate action and human review. A breach of the boundary beyond which the organization cannot defend the behavior triggers an automated kill-switch and a documented incident response process. The tier model is what allows the discipline to scale — most KRI breaches are Tier 1 events that don’t escalate, which is what makes the rare Tier 3 event survivable.</p>
-
-  <h2>The three-tier model applied to AI agents</h2>
-
-  <figure class="post-figure">
-    <img src="/assets/img/blog/cm-ai-deck/image12.png" alt="The automated escalation staircase removes the human bottleneck" loading="lazy" />
-    <figcaption>The automated escalation staircase removes the human bottleneck</figcaption>
-  </figure>
-
-  <p>The same three-tier structure transfers to AI agents directly. Here is how I implement it on every Prism engagement.</p>
-
-  <p><strong>Tier 1 — Warning.</strong> Statistical drift detected. The metric has moved outside the expected band but has not exceeded operational tolerance. Response time: investigate within 24 hours. Action: document the cause. If the drift is intentional — an intended scope change, expected seasonality, planned behavior expansion — update the baseline. If unintentional, remediate. Authority: engineering or operations on-call.</p>
-
-  <p><strong>Tier 2 — Action.</strong> Drift exceeds operational tolerance. The metric is materially outside the approved range. Response time: immediate. Action: auto-throttle, rate-limit, or restrict the agent’s scope. Human review required before continued operation. Notify compliance and the business owner. Authority: engineering manager or compliance lead.</p>
-
-  <p><strong>Tier 3 &amp;mdash; Intervention.</strong> Operational risk threshold breached. The agent&rsquo;s behavior is materially outside what the organization can defensibly explain to a regulator, auditor, or board. Response time: immediate. Action: kill-switch activates. Rollback to last approved baseline. Incident report filed. Post-incident review within five business days. Disclosure path determined &amp;mdash; regulator, customer, board, insurer &amp;mdash; based on materiality. Authority: pre-defined incident commander; legal and executive notification required.</p>
-
-  <table class="article-table"><thead><tr><th>Tier</th><th>Trigger</th><th>Response time</th><th>Action</th><th>Authority</th></tr></thead><tbody><tr><td><strong>Tier 1 &amp;mdash; Warning</strong></td><td>Statistical drift detected, within operational tolerance</td><td>Within 24 hours</td><td>Investigate; document cause; update baseline or remediate</td><td>Engineering or operations on-call</td></tr><tr><td><strong>Tier 2 &amp;mdash; Action</strong></td><td>Drift exceeds operational tolerance</td><td>Immediate</td><td>Auto-throttle or restrict scope; human review required</td><td>Engineering manager or compliance lead</td></tr><tr><td><strong>Tier 3 &amp;mdash; Intervention</strong></td><td>Operational risk threshold breached</td><td>Immediate</td><td>Kill-switch; rollback to last approved baseline; incident report; post-incident review within 5 business days</td><td>Pre-defined incident commander; legal + executive notification</td></tr></tbody></table>
-
-  <p>The tier model is what allows KRIs to operate as actual controls rather than as elaborate dashboards. A Tier 1 breach does not page anyone at 3 a.m. A Tier 3 breach takes the agent offline before a human is in the loop. Both are appropriate responses to their respective severity, and both are documented in advance so the team is not improvising under pressure.</p>
-
-  <h2>Concrete KRIs for production AI agents</h2>
-
-  <figure class="post-figure">
-    <img src="/assets/img/blog/cm-ai-deck/image13.png" alt="Translating statistical drift into runtime intervention" loading="lazy" />
-    <figcaption>Translating statistical drift into runtime intervention</figcaption>
-  </figure>
-
-  <p>The starter set Prism deploys covers four categories. These are starting points, not commitments — every organization tunes them against its actual baselines, regulatory environment, and risk appetite.</p>
-
-  <p><strong>Output integrity.</strong> Hallucination rate (sampled and reviewed): Tier 1 above 1% over a 24-hour rolling window, Tier 2 above 3%, Tier 3 above 5% or any single high-severity hallucination in regulated content. Refusal-rate inversion: a sudden drop in the agent’s refusal rate on prompts the policy classifies as off-limits — this is one of the strongest signals of a successful prompt-injection or policy-classifier degradation, and it is rarely measured. Output distribution shift: statistical divergence — Population Stability Index or a comparable measure — between current and baseline output distributions, with thresholds at 0.10 and 0.25.</p>
-
-  <p><strong>Behavioral integrity.</strong> Tool-call error rate. Out-of-scope tool invocation — the agent attempts to call a tool not in its approved inventory — any single occurrence is a Tier 2 event. Out-of-scope data access — the agent queries data outside its approved scope — any single occurrence is a Tier 3 event. Loop or recursion depth exceeding the defined limit. Multi-agent handoff failure rate.</p>
-
-  <p><strong>Operational integrity.</strong> Cost per action drift, with Tier 2 triggered at a doubling above baseline (often the first signal of a runaway loop or successful prompt injection that has the agent calling tools or models excessively). Latency drift, authentication failure rate, request volume anomalies.</p>
-
-  <p><strong>Configuration integrity.</strong> Live agent configuration drift from approved baseline &amp;mdash; any unauthorized prompt, tool, or model variance. Unapproved model version in production &amp;mdash; any occurrence is Tier 3. Missing audit log periods.</p>
-
-  <table class="article-table"><thead><tr><th>Category</th><th>Sample KRIs</th><th>Default tier triggers</th></tr></thead><tbody><tr><td><strong>Output integrity</strong></td><td>Hallucination rate; refusal-rate inversion; output distribution shift (PSI)</td><td>Tier 1 at &amp;gt; 1% hallucination / 24h; Tier 2 at &amp;gt; 3%; Tier 3 at &amp;gt; 5% or high-severity in regulated content</td></tr><tr><td><strong>Behavioral integrity</strong></td><td>Tool-call error rate; out-of-scope tool invocation; out-of-scope data access; recursion depth</td><td>Out-of-scope tool: Tier 2 on any occurrence. Out-of-scope data access: Tier 3 on any occurrence</td></tr><tr><td><strong>Operational integrity</strong></td><td>Cost per action drift; latency drift; auth failure rate; request volume anomaly</td><td>Tier 1 at +25% cost / 24h; Tier 2 at +100% cost (likely loop or injection)</td></tr><tr><td><strong>Configuration integrity</strong></td><td>Baseline drift; unapproved model in production; missing audit log</td><td>Unapproved model: Tier 3 on any occurrence. Audit log gap &amp;gt; 1h: Tier 3</td></tr></tbody></table>
-
-  <p>The full starter set with thresholds, tier mappings, and a methodology for tuning is published as the Prism CM-AI KRI Starter Set, available with the framework reference document.</p>
-
-  <h2>How to set thresholds</h2>
-
-  <figure class="post-figure">
-    <img src="/assets/img/blog/cm-ai-deck/image11.png" alt="Deriving defensible KRI thresholds from live telemetry" loading="lazy" />
-    <figcaption>Deriving defensible KRI thresholds from live telemetry</figcaption>
-  </figure>
-
-  <p>Thresholds are derived, not chosen. The starter values published with the framework are reasonable defaults; the implementation work is replacing them with values grounded in the agent’s actual behavior. The methodology has four steps.</p>
-
-  <p>First, establish baseline distributions over a 14- to 30-day observation window. Collect each metric across a representative period of normal operation. Without baselines, thresholds are guesses.</p>
-
-  <p>Second, define operational tolerance. Tier 1 typically sits at the 95th percentile of baseline behavior. Tier 2 at the 99th. Tier 3 at the level beyond which the organization cannot defensibly explain the behavior. The tier definitions are organizational policy decisions, not technical defaults — they require sign-off from risk, compliance, and the business owner.</p>
-
-  <p>Third, validate against historical incidents. If the agent has had an incident before, the threshold should have caught it. If the proposed threshold would not have caught the incident, the threshold is wrong. This step is what separates real KRI design from theatrical KRI design.</p>
-
-  <p>Fourth, review quarterly. Drift in the agent’s environment, in user behavior, and in regulatory expectations all move thresholds over time. A KRI catalog that is not reviewed becomes a KRI catalog that is not trusted.</p>
-
-  <h2>Why this matters now</h2>
-
-  <p>The gap between AI governance policy and AI governance practice is, in my experience, almost entirely the absence of this discipline. Organizations have policies. They have ethics committees. They have observability platforms that produce dashboards. What they do not have is the mechanic that translates policy into runtime control: a documented baseline, a defined threshold, a defined response, a tested rollback. That mechanic is exactly what financial services KRI frameworks provide, and it is exactly what configuration management frameworks have provided in enterprise IT for the same length of time.</p>
-
-  <p>The rest of the framework — Baseline, Change Control, Drift Detection, Audit &amp; Remediation — describes the structure within which KRIs operate. The KRI tier model is the part of the structure that does the actual governing. If the rest of the framework is the building, KRIs are the load-bearing walls. Take them out and the structure does not stand.</p>
-
-  <p>The next post in this series maps the framework explicitly to the NIST AI Risk Management Framework — translating between the policy language compliance teams already use and the operational discipline this post describes. After that, the series crosswalks the discipline against the IAPP AIGP Body of Knowledge for governance professionals studying for the certification. A separate follow-up post walks through the framework&rsquo;s working implementation in the Prism dashboard once the agent monitoring extension is in production.</p>
-
-  <p>Governance that operates at human meeting speed cannot govern a system that operates at machine speed. KRIs are how the discipline catches up.</p>
-
-  <p><em>This is part 3 of a six-part series on Configuration Management for AI Agents. Part 1 stakes out the latency gap. Part 2 introduces the four-discipline framework. Part 4 maps the framework to NIST AI RMF, and Part 6 crosswalks the discipline against the IAPP AIGP Body of Knowledge.</em></p>
-
-  <h2>Sources cited</h2>
-
-  <ul><li>Federal Reserve, <em>SR 11-7: Supervisory Guidance on Model Risk Management</em> (2011). <a href="https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm">federalreserve.gov/supervisionreg/srletters/sr1107.htm</a></li><li>Office of the Comptroller of the Currency, <em>Bulletin 2011-12: Sound Practices for Model Risk Management</em>. <a href="https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html">occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html</a></li><li>Basel Committee on Banking Supervision, <em>Principles for the Sound Management of Operational Risk</em>. <a href="https://www.bis.org/bcbs/">bis.org/bcbs</a></li><li>Krishan Sharma (SVP Model Risk Management, Citigroup), "SR 11-7 in the Age of Agentic AI: Where the Framework Holds &amp;mdash; and Where It Strains," GARP <em>Risk Intelligence</em>, 2026-02-27. <a href="https://www.garp.org/risk-intelligence/operational/sr-11-7-age-agentic-ai-260227">garp.org/risk-intelligence/operational/sr-11-7-age-agentic-ai-260227</a></li></ul>
-
-  <div class="article-cta">
-    <h3>Need a KRI Starter Set for Your AI Agents?</h3>
-    <p>The Prism CM-AI KRI Starter Set documents the full catalog — output integrity, behavioral integrity, operational integrity, and configuration integrity — with default thresholds, tier mappings, and a tuning methodology. We share it under NDA with organizations actively scaling AI agent deployments.</p>
-    <a href="/#contact">Request the KRI Starter Set</a>
+  <div class="stub-card">
+    <div class="stub-badge">Coming Soon</div>
+    <h2>Publishing</h2>
+    <div class="stub-date">June 4, 2026</div>
+    <p class="stub-desc">The most common failure mode I see in production AI deployments is treating a Key Performance Indicator as if it were a Key Risk Indicator. The two are not the same. They answer different questions, t...</p>
+    <p class="stub-desc" style="font-size:.92rem;">Check back on the publish date for the full article.</p>
   </div>
 </article>
 

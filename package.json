@@ -4,6 +4,8 @@
   "description": "Prism AI Analytics marketing site (prismaianalytics.com). Static HTML rendered by Eleventy.",
   "private": true,
   "scripts": {
+    "build:posts": "node _build_blog_html.js",
+    "prebuild": "node _build_blog_html.js",
     "build": "eleventy",
     "watch": "eleventy --watch",
     "serve": "eleventy --serve --port=8080"
