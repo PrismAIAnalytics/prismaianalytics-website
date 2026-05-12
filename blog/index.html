@@ -94,52 +94,95 @@
 
     /* BLOG GRID */
     .blog-section { padding: 4rem 4rem 6rem; background: var(--offwhite); }
+    .blog-section-group {
+      max-width: 1240px; margin: 0 auto 4rem;
+    }
+    .blog-section-group:last-child { margin-bottom: 0; }
+    .blog-section-header {
+      margin-bottom: 1.5rem; padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--gray);
+    }
+    .blog-section-header h2 {
+      font-size: 1.4rem; font-weight: 700; color: var(--navy);
+      margin: 0 0 0.4rem; letter-spacing: -0.01em;
+    }
+    .blog-section-header p {
+      font-size: 0.9rem; color: var(--text-muted);
+      line-height: 1.55; margin: 0; max-width: 720px;
+    }
     .blog-grid {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+    }
+    @media (max-width: 1180px) {
+      .blog-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .blog-grid { grid-template-columns: 1fr; }
     }
 
     /* BLOG CARD */
     .blog-card {
-      background: var(--white); border-radius: 12px; overflow: hidden;
+      background: var(--white); border-radius: 10px; overflow: hidden;
       border: 1px solid var(--gray);
       transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       display: flex; flex-direction: column;
       text-decoration: none; color: inherit;
     }
     .blog-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 48px rgba(23,19,92,0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(23,19,92,0.1);
       border-color: var(--sky);
     }
     .blog-card-top {
       background: linear-gradient(135deg, var(--navy), #2A2580);
-      padding: 2rem 2rem 1.5rem;
+      padding: 1.15rem 1.25rem 1.1rem;
       position: relative;
     }
     .blog-card-category {
       display: inline-block; background: rgba(200,164,90,0.15); color: var(--gold);
-      padding: 0.3rem 0.8rem; border-radius: 16px; font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem;
+      padding: 0.22rem 0.7rem; border-radius: 14px; font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.7rem;
+    }
+    .blog-card-series {
+      display: block;
+      font-size: 0.65rem; font-weight: 500;
+      color: var(--sky); letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0 0 0.35rem;
+      opacity: 0.85;
+    }
+    .blog-card-date-top {
+      display: block;
+      font-size: 0.7rem; font-weight: 500;
+      color: var(--sky); letter-spacing: 0.03em;
+      margin: 0 0 0.55rem;
+      opacity: 0.78;
     }
     .blog-card-top h2 {
-      font-size: 1.15rem; font-weight: 700; color: var(--white); line-height: 1.35;
+      font-size: 0.98rem; font-weight: 700; color: var(--white); line-height: 1.3;
       margin: 0;
     }
     .blog-card-body {
-      padding: 1.5rem 2rem 2rem; flex: 1; display: flex; flex-direction: column;
+      padding: 1rem 1.25rem 1.15rem; flex: 1; display: flex; flex-direction: column;
     }
     .blog-card-excerpt {
-      font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); flex: 1;
-      margin-bottom: 1.5rem;
+      font-size: 0.82rem; line-height: 1.55; color: var(--text-muted); flex: 1;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .blog-card-meta {
       display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.75rem; color: var(--text-muted); padding-top: 1rem;
+      font-size: 0.7rem; color: var(--text-muted); padding-top: 0.7rem;
       border-top: 1px solid var(--offwhite);
     }
     .blog-card-read {
-      color: var(--royal); font-weight: 600; font-size: 0.8rem;
+      color: var(--royal); font-weight: 600; font-size: 0.72rem;
       display: flex; align-items: center; gap: 0.3rem;
       transition: color 0.2s;
     }
@@ -187,11 +230,7 @@
       .hamburger { display: flex; }
       .blog-hero { padding: 7rem 1.5rem 3rem; }
       .blog-section { padding: 3rem 1.5rem 4rem; }
-      .blog-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
-    }
-    @media (min-width: 601px) and (max-width: 900px) {
-      .blog-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -235,121 +274,304 @@
 </header>
 
 <section class="blog-section">
-  <div class="blog-grid">
 
-    <a href="/blog/the-2026-ai-regulation-clock-is-ticking/" class="blog-card reveal">
-      <div class="blog-card-top">
-        <div class="blog-card-category">Industry Insights</div>
-        <h2>The 2026 AI Regulation Clock Is Ticking &mdash; What Small Businesses Need to Know Right Now</h2>
-      </div>
-      <div class="blog-card-body">
-        <p class="blog-card-excerpt">The EU AI Act, state AI laws, and new governance standards all have concrete 2026 deadlines. Here&rsquo;s the timeline every small business using AI should have on their calendar.</p>
-        <div class="blog-card-meta">
-          <span>9 min read</span>
-          <span class="blog-card-read">Read Article &rarr;</span>
+  <!-- ============================================================== -->
+  <!-- AI Agent Governance (Configuration Management for AI Agents series) -->
+  <!-- ============================================================== -->
+  <div class="blog-section-group">
+    <div class="blog-section-header">
+      <h2>AI Agent Governance</h2>
+      <p>Configuration management discipline and KRI tier model for AI agents, applied through the Prism CM-AI Framework. A six-part series plus a bonus post, written for practitioners shipping autonomous AI in production.</p>
+    </div>
+    <div class="blog-grid">
+
+      <a href="/blog/configuration-management-and-the-aigp-body-of-knowledge/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">AI Agent Governance</div>
+          <span class="blog-card-series">Part 6 &middot; CM-AI Framework</span>
+          <span class="blog-card-date-top">June 25, 2026</span>
+          <h2>Configuration Management and the AIGP Body of Knowledge: The Operational Layer the Curriculum Implies</h2>
         </div>
-      </div>
-    </a>
-
-    <a href="/blog/why-im-pursuing-the-claude-certified-architect/" class="blog-card reveal">
-      <div class="blog-card-top">
-        <div class="blog-card-category">Industry Insights</div>
-        <h2>Why I&rsquo;m Pursuing the Claude Certified Architect Credential &mdash; And Why It Matters for Small Business</h2>
-      </div>
-      <div class="blog-card-body">
-        <p class="blog-card-excerpt">A look at the new Claude Certified Architect certification, what it covers, and why credentialed AI expertise is about to matter for every business buying AI services.</p>
-        <div class="blog-card-meta">
-          <span>7 min read</span>
-          <span class="blog-card-read">Read Article &rarr;</span>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">The IAPP AIGP Body of Knowledge defines what AI governance professionals are accountable for. The operational mechanic that turns those accountabilities into runtime control is what configuration management provides.</p>
+          <div class="blog-card-meta">
+            <span>11 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
 
-    <a href="/blog/what-is-an-ai-readiness-assessment/" class="blog-card reveal">
-      <div class="blog-card-top">
-        <div class="blog-card-category">Data Demystified</div>
-        <h2>What Is an AI Readiness Assessment &mdash; And Why Your Business Needs One</h2>
-      </div>
-      <div class="blog-card-body">
-        <p class="blog-card-excerpt">Learn what an AI readiness assessment covers, why it matters for small businesses, and how to determine if your organization is prepared to adopt AI successfully.</p>
-        <div class="blog-card-meta">
-          <span>7 min read</span>
-          <span class="blog-card-read">Read Article &rarr;</span>
+      <a href="/blog/microsoft-agent-governance-toolkit-and-the-cm-layer-above-it/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">AI Agent Governance</div>
+          <span class="blog-card-series">Bonus &middot; CM-AI Framework</span>
+          <span class="blog-card-date-top">June 18, 2026</span>
+          <h2>Microsoft&rsquo;s Agent Governance Toolkit Is the Kernel. Configuration Management Is the Layer Above It.</h2>
         </div>
-      </div>
-    </a>
-
-    <a href="/blog/five-signs-your-business-is-ready-for-ai/" class="blog-card reveal reveal-delay-1">
-      <div class="blog-card-top">
-        <div class="blog-card-category">Actionable Tips</div>
-        <h2>5 Signs Your Small Business Is Ready for AI</h2>
-      </div>
-      <div class="blog-card-body">
-        <p class="blog-card-excerpt">Not sure if your business is ready to adopt AI? Here are five clear signals that your organization is primed to benefit from artificial intelligence.</p>
-        <div class="blog-card-meta">
-          <span>6 min read</span>
-          <span class="blog-card-read">Read Article &rarr;</span>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Microsoft&rsquo;s April 2026 toolkit ships excellent runtime enforcement infrastructure. It deliberately stops short of the state-management layer. Here is what configuration management adds above the kernel.</p>
+          <div class="blog-card-meta">
+            <span>9 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
 
-    <a href="/blog/why-most-small-businesses-are-behind-on-data/" class="blog-card reveal reveal-delay-2">
-      <div class="blog-card-top">
-        <div class="blog-card-category">Industry Insights</div>
-        <h2>Why Most Small Businesses Are Behind on Data &mdash; And How to Catch Up</h2>
-      </div>
-      <div class="blog-card-body">
-        <p class="blog-card-excerpt">Most small businesses know data matters but struggle to use it effectively. Learn the common barriers and practical steps to build a strong data foundation.</p>
-        <div class="blog-card-meta">
-          <span>8 min read</span>
-          <span class="blog-card-read">Read Article &rarr;</span>
+      <a href="/blog/nist-ai-rmf-meets-configuration-management/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">AI Agent Governance</div>
+          <span class="blog-card-series">Part 4 &middot; CM-AI Framework</span>
+          <span class="blog-card-date-top">June 11, 2026</span>
+          <h2>Mapping NIST AI RMF to Configuration Management: A Crosswalk for Compliance Teams</h2>
         </div>
-      </div>
-    </a>
-
-    <a href="/blog/how-a-fractional-ai-advisor-can-transform-your-business/" class="blog-card reveal">
-      <div class="blog-card-top">
-        <div class="blog-card-category">Small Biz AI Wins</div>
-        <h2>How a Fractional AI Advisor Can Transform Your Business</h2>
-      </div>
-      <div class="blog-card-body">
-        <p class="blog-card-excerpt">Discover how a fractional AI advisor gives small businesses access to enterprise-level AI strategy and implementation without the full-time cost.</p>
-        <div class="blog-card-meta">
-          <span>7 min read</span>
-          <span class="blog-card-read">Read Article &rarr;</span>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">NIST AI RMF defines what AI governance must achieve. Configuration management defines how the work gets done day to day. The crosswalk maps Govern, Map, Measure, and Manage to the four BCDA disciplines.</p>
+          <div class="blog-card-meta">
+            <span>11 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
 
-    <a href="/blog/from-spreadsheets-to-dashboards/" class="blog-card reveal reveal-delay-1">
-      <div class="blog-card-top">
-        <div class="blog-card-category">Actionable Tips</div>
-        <h2>From Spreadsheets to Dashboards &mdash; Modernizing Your Business Reporting</h2>
-      </div>
-      <div class="blog-card-body">
-        <p class="blog-card-excerpt">Still relying on spreadsheets for business reporting? Learn how to transition to interactive dashboards that save time and improve decision-making.</p>
-        <div class="blog-card-meta">
-          <span>7 min read</span>
-          <span class="blog-card-read">Read Article &rarr;</span>
+      <a href="/blog/kri-vs-kpi-for-ai-agents/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">AI Agent Governance</div>
+          <span class="blog-card-series">Part 3 &middot; CM-AI Framework</span>
+          <span class="blog-card-date-top">June 4, 2026</span>
+          <h2>KRIs vs KPIs for Autonomous Agents: Borrowing 30 Years of Discipline from Financial Services</h2>
         </div>
-      </div>
-    </a>
-
-    <a href="/blog/configuration-drift-the-silent-security-risk/" class="blog-card reveal reveal-delay-2">
-      <div class="blog-card-top">
-        <div class="blog-card-category">Industry Insights</div>
-        <h2>Configuration Drift: The Silent Security Risk Most Businesses Ignore</h2>
-      </div>
-      <div class="blog-card-body">
-        <p class="blog-card-excerpt">Configuration drift quietly undermines your security posture. Learn what it is, why it matters, and how small businesses can detect and prevent compliance gaps.</p>
-        <div class="blog-card-meta">
-          <span>8 min read</span>
-          <span class="blog-card-read">Read Article &rarr;</span>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Treating a KPI as if it were a KRI is the most common failure mode in production AI. The three-tier escalation model &mdash; ported from financial-services operational risk &mdash; is what makes governance defensible at machine speed.</p>
+          <div class="blog-card-meta">
+            <span>12 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
 
+      <a href="/blog/configuration-management-for-ai-agents/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">AI Agent Governance</div>
+          <span class="blog-card-series">Part 2 &middot; CM-AI Framework</span>
+          <span class="blog-card-date-top">May 28, 2026</span>
+          <h2>Configuration Management for AI Agents: The Missing Twin of Agentic Governance</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Frontier labs and vendor SDKs are independently reinventing pieces of configuration management without naming it. The integrated framework &mdash; Baseline, Change Control, Drift Detection, Audit &amp; Remediation &mdash; ties them together.</p>
+          <div class="blog-card-meta">
+            <span>11 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/observability-isnt-governance/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">AI Agent Governance</div>
+          <span class="blog-card-series">Part 1 &middot; CM-AI Framework</span>
+          <span class="blog-card-date-top">May 21, 2026</span>
+          <h2>Observability Isn&rsquo;t Governance: The Latency Gap in Agentic AI</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Roughly 5 percent of production LLM calls fail outright, and Moffatt v. Air Canada has already established legal liability for unsupervised agent output. The gap between agent speed and human attention has a name &mdash; the latency gap &mdash; and it is the central problem in agentic AI governance today.</p>
+          <div class="blog-card-meta">
+            <span>9 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/what-is-ai-agent-governance/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">AI Agent Governance</div>
+          <span class="blog-card-series">Part 0 &middot; Primer</span>
+          <span class="blog-card-date-top">May 14, 2026</span>
+          <h2>What Is AI Agent Governance? A Practitioner&rsquo;s Glossary for the Prism CM-AI Framework</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Start here. Working definitions of AI agent governance, the four BCDA disciplines, the KRI tier model, and how the framework connects to NIST, ISO, the EU AI Act, and the major runtime governance toolkits. Includes a closing glossary.</p>
+          <div class="blog-card-meta">
+            <span>10 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
   </div>
+
+  <!-- ============================================================== -->
+  <!-- Industry Insights -->
+  <!-- ============================================================== -->
+  <div class="blog-section-group">
+    <div class="blog-section-header">
+      <h2>Industry Insights</h2>
+      <p>What the regulation, certification, and compliance landscape means for small businesses.</p>
+    </div>
+    <div class="blog-grid">
+
+      <a href="/blog/the-2026-ai-regulation-clock-is-ticking/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">Industry Insights</div>
+          <span class="blog-card-date-top">April 23, 2026</span>
+          <h2>The 2026 AI Regulation Clock Is Ticking &mdash; What Small Businesses Need to Know Right Now</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">The EU AI Act, state AI laws, and new governance standards all have concrete 2026 deadlines. Here&rsquo;s the timeline every small business using AI should have on their calendar.</p>
+          <div class="blog-card-meta">
+            <span>9 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/why-im-pursuing-the-claude-certified-architect/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">Industry Insights</div>
+          <span class="blog-card-date-top">April 23, 2026</span>
+          <h2>Why I&rsquo;m Pursuing the Claude Certified Architect Credential &mdash; And Why It Matters for Small Business</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">A look at the new Claude Certified Architect certification, what it covers, and why credentialed AI expertise is about to matter for every business buying AI services.</p>
+          <div class="blog-card-meta">
+            <span>7 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/why-most-small-businesses-are-behind-on-data/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">Industry Insights</div>
+          <span class="blog-card-date-top">April 6, 2026</span>
+          <h2>Why Most Small Businesses Are Behind on Data &mdash; And How to Catch Up</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Most small businesses know data matters but struggle to use it effectively. Learn the common barriers and practical steps to build a strong data foundation.</p>
+          <div class="blog-card-meta">
+            <span>8 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/configuration-drift-the-silent-security-risk/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">Industry Insights</div>
+          <span class="blog-card-date-top">April 6, 2026</span>
+          <h2>Configuration Drift: The Silent Security Risk Most Businesses Ignore</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Configuration drift quietly undermines your security posture. Learn what it is, why it matters, and how small businesses can detect and prevent compliance gaps.</p>
+          <div class="blog-card-meta">
+            <span>8 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- Data Demystified -->
+  <!-- ============================================================== -->
+  <div class="blog-section-group">
+    <div class="blog-section-header">
+      <h2>Data Demystified</h2>
+      <p>Making sense of the data and analytics decisions every small business eventually faces.</p>
+    </div>
+    <div class="blog-grid">
+
+      <a href="/blog/what-is-an-ai-readiness-assessment/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">Data Demystified</div>
+          <span class="blog-card-date-top">April 6, 2026</span>
+          <h2>What Is an AI Readiness Assessment &mdash; And Why Your Business Needs One</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Learn what an AI readiness assessment covers, why it matters for small businesses, and how to determine if your organization is prepared to adopt AI successfully.</p>
+          <div class="blog-card-meta">
+            <span>7 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- Actionable Tips -->
+  <!-- ============================================================== -->
+  <div class="blog-section-group">
+    <div class="blog-section-header">
+      <h2>Actionable Tips</h2>
+      <p>Practical, do-it-tomorrow guidance for small business operators.</p>
+    </div>
+    <div class="blog-grid">
+
+      <a href="/blog/five-signs-your-business-is-ready-for-ai/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">Actionable Tips</div>
+          <span class="blog-card-date-top">April 6, 2026</span>
+          <h2>5 Signs Your Small Business Is Ready for AI</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Not sure if your business is ready to adopt AI? Here are five clear signals that your organization is primed to benefit from artificial intelligence.</p>
+          <div class="blog-card-meta">
+            <span>6 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/from-spreadsheets-to-dashboards/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">Actionable Tips</div>
+          <span class="blog-card-date-top">April 6, 2026</span>
+          <h2>From Spreadsheets to Dashboards &mdash; Modernizing Your Business Reporting</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Still relying on spreadsheets for business reporting? Learn how to transition to interactive dashboards that save time and improve decision-making.</p>
+          <div class="blog-card-meta">
+            <span>7 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- Small Biz AI Wins -->
+  <!-- ============================================================== -->
+  <div class="blog-section-group">
+    <div class="blog-section-header">
+      <h2>Small Biz AI Wins</h2>
+      <p>Where AI is actually helping small businesses today, with concrete examples.</p>
+    </div>
+    <div class="blog-grid">
+
+      <a href="/blog/how-a-fractional-ai-advisor-can-transform-your-business/" class="blog-card reveal">
+        <div class="blog-card-top">
+          <div class="blog-card-category">Small Biz AI Wins</div>
+          <span class="blog-card-date-top">April 6, 2026</span>
+          <h2>How a Fractional AI Advisor Can Transform Your Business</h2>
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-excerpt">Discover how a fractional AI advisor gives small businesses access to enterprise-level AI strategy and implementation without the full-time cost.</p>
+          <div class="blog-card-meta">
+            <span>7 min read</span>
+            <span class="blog-card-read">Read Article &rarr;</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
 </section>
 
 <footer>
