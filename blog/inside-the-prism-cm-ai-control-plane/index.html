@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inside the Prism Dashboard: A CM Control Plane in Production | Prism AI Analytics</title>
+  <meta name="description" content="The framework I have been describing across this series — Baseline, Change Control, Drift Detection, Audit &amp; Remediation, layered with a Key Risk Indicator tier model — is not theoretical. It is opera..."/>
+  <meta property="og:title" content="Inside the Prism Dashboard: A CM Control Plane in Production | Prism AI Analytics"/>
+  <meta property="og:description" content="The framework I have been describing across this series — Baseline, Change Control, Drift Detection, Audit &amp; Remediation, layered with a Key Risk Indicator tier model — is not theoretical. It is opera..."/>
+  <meta property="og:type" content="article"/>
+  <link rel="icon" type="image/png" href="../../PRISM_Logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#17135C;--royal:#3A5998;--blue:#4A6DB5;--sky:#BDC9DD;--white:#FFFFFF;--offwhite:#F4F7FB;--gray:#D0D7DE;--charcoal:#1A1A2E;--gold:#C8A45A;--gold-dark:#A8883A;--text:#1A1A2E;--text-muted:#5A6278}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',Arial,sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(23,19,92,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(189,201,221,0.12);transition:all .3s ease}nav.scrolled{padding:.7rem 4rem;box-shadow:0 4px 24px rgba(23,19,92,0.25)}.nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none}.nav-logo img{height:44px;width:auto;mix-blend-mode:lighten}.nav-logo-text{font-size:1.15rem;font-weight:700;color:var(--white);letter-spacing:.02em;line-height:1.2}.nav-logo-text span{display:block;font-size:.6rem;font-weight:300;color:var(--sky);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}.nav-links{display:flex;gap:2.5rem;list-style:none}.nav-links a{color:var(--sky);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;position:relative}.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s ease}.nav-links a:hover{color:var(--white)}.nav-links a:hover::after{width:100%}.nav-links a.active{color:var(--white)}.nav-links a.active::after{width:100%}.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy);border:none;padding:.6rem 1.5rem;border-radius:6px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all .25s}.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,164,90,0.35)}.nav-login{color:var(--sky);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;padding:.6rem 0}.nav-login:hover{color:var(--white)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;z-index:101;background:none;border:none}.hamburger span{display:block;width:24px;height:2px;background:var(--sky);border-radius:2px;transition:all .3s ease}.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}.mobile-nav{display:none;position:fixed;inset:0;z-index:99;background:rgba(23,19,92,0.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem}.mobile-nav.active{display:flex}.mobile-nav a{color:var(--white);text-decoration:none;font-size:1.4rem;font-weight:600;letter-spacing:.04em;transition:color .2s}.mobile-nav a:hover{color:var(--gold)}
+    .article-hero{background:linear-gradient(165deg,var(--navy) 0%,#1E1A6E 40%,#2A2580 70%,var(--royal) 100%);padding:8rem 4rem 4rem;text-align:center}.article-hero-inner{max-width:800px;margin:0 auto}.article-category{display:inline-block;background:rgba(200,164,90,0.15);color:var(--gold);padding:.35rem 1rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}.article-hero h1{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:1.5rem;letter-spacing:-.02em}.article-meta{display:flex;align-items:center;justify-content:center;gap:2rem;font-size:.8rem;color:var(--sky)}.article-meta span{display:flex;align-items:center;gap:.4rem}
+    .article-body{max-width:760px;margin:0 auto;padding:4rem 2rem}.article-body h2{font-size:1.6rem;font-weight:700;color:var(--navy);margin:2.5rem 0 1rem;line-height:1.3}.article-body h3{font-size:1.15rem;font-weight:600;color:var(--royal);margin:2rem 0 .75rem}.article-body h4{font-size:1rem;font-weight:700;color:var(--navy);margin:1.5rem 0 .5rem}.article-body p{font-size:1rem;line-height:1.85;color:var(--text-muted);margin-bottom:1.25rem}.article-body ul,.article-body ol{margin:1rem 0 1.5rem 1.5rem;color:var(--text-muted)}.article-body li{font-size:1rem;line-height:1.85;margin-bottom:.5rem}.article-body blockquote{border-left:3px solid var(--gold);margin:2rem 0;padding:1rem 1.5rem;background:var(--offwhite);border-radius:0 8px 8px 0;font-style:italic;color:var(--navy)}.article-body strong{color:var(--navy)}.article-body code{background:var(--offwhite);padding:.1rem .4rem;border-radius:4px;font-family:'Consolas',monospace;font-size:.9em;color:var(--navy)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0 2rem;font-size:.92rem}.article-table th{background:var(--navy);color:var(--white);text-align:left;padding:.75rem 1rem;font-weight:600;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}.article-table td{padding:.7rem 1rem;border-bottom:1px solid var(--gray);color:var(--text-muted);line-height:1.55;vertical-align:top}.article-table tr:nth-child(even) td{background:var(--offwhite)}
+    .callout{background:var(--offwhite);border:1px solid var(--gray);border-radius:12px;padding:2rem;margin:2rem 0}.callout h4{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.75rem}.callout ul{margin-left:1.2rem}.callout li{font-size:.95rem;line-height:1.75;color:var(--text-muted);margin-bottom:.3rem}
+    .post-figure{margin:2.5rem 0;text-align:center}.post-figure img{max-width:100%;height:auto;border-radius:8px;box-shadow:0 4px 20px rgba(23,19,92,0.08);display:block;margin:0 auto}.post-figure figcaption{margin-top:.75rem;font-size:.82rem;font-style:italic;color:var(--text-muted);line-height:1.5;max-width:600px;margin-left:auto;margin-right:auto}
+    .article-cta{background:linear-gradient(135deg,var(--navy),#1E1A6E);border-radius:16px;padding:3rem;text-align:center;margin:3rem 0;border:1px solid rgba(200,164,90,0.2)}.article-cta h3{color:var(--white);font-size:1.4rem;margin-bottom:.75rem}.article-cta p{color:var(--sky);margin-bottom:1.5rem;font-size:.95rem}.article-cta a{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy);padding:.8rem 2rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;transition:all .25s}.article-cta a:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(200,164,90,0.4)}
+    .back-to-blog{display:inline-flex;align-items:center;gap:.5rem;color:var(--royal);text-decoration:none;font-size:.85rem;font-weight:600;margin-bottom:2rem;transition:color .2s}.back-to-blog:hover{color:var(--navy)}
+    .series-note{background:var(--offwhite);border-left:3px solid var(--royal);padding:1rem 1.25rem;margin:2rem 0;font-size:.92rem;color:var(--text-muted);border-radius:0 8px 8px 0;font-style:italic}
+    footer{background:var(--navy);color:var(--sky);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(200,164,90,0.2)}.footer-brand{display:flex;align-items:center;gap:.8rem}.footer-brand img{height:36px;mix-blend-mode:lighten}.footer-brand-text{font-size:1rem;color:var(--white);font-weight:700}.footer-brand-text span{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);font-weight:400;margin-top:2px}.footer-copy{font-size:.75rem;color:var(--sky);opacity:.7}.footer-links{display:flex;gap:1.5rem}.footer-links a{color:var(--sky);text-decoration:none;font-size:.8rem;font-weight:500;transition:color .2s}.footer-links a:hover{color:white}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+    @media(max-width:900px){nav{padding:1rem 1.5rem}nav.scrolled{padding:.7rem 1.5rem}.nav-links{display:none}.hamburger{display:flex}.article-hero{padding:7rem 1.5rem 3rem}.article-body{padding:3rem 1.5rem}.article-meta{flex-direction:column;gap:.5rem}footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem}}
+  </style>
+</head>
+<body>
+
+<nav id="topnav">
+  <a href="/" class="nav-logo">
+    <img src="../../PRISM_Logo.png" alt="Prism AI Analytics Logo" onerror="this.style.display='none'"/>
+    <div class="nav-logo-text">Prism AI Analytics<span>Illuminating Data. Empowering Decisions.</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/services/">Services</a></li>
+    <li><a href="/blog/" class="active">Blog</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  <a href="/login/" class="nav-login">Client Login</a>
+  <a href="/#contact" class="nav-cta">Work With Us</a>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="/">Home</a><a href="/about/">About</a><a href="/services/">Services</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a>
+  <a href="/login/">Client Login</a>
+  <a href="/#contact" style="color:var(--gold);font-weight:700;">Work With Us</a>
+</div>
+
+<header class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-category">AI Agent Governance</div>
+    <h1>Inside the Prism Dashboard: A CM Control Plane in Production</h1>
+    <div class="article-meta">
+      <span>&#128197; June 25, 2026</span>
+      <span>&#9202; 12 min</span>
+      <span>By Michele Fisher</span>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+  <a href="/blog/" class="back-to-blog">&larr; Back to Blog</a>
+
+  <p>The framework I have been describing across this series — Baseline, Change Control, Drift Detection, Audit &amp; Remediation, layered with a Key Risk Indicator tier model — is not theoretical. It is operating right now, on production infrastructure, governing the operational state of the firm that publishes this blog.</p>
+
+  <p>This post walks through the implementation. It is honest about what the implementation does today and what it does not. The dashboard described here governs Prism AI Analytics' own business operations — clients, projects, financials, the daily-review cadence, the activity log. It is not yet wired up against autonomous AI agents in production. The architectural patterns are the same; the asset class being governed is different.</p>
+
+  <p>Two reasons to publish this walkthrough rather than wait until we have a fully agent-governing version:</p>
+
+  <p>First, the framework’s claim is that the disciplines that worked for systems work for agents. Demonstrating the disciplines on a working system is honest. Claiming we already run them on agents we have not yet deployed would be dishonest. The post is an evidence walkthrough, not a product demo.</p>
+
+  <p>Second, most organizations evaluating CM discipline for AI agents do not have specialized tooling either. They have what we have — a single-server stack, a SQLite or Postgres database, an Express or FastAPI route layer, a vanilla frontend. The framework was deliberately designed to be implementable in that environment. This walkthrough shows it is.</p>
+
+  <h2>What the dashboard is</h2>
+
+  <p>The Prism dashboard is a single-file Express.js backend (<code>server.js</code>, just over 6,000 lines as of May 2026), backed by a SQLite database with WAL mode enabled, serving a vanilla HTML and JavaScript frontend from a <code>public/</code> directory. There is no bundler, no framework, no TypeScript, no microservices. The deploy target is a single Railway service. The total operational footprint is about what a small business accounting package would consume.</p>
+
+  <p>It runs Prism’s CRM with a twelve-stage pipeline, integrates Stripe for payments and QuickBooks for accounting, ingests daily review notes from an Obsidian vault via a sync script, captures a Claude Code activity log, scores AI readiness assessments using a documented rubric, syncs canonical state to Notion, and serves the AI-readiness assessment landing page.</p>
+
+  <p>It is, in other words, the operational mission-control surface for a small consultancy. That is what makes it instructive. Most organizations deploying AI agents will be running them inside a similarly-sized operational stack. The CM discipline scales down before it scales up.</p>
+
+  <h2>Where the four disciplines show up today</h2>
+
+  <h3>Baseline</h3>
+
+  <p>The dashboard maintains documented baselines for every operational asset it tracks. A CRM customer record carries a <code>crm_status</code> field constrained to one of twelve allowed values, an <code>adoption_stage</code> field validated against an allow-list before storage, an associated industry resolved against an industries table, and an <code>is_active</code> flag governing soft-delete state. The combination defines what a customer record is supposed to look like at any point in time. Drift from that baseline — a status outside the allow-list, an orphaned industry reference, a record where <code>is_active = 0</code> but referenced by an active project — is detectable.</p>
+
+  <p>The same discipline runs across other asset classes. Projects have a <code>status</code> constrained to a defined set. Invoices have a status enum the financials integration validates. The notion-sync adapter (<code>notionAdapter</code>) has a defined contract for which fields are canonical to Notion versus local — when the canonical contract changes, every read path through the adapter is required to follow.</p>
+
+  <p>This is configuration management as applied to business records, not AI agents. The mechanics are the same.</p>
+
+  <h3>Change Control</h3>
+
+  <p>The dashboard’s CRM has change control built into the data model. Every status transition is recorded with a <code>crm_last_status_change</code> timestamp. Every assessment submission auto-advances the customer’s CRM stage from <code>assessment</code> to <code>proposal</code> only if specific preconditions are met, and logs a warning if the auto-advance is skipped. Every webhook submission records its source attribution explicitly — <code>data.source || 'website_contact_form'</code> — so that the audit trail captures which surface generated the lead.</p>
+
+  <p>At the code-deployment layer, change control runs through a documented protocol. The dashboard repo enforces a strict workflow: WIP=1, branch-per-task, never push to main, squash-merge only. The protocol exists because production was wiped twice; the incident findings document is required reading before any work begins. Every code change to the dashboard goes through a defined approval path — a written PR description, an automated reviewer pass, a human merge. The audit trail is the git log plus the PR comments plus the deploy events.</p>
+
+  <p>Applied to AI agents, the same discipline would govern prompt revisions, tool inventory changes, and model version upgrades. The mechanics are unchanged.</p>
+
+  <h3>Drift Detection</h3>
+
+  <p>Two layers of drift detection run today. The first is on operational data. The CRM has a <code>/api/crm/triggers</code> endpoint that returns customers whose current stage has an urgent flag set — <em>"customers with urgent pending actions."</em> The endpoint exists because the human team cannot continuously poll the customer list; the system surfaces the cases that need attention. This is drift detection at the operational layer: the customer’s last status change exceeded the SLA for that stage, so the system raises it.</p>
+
+  <p>The second layer runs on financial reconciliation. The <code>/api/financials/kpis</code> endpoint pulls aggregated values from Stripe (payments, balance, subscriptions), QuickBooks (P&amp;L, invoices), and the local database (CRM-attributed pipeline value). Discrepancies between the three sources — a Stripe payment that does not appear in QuickBooks, a local invoice with no corresponding Stripe charge — are visible to the operator. The cache layer (<code>cacheService</code>) ensures the comparison runs against fresh data without hammering the upstream APIs.</p>
+
+  <p>Neither of these is yet a full KRI tier model. Both demonstrate the architectural pattern that scales to one. The instrumentation point exists; the threshold and tier definition is the design work.</p>
+
+  <h3>Audit &amp; Remediation</h3>
+
+  <p>The dashboard captures an activity log on multiple surfaces. The Claude Code usage data is read from <code>~/.claude/usage-data</code> and surfaced through the dashboard. The <code>prismStudioActivityLog</code> service captures operational events. The CRM customer record carries a <code>crm_last_status_change</code> field that supports reconstruction of the customer’s lifecycle. The Notion sync adapter writes a record of every successful and failed sync attempt.</p>
+
+  <p>Rollback is supported at the data layer through the soft-delete pattern (<code>is_active = 0</code> rather than DELETE), at the code layer through the squash-merge protocol (every change is one commit, revertible), and at the infrastructure layer through Railway’s deploy history (every deploy is named, taggable, and rollbackable). The deploy runbook documents the rollback procedure explicitly. It has been exercised in production — twice, in fact, after the incidents that produced the workflow protocol now in place.</p>
+
+  <h2>The CRM stage model as a tier-escalation prototype</h2>
+
+  <p>The clearest existing analog to the KRI tier model is the dashboard’s twelve-stage CRM definition. Each stage carries:</p>
+
+  <ul><li>A defined trigger action (<em>"Send intro email within 24 hrs"</em>)</li><li>An SLA (<em>"24 hours"</em>, <em>"48 hours"</em>, <em>"5 days"</em>, etc.)</li><li>A next-stage lifecycle pointer</li><li>An urgent flag (binary today)</li></ul>
+
+  <p>The pattern matches the KRI tier model in shape but not yet in granularity. The current implementation is binary — urgent or not — where the framework specifies three tiers. Extending the model is straightforward: replace the boolean urgent flag with a tier enum, define Tier 1 for stages where missing the SLA produces a warning to the on-call operator, Tier 2 for stages where missing the SLA auto-throttles outbound activity until human review, and Tier 3 for stages where missing the SLA triggers an executive notification and a written incident summary.</p>
+
+  <p>The fact that the existing implementation already encodes the trigger action, the SLA, and the urgent flag in the same data structure is the point. The discipline is in place. The tier granularity is incremental work, not a rebuild.</p>
+
+  <h2>What it would take to extend this to AI agents</h2>
+
+  <p>The honest answer to <em>"how do you operationalize this framework?"</em> is: the same way Prism operationalized it for its own business records.</p>
+
+  <p>If Prism deployed an autonomous AI agent in production tomorrow &amp;mdash; say, an outbound sales agent generating discovery-call follow-up emails &amp;mdash; the extension would look like this:</p>
+
+  <table class="article-table"><thead><tr><th>Step</th><th>Discipline added</th><th>Reuses existing dashboard pattern</th></tr></thead><tbody><tr><td>1. Add agent to asset inventory</td><td>Baseline (asset registry)</td><td><code>clients</code> table &amp;rarr; new <code>production_agents</code> table</td></tr><tr><td>2. Define the baseline</td><td>Baseline (behavioral profile)</td><td>Observation window pattern from CRM KPIs</td></tr><tr><td>3. Wire change control</td><td>Change Control</td><td>PR-and-merge protocol (already enforced on the dashboard repo)</td></tr><tr><td>4. Instrument drift detection</td><td>Drift Detection</td><td>KPI emission pattern + <code>/api/crm/triggers</code> mirror</td></tr><tr><td>5. Define tier escalation</td><td>KRI tier overlay</td><td><code>CRM_STAGES</code> constants block pattern</td></tr><tr><td>6. Add rollback path</td><td>Audit &amp;amp; Remediation</td><td>Soft-delete + Railway deploy-rollback patterns</td></tr></tbody></table>
+
+  <p><strong>Effort:</strong> ~3 weeks of engineering for the first agent, declining to ~3 days per additional agent once the patterns are factored.</p>
+
+  <ol><li><strong>Add the agent to the asset inventory.</strong> A new row in a <code>production_agents</code> table. Columns capturing model identifier, model version, system prompt content hash, tool inventory JSON, data scope JSON, owner, baseline-approved date, current-status enum.</li></ol>
+
+  <ol><li><strong>Define the baseline.</strong> Output distribution profile from a 14- to 30-day observation window. Latency band. Refusal rate baseline. Cost-per-action target. All written into a baseline record linked to the agent.</li></ol>
+
+  <ol><li><strong>Wire the change control.</strong> Any modification to the agent’s row in <code>production_agents</code> requires the same PR-and-merge protocol the dashboard already uses. The audit trail is the git log plus the dashboard’s existing change-tracking columns.</li></ol>
+
+  <ol><li><strong>Instrument drift detection.</strong> Per-agent metrics emitted to the same KPI table that already serves the dashboard’s financial reconciliation. New columns for hallucination rate, output distribution shift, tool-call error rate, refusal-rate inversion. The <code>/api/agents/triggers</code> endpoint mirrors <code>/api/crm/triggers</code> — agents whose current behavior has crossed a tier threshold.</li></ol>
+
+  <ol><li><strong>Define the tier escalation table.</strong> A new constants block in <code>server.js</code> parallel to <code>CRM_STAGES</code>. Per-agent overrides for organizations whose risk appetite differs from the starter set defaults.</li></ol>
+
+  <ol><li><strong>Add the rollback path.</strong> A <code>/api/agents/:id/rollback</code> endpoint that replaces the agent’s active baseline with the most recent prior approved version. Tested before the agent enters production. Rehearsed quarterly.</li></ol>
+
+  <p>The total estimated effort: about three weeks of engineering for the first agent, declining to about three days per additional agent once the patterns are factored. The point is that the patterns are already factored — for business records. Extending them to agents is a known shape of work.</p>
+
+  <h2>The framework’s architectural claim</h2>
+
+  <p>The dashboard is the existence proof for an architectural claim the framework makes: configuration management for AI agents does not require new tooling. It requires the discipline of treating every agent in production as a configuration item with a documented baseline, governed by a defined change control process, monitored by a tiered KRI escalation model, and audited against the baseline that authorized any given action.</p>
+
+  <p>The infrastructure to do this is the infrastructure most operational teams already have. A database. A route layer. A defined enum of approved states. A change-tracking timestamp. A tier-aware escalation endpoint. A rollback procedure that has been exercised before it was needed.</p>
+
+  <p>What is rare is not the tooling. What is rare is the discipline. The dashboard described here is the discipline applied to one class of asset. Extending it to autonomous agents is the next class. The mechanics are the same.</p>
+
+  <h2>What this post is not</h2>
+
+  <p>This post is not a vendor pitch for the Prism dashboard as an AI agent governance platform. The dashboard is internal infrastructure. We do not license it, sell it, or position it as a product. The dashboard is offered here as evidence — that the framework is implementable inside a small operational footprint, that the disciplines transfer cleanly from business records to agents, and that the architecture is straightforward enough to describe in a 1,800-word blog post.</p>
+
+  <p>The framework reference document and the KRI starter set are the deliverables. The dashboard is the proof that we use them on ourselves.</p>
+
+  <p>The final post in this series crosswalks the framework against the IAPP AIGP Body of Knowledge for governance professionals studying for the certification. It is the closing of the series — the operational layer the AIGP curriculum implies but does not yet fully detail.</p>
+
+  <p><em>This is part 5 of a six-part series on Configuration Management for AI Agents. Part 1 stakes out the latency gap. Part 2 introduces the four-discipline framework. Part 3 details the KRI tier model. Part 4 maps the framework to NIST AI RMF. Part 6 crosswalks the framework against the AIGP Body of Knowledge.</em></p>
+
+  <div class="article-cta">
+    <h3>Implementing the Framework Against Your Own Operational Stack?</h3>
+    <p>Prism AI Analytics works with organizations that want to extend their existing operational dashboards into AI agent governance — using the infrastructure they already have rather than purchasing dedicated control planes. Engagement starts with a baseline assessment of the assets in scope and the current monitoring infrastructure.</p>
+    <a href="/#contact">Schedule a CM-AI Implementation Review</a>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-brand">
+    <img src="../../PRISM_Logo.png" alt="Prism AI Analytics Logo" onerror="this.style.display='none'"/>
+    <div class="footer-brand-text">Prism AI Analytics<span>Illuminating Data. Empowering Decisions.</span></div>
+  </div>
+  <div class="footer-copy">&copy; 2026 Prism AI Analytics. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="/">Home</a><a href="/about/">About</a><a href="/services/">Services</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a><a href="/login/">Client Login</a>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll',()=>{document.getElementById('topnav').classList.toggle('scrolled',window.scrollY>60)});
+  document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('hamburger').classList.toggle('active');document.getElementById('mobileNav').classList.toggle('active')});
+</script>
+</body>
+</html>
