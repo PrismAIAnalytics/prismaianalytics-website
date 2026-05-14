@@ -21,3 +21,7 @@
 # Required environment variables (set in Netlify UI, not here):
 #   DASHBOARD_API_URL       — Railway URL of your dashboard, no trailing slash
 #   DASHBOARD_LEADS_SECRET  — optional shared secret for X-Lead-Forwarder header
+#   GA_MEASUREMENT_ID       — GA4 Measurement ID (format: G-XXXXXXXXXX). Required
+#                              for production traffic monitoring. If unset, the
+#                              post-build inject-analytics.js step skips silently
+#                              (warns but does not fail). See IM-006 in Notion.
