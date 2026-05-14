@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>What Is AI Agent Governance? A Practitioner's Glossary for the Prism CM-AI Framework | Prism AI Analytics</title>
   <meta name="description" content="The phrase *AI agent governance* means different things in different conversations. A CISO at a financial-services firm hears &quot;perimeter and identity.&quot; A compliance officer hears &quot;policy and audit.&quot; A..."/>
-  <meta name="robots" content="noindex, follow"/>
   <meta property="og:title" content="What Is AI Agent Governance? A Practitioner's Glossary for the Prism CM-AI Framework | Prism AI Analytics"/>
   <meta property="og:description" content="The phrase *AI agent governance* means different things in different conversations. A CISO at a financial-services firm hears &quot;perimeter and identity.&quot; A compliance officer hears &quot;policy and audit.&quot; A..."/>
   <meta property="og:type" content="article"/>
@@ -26,11 +25,6 @@
     footer{background:var(--navy);color:var(--sky);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(200,164,90,0.2)}.footer-brand{display:flex;align-items:center;gap:.8rem}.footer-brand img{height:36px;mix-blend-mode:lighten}.footer-brand-text{font-size:1rem;color:var(--white);font-weight:700}.footer-brand-text span{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);font-weight:400;margin-top:2px}.footer-copy{font-size:.75rem;color:var(--sky);opacity:.7}.footer-links{display:flex;gap:1.5rem}.footer-links a{color:var(--sky);text-decoration:none;font-size:.8rem;font-weight:500;transition:color .2s}.footer-links a:hover{color:white}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
     @media(max-width:900px){nav{padding:1rem 1.5rem}nav.scrolled{padding:.7rem 1.5rem}.nav-links{display:none}.hamburger{display:flex}.article-hero{padding:7rem 1.5rem 3rem}.article-body{padding:3rem 1.5rem}.article-meta{flex-direction:column;gap:.5rem}footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem}}
-    .stub-card{max-width:640px;margin:0 auto;padding:3rem 2rem;text-align:center}
-    .stub-card .stub-badge{display:inline-block;background:rgba(200,164,90,0.15);color:var(--gold);padding:.35rem 1rem;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
-    .stub-card h2{font-size:1.05rem;font-weight:600;color:var(--text-muted);margin-bottom:1rem;letter-spacing:.02em;text-transform:uppercase}
-    .stub-card .stub-date{font-size:1.6rem;font-weight:800;color:var(--navy);margin-bottom:1.5rem;letter-spacing:-.01em}
-    .stub-card .stub-desc{font-size:1rem;line-height:1.75;color:var(--text-muted);margin-bottom:2rem}
   </style>
 </head>
 <body>
@@ -61,17 +55,175 @@
   <div class="article-hero-inner">
     <div class="article-category">AI Agent Governance</div>
     <h1>What Is AI Agent Governance? A Practitioner's Glossary for the Prism CM-AI Framework</h1>
+    <div class="article-meta">
+      <span>&#128197; May 14, 2026</span>
+      <span>&#9202; 10 min</span>
+      <span>By Michele Fisher</span>
+    </div>
   </div>
 </header>
 
 <article class="article-body">
   <a href="/blog/" class="back-to-blog">&larr; Back to Blog</a>
-  <div class="stub-card">
-    <div class="stub-badge">Coming Soon</div>
-    <h2>Publishing</h2>
-    <div class="stub-date">May 14, 2026</div>
-    <p class="stub-desc">The phrase *AI agent governance* means different things in different conversations. A CISO at a financial-services firm hears &quot;perimeter and identity.&quot; A compliance officer hears &quot;policy and audit.&quot; A...</p>
-    <p class="stub-desc" style="font-size:.92rem;">Check back on the publish date for the full article.</p>
+
+  <p>The phrase <em>AI agent governance</em> means different things in different conversations. A CISO at a financial-services firm hears "perimeter and identity." A compliance officer hears "policy and audit." An ML engineer hears "evaluation and observability." A risk officer hears "operational controls and escalation." When the people in a room each define a foundational term differently, they will produce frameworks that do not connect to each other, audit trails that do not reconcile, and incident response plans that contradict each other under pressure.</p>
+
+  <p>This post is the primer for a six-part series on configuration management for AI agents. The rest of the series goes deep on specific disciplines — the latency gap, the four BCDA disciplines, the KRI tier model, the standards crosswalks, a working implementation, and the AIGP Body of Knowledge mapping. Before any of that, the terms need to mean the same thing twice in a row.</p>
+
+  <p>What follows is a working glossary plus the Prism CM-AI Framework&rsquo;s specific definitions, organized so each definition builds on the ones above it.</p>
+
+  <h2>What AI Agent Governance is, and what it is not</h2>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/cm-ai-deck/image3.png" alt="Governance answers a single, structural question" loading="lazy" />
+    <figcaption>Governance answers a single, structural question</figcaption>
+  </figure>
+
+  <p><strong>AI agent governance</strong> is the operational discipline of ensuring that autonomous AI systems acting on behalf of an organization continue to operate within the boundaries the organization approved. It answers a single question: <em>is the agent currently doing what we approved it to do?</em></p>
+
+  <p>That question has structure. It assumes there is an approved configuration. It assumes deviation from that configuration is detectable. It assumes the organization can intervene before deviation becomes loss. Each of those assumptions is a discipline, not a tool.</p>
+
+  <p>AI agent governance is <em>not</em> alignment research. Alignment asks whether the model&rsquo;s values are correct in the first place. Governance assumes the model passed an alignment review at deployment time and addresses what happens after.</p>
+
+  <p>It is <em>not</em> safety evaluation. Evaluation tests an agent against expected scenarios. Governance handles unexpected scenarios, drift between expected and actual behavior, and the audit trail that supports incident response.</p>
+
+  <p>It is <em>not</em> observability. Observability tells you what the agent did. Governance tells you whether what the agent did was authorized.</p>
+
+  <p>It is <em>not</em> runtime policy enforcement on its own. Policy enforcement decides what an agent can do at this instant. Governance decides what an agent is supposed to be allowed to do, who approved that, when it changed, and whether the live policies still match the approved configuration.</p>
+
+  <p>Agentic AI differs from earlier AI systems in one operationally critical way: it acts. Static prediction models output probabilities. Agentic systems take actions — send emails, modify records, execute trades, file tickets, generate code. Action means consequence. Consequence means the governance bar moves up.</p>
+
+  <h2>The latency gap</h2>
+
+  <p>The central problem in agentic AI governance is the <strong>latency gap</strong> — the interval between the moment an agent&rsquo;s behavior changes and the moment a human, looking at a dashboard, notices and decides to act.</p>
+
+  <p>Agents operate at machine speed. They complete thousands of actions in the time it takes a human reviewer to refresh a screen. By the time the dashboard refreshes, the actions are already taken. Even when the human notices and intervenes, the intervention is reactive. The damage, if any, is in the past.</p>
+
+  <p>Observability cannot close the latency gap on its own. It is asynchronous by design. What closes the gap is automated detection of deviation from an approved baseline, with predefined responses tiered to severity. That is what configuration management has done in adjacent fields — enterprise IT, financial services, critical infrastructure — for three decades. The framework presented in this series ports that discipline to AI agents.</p>
+
+  <h2>The four BCDA disciplines</h2>
+
+  <p>Configuration management as a discipline has four parts. Each is necessary; none is sufficient on its own. The framework names them BCDA — short for Baseline, Change Control, Drift Detection, Audit and Remediation.</p>
+
+  <p><strong>Baseline</strong> is the documented description of what <em>good</em> looks like for an agent. For a production AI agent, the baseline includes the approved model identifier and version, the system prompt&rsquo;s content hash, the inventory of tools the agent may invoke, the data resources the agent may access, the expected output distribution from a 14- to 30-day observation window, the latency band, the refusal rate baseline, and the cost-per-action target. The baseline is version-controlled, signed off by a named approver, and reviewed quarterly. Without a baseline, drift is undetectable.</p>
+
+  <p><strong>Change Control</strong> is the defined approval path for any modification to the baseline. Most current AI deployments are weakest here. Organizations gate model upgrades but rarely gate prompt revisions. They gate new tool integrations but rarely gate scope expansions to existing tools. Change control extends approval discipline to every element of the baseline — the prompt, the tool inventory, the data scope. The approval path is documented, the audit trail captures who approved what against what evidence, and the rollback path is defined before the change is approved, not after.</p>
+
+  <p><strong>Drift Detection</strong> is continuous comparison of the live agent&rsquo;s behavior against the baseline, at machine speed, with defined thresholds and predefined responses. Drift detection is not a dashboard. It is an automated control loop that emits events when behavior deviates from the documented baseline. Two patterns matter: exact-match comparison for elements that should not change without approval (model version, prompt hash, tool whitelist, data scope) and statistical comparison for elements that fluctuate naturally within tolerance (output distribution, latency, refusal rate, cost-per-action).</p>
+
+  <p><strong>Audit and Remediation</strong> is the ability to reconstruct, after any event, exactly what the agent did against what baseline, who approved that baseline, and what changed between then and now. Combined with the ability to roll back to a previously approved baseline when the response to drift is to revert. The audit trail uses hash chains — the same property git commits provide for code, applied to configuration state — so that tampering is detectable. The rollback procedure is tested on a non-production replica before the agent enters production and re-exercised at least quarterly.</p>
+
+  <p>The disciplines exist whether or not anyone names them. The framework&rsquo;s contribution is the explicit naming, the cross-discipline integration, and the operational thresholds for each.</p>
+
+  <table class="article-table"><thead><tr><th>Discipline</th><th>Question it answers</th><th>What it looks like for an AI agent</th></tr></thead><tbody><tr><td><strong>B — Baseline</strong></td><td>What is <em>good</em> supposed to look like?</td><td>Approved model + version, system prompt hash, tool inventory, data scope, expected output distribution, latency band, refusal rate, cost per action</td></tr><tr><td><strong>C — Change Control</strong></td><td>Who can change the baseline, when, with what authorization?</td><td>Prompt revisions, model upgrades, tool additions, data-source expansions &amp;mdash; each routed through a defined approval path</td></tr><tr><td><strong>D — Drift Detection</strong></td><td>Has runtime diverged from baseline?</td><td>Output distribution shifts, hallucination-rate thresholds, tool-call error spikes, cost drift, refusal-rate inversion, anomaly detection</td></tr><tr><td><strong>A — Audit &amp;amp; Remediation</strong></td><td>Can we reconstruct <em>why</em>? Can we roll back?</td><td>Decision provenance, prompt + tool-call logs, change history with hash chain, kill-switch, tested rollback, post-incident review</td></tr></tbody></table>
+
+  <h2>The KRI tier model</h2>
+
+  <p>Drift detection on its own produces alerts. Alerts without a defined response are noise. The framework layers a Key Risk Indicator tier model over the drift detection discipline to turn alerts into actual controls.</p>
+
+  <p>The vocabulary matters. A <strong>KPI</strong> — Key Performance Indicator — measures whether the agent is producing value. Output volume, conversion lift, hours saved, cost reduction. A <strong>KRI</strong> — Key Risk Indicator — measures whether the agent is operating within its approved boundaries. Hallucination rate, refusal-rate inversion, output distribution shift, tool-call error rate. The two answer different questions and trigger different responses. A high-performing agent producing harmful or out-of-policy outputs is the worst possible failure mode, and it is largely invisible to a KPI dashboard.</p>
+
+  <p>The tier model has three levels, adapted from financial-services operational risk practice &amp;mdash; specifically the discipline banks have run under <a href="https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm">SR 11-7</a> and <a href="https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html">OCC Bulletin 2011-12</a> since 2011.</p>
+
+  <p><strong>Tier 1 — Warning.</strong> Statistical drift detected. The metric has moved outside the expected band but has not exceeded operational tolerance. Response time: investigate within 24 hours. Action: document the cause. If intentional, update the baseline. If unintentional, remediate. Authority: engineering or operations on-call.</p>
+
+  <p><strong>Tier 2 — Action.</strong> Drift exceeds operational tolerance. The metric is materially outside the approved range. Response time: immediate. Action: auto-throttle, rate-limit, or restrict the agent&rsquo;s scope. Human review required before continued operation. Authority: engineering manager or compliance lead.</p>
+
+  <p><strong>Tier 3 &amp;mdash; Intervention.</strong> Operational risk threshold breached. The agent&rsquo;s behavior is materially outside what the organization can defensibly explain to a regulator, auditor, or board. Response time: immediate. Action: kill-switch activates. Rollback to last approved baseline. Incident report filed. Post-incident review within five business days. Authority: pre-defined incident commander; legal and executive notification required.</p>
+
+  <table class="article-table"><thead><tr><th>Tier</th><th>Trigger</th><th>Response time</th><th>Action</th><th>Authority</th></tr></thead><tbody><tr><td><strong>Tier 1 &amp;mdash; Warning</strong></td><td>Statistical drift, within tolerance</td><td>Within 24 hours</td><td>Investigate; update baseline or remediate</td><td>Engineering or ops on-call</td></tr><tr><td><strong>Tier 2 &amp;mdash; Action</strong></td><td>Drift exceeds tolerance</td><td>Immediate</td><td>Auto-throttle; human review required</td><td>Engineering manager or compliance lead</td></tr><tr><td><strong>Tier 3 &amp;mdash; Intervention</strong></td><td>Operational risk threshold breached</td><td>Immediate</td><td>Kill-switch; rollback; incident report; review within 5 days</td><td>Pre-defined incident commander; legal + exec notification</td></tr></tbody></table>
+
+  <p>The tier model is what allows governance to operate at the speed of the agent rather than the speed of human attention.</p>
+
+  <h2>How these terms relate to the major standards</h2>
+
+  <p>The framework is designed to operationalize the policy outcomes the standards your compliance team is already accountable to require, not to replace them.</p>
+
+  <p>**<a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a>** &amp;mdash; four functions: Govern, Map, Measure, Manage. BCDA disciplines map directly. Govern is change control. Map is baseline. Measure is drift detection plus the KRI catalog. Manage is audit and remediation plus tested rollback.</p>
+
+  <p>**<a href="https://www.iso.org/standard/81230.html">ISO/IEC 42001:2023</a>** mandates a Plan-Do-Check-Act cycle for AI management systems. BCDA disciplines operationalize the cycle: Plan equals Baseline, Do equals Change Control, Check equals Drift Detection, Act equals Audit and Remediation.</p>
+
+  <p>**<a href="https://artificialintelligenceact.eu/the-act/">EU AI Act, Article 72</a>** requires post-market monitoring for high-risk AI providers with documented baselines. The KRI tier model plus the audit trail satisfy the operational evidence requirement.</p>
+
+  <p>**<a href="https://iapp.org/certify/aigp">IAPP AIGP Body of Knowledge</a>, Domains III and IV** &amp;mdash; governance of AI development and deployment. The framework is the operational implementation layer of what these domains describe as governance accountabilities. Domain II&rsquo;s standards crosswalks map cleanly to the BCDA &amp;times; NIST &amp;times; ISO &amp;times; EU correspondences above.</p>
+
+  <h2>How these terms relate to the runtime layer</h2>
+
+  <p>The framework sits above the runtime governance toolkits already shipping in 2026, not against them. Specifically:</p>
+
+  <p>**<a href="https://github.com/microsoft/agent-governance-toolkit">Microsoft Agent Governance Toolkit</a>** is the runtime kernel &amp;mdash; policy enforcement at request time, identity verification, sandboxing, SRE practices. The framework provides the configuration-management layer above the kernel. The kernel decides what an agent is allowed to do right now; the framework decides what the kernel should be enforcing in the first place and when the rules should change.</p>
+
+  <p>**<a href="https://www.paloaltonetworks.com/cyberpedia/what-is-agentic-ai-governance">Palo Alto Networks Prisma AIRS</a>** and the broader Cortex platform provide security-perimeter governance &amp;mdash; authority delegation, identity boundaries, runtime controls. The framework adds the quantitative KRI tier model, baseline-definition methodology, and change-authorization workflow that the perimeter-security framing does not specify.</p>
+
+  <p>**<a href="https://github.com/open-gitagent/gitagent">GitAgent</a>** provides git-native agent identity, behavioral constraints, and compliance metadata. The framework adds formal hash-chained CHANGE_LOG, KRI tier thresholds, tested rollback as a first-class artifact, and the financial-services lineage. Both can co-exist; agents written under GitAgent&rsquo;s structure can adopt the framework&rsquo;s four artifacts alongside their existing files.</p>
+
+  <p>The bonus post in this series — <em>Microsoft&rsquo;s Agent Governance Toolkit Is the Kernel. Configuration Management Is the Layer Above It.</em> — goes deeper on the integration patterns. The short version: runtime engines and configuration management are complementary disciplines, not competing ones.</p>
+
+  <h2>Glossary — quick reference</h2>
+
+  <p>For readers who want to scan: every key term used in the series, defined in one line.</p>
+
+  <p><strong>Agent.</strong> An AI system that plans, decides, and executes actions toward a goal, with access to tools and data, operating over multiple steps.</p>
+
+  <p><strong>Audit and Remediation.</strong> The fourth BCDA discipline — reconstructing what the agent did against what baseline, with a tested path to roll back.</p>
+
+  <p><strong>Baseline.</strong> The documented description of what <em>good</em> looks like for an agent — model version, prompt hash, tool inventory, data scope, behavioral expectations.</p>
+
+  <p><strong>BCDA.</strong> Acronym for the four configuration management disciplines: Baseline, Change Control, Drift Detection, Audit and Remediation.</p>
+
+  <p><strong>Change Control.</strong> The second BCDA discipline — defined approval path for any modification to the baseline.</p>
+
+  <p><strong>Configuration Drift.</strong> The gap between the documented baseline and the live state of the agent.</p>
+
+  <p><strong>Drift Detection.</strong> The third BCDA discipline — continuous comparison of live behavior against baseline, with defined thresholds.</p>
+
+  <p><strong>Hash Chain.</strong> A sequence of cryptographic hashes where each entry references the prior entry, producing a tamper-evident audit trail.</p>
+
+  <p><strong>KPI (Key Performance Indicator).</strong> A metric that measures whether the agent is producing value. Reviewed weekly or monthly. Action: optimize.</p>
+
+  <p><strong>KRI (Key Risk Indicator).</strong> A metric that measures whether the agent is operating within approved boundaries. Monitored continuously. Action: escalate per tier.</p>
+
+  <p><strong>Latency Gap.</strong> The interval between a behavioral change in an agent and a human noticing and intervening. The central problem the framework addresses.</p>
+
+  <p>**<a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/">OWASP Top 10 for Agentic Applications</a>.** The OWASP Gen AI Security Project&rsquo;s canonical risk taxonomy for agentic AI systems &amp;mdash; ten categories (ASI01&amp;ndash;ASI10) released December 2025 for the 2026 edition.</p>
+
+  <p><strong>Rollback.</strong> Reverting an agent to a previously approved baseline. Tested before production, re-exercised quarterly.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/cm-ai-deck/image9.png" alt="Governing the permission-inheritance chain of sub-agents" loading="lazy" />
+    <figcaption>Governing the permission-inheritance chain of sub-agents</figcaption>
+  </figure>
+
+  <p><strong>Sub-agent Provisions.</strong> Four extra fields a sub-agent&rsquo;s baseline must carry to close the permission-inheritance failure mode: permitted invokers, max recursion depth, permission inheritance rule, output validation contract.</p>
+
+  <p><strong>Tier 1 / 2 / 3.</strong> The three levels of KRI escalation. Tier 1: warning, investigate within 24 hours. Tier 2: action, auto-throttle and human review. Tier 3: intervention, kill-switch and rollback.</p>
+
+  <h2>What comes next</h2>
+
+  <p>If the terms above feel useful, the next post in the series goes deep on the latency gap and the structural reasons observability cannot close it. After that, the framework&rsquo;s four disciplines, the KRI tier model in detail, the NIST AI RMF crosswalk, a bonus post on Microsoft&rsquo;s Agent Governance Toolkit, and the AIGP Body of Knowledge mapping as the series closer. A follow-up implementation walkthrough of the framework in the Prism dashboard publishes separately once the dashboard&rsquo;s agent monitoring extension is live.</p>
+
+  <p>Read this primer once. Reference the glossary as needed. The disciplines work whether or not the vocabulary is universal — but the vocabulary is what allows two practitioners to write down what they mean and have it mean the same thing the next morning.</p>
+
+  <p><em>This is part 0 of a six-part series on Configuration Management for AI Agents. Part 1 stakes out the latency gap. Part 2 introduces the four-discipline framework.</em></p>
+
+  <h2>Sources cited</h2>
+
+  <p><strong>Financial-services lineage:</strong></p>
+
+  <ul><li>Federal Reserve, <em>SR 11-7: Supervisory Guidance on Model Risk Management</em>. <a href="https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm">federalreserve.gov/supervisionreg/srletters/sr1107.htm</a></li><li>OCC, <em>Bulletin 2011-12</em>. <a href="https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html">occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html</a></li></ul>
+
+  <p><strong>AI governance standards:</strong></p>
+
+  <ul><li>NIST, <em>AI Risk Management Framework 1.0</em>. <a href="https://www.nist.gov/itl/ai-risk-management-framework">nist.gov/itl/ai-risk-management-framework</a></li><li>ISO/IEC 42001:2023. <a href="https://www.iso.org/standard/81230.html">iso.org/standard/81230.html</a></li><li>EU AI Act (Regulation (EU) 2024/1689). <a href="https://artificialintelligenceact.eu/the-act/">artificialintelligenceact.eu/the-act</a></li><li>IAPP, <em>AIGP Body of Knowledge v2.1</em>. <a href="https://iapp.org/certify/aigp">iapp.org/certify/aigp</a></li></ul>
+
+  <p><strong>Runtime layer (referenced for integration patterns):</strong></p>
+
+  <ul><li>Microsoft, <em>Agent Governance Toolkit</em>. <a href="https://github.com/microsoft/agent-governance-toolkit">github.com/microsoft/agent-governance-toolkit</a></li><li>Palo Alto Networks, <em>What is Agentic AI Governance?</em> Cyberpedia entry. <a href="https://www.paloaltonetworks.com/cyberpedia/what-is-agentic-ai-governance">paloaltonetworks.com/cyberpedia/what-is-agentic-ai-governance</a></li><li>GitAgent. <a href="https://github.com/open-gitagent/gitagent">github.com/open-gitagent/gitagent</a></li></ul>
+
+  <div class="article-cta">
+    <h3>Want the Framework Reference?</h3>
+    <p>The Prism CM-AI Framework is documented in a single canonical reference with the four disciplines, the KRI tier definitions, and the standards crosswalks. We share it under NDA with organizations actively scaling AI agent deployments.</p>
+    <a href="/#contact">Request the Framework Reference</a>
   </div>
 </article>
 
