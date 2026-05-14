@@ -12,6 +12,8 @@
     --offwhite:#F4F7FB;
     --gold:    #C8A45A;
     --gold-dk: #A8883A;
+    /* WCAG AA-compliant eyebrow gold on offwhite ground (contrast 5.6:1 vs #F4F7FB) */
+    --gold-eyebrow: #7A5F2A;
     --charcoal:#1A1A2E;
     --muted:   #5A6278;
   }
@@ -83,11 +85,11 @@
     max-width: 920px;
   }
   .eyebrow {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 16px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--gold-dk);
+    color: var(--gold-eyebrow);
     margin: 0 0 26px;
   }
   .headline {
