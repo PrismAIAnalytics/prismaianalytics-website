@@ -7,7 +7,7 @@
   "phoneHref": "+19803468368",
   "location": "Charlotte, North Carolina",
   "twitterHandle": "",
-  "ogImage": "/PRISM_Logo.png",
+  "ogImage": "/assets/img/homepage-v2-og.png",
   "nav": [
     { "label": "Home", "href": "/" },
     { "label": "About", "href": "/about/" },
