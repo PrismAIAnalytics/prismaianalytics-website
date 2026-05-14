@@ -6,7 +6,7 @@
   "scripts": {
     "build:posts": "node _build_blog_html.js",
     "prebuild": "node _build_blog_html.js",
-    "build": "eleventy && node scripts/inject-analytics.js",
+    "build": "eleventy && node scripts/inject-analytics.js && node scripts/inject-blog-schema.js",
     "watch": "eleventy --watch",
     "serve": "eleventy --serve --port=8080"
   },

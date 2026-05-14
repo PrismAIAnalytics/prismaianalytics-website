@@ -21,7 +21,7 @@ eleventyExcludeFromCollections: true
         Prism AI Analytics delivers AI adoption strategy and execution across analytics, automation, and compliance engineering. Engagements scale from a two-week diagnostic to a full managed operations partnership &mdash; structured by where the business is in the adoption journey, not by an arbitrary tier.
       </p>
       <div class="hero-btns">
-        <a href="#contact" class="btn-primary">Start with the AI Readiness Self-Assessment</a>
+        <a href="#contact" class="btn-primary" data-event="hero_cta" data-event-location="homepage_hero">Start with the AI Readiness Self-Assessment</a>
         <a href="#journey" class="btn-secondary">See how adoption ships</a>
       </div>
       <div class="hero-arc">
@@ -291,7 +291,7 @@ eleventyExcludeFromCollections: true
       </div>
       <div class="contact-form reveal">
         <div class="form-title">Send a Message</div>
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-event="contact_form_submit" data-event-source="homepage_contact">
         <input type="hidden" name="form-name" value="contact"/>
         <p style="display:none;"><label>Don't fill this out: <input name="bot-field"/></label></p>
         <div class="form-row">

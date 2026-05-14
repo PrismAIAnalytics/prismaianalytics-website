@@ -191,7 +191,7 @@ permalink: /ai-readiness/
            /api/leads route reads it (and the Netlify webhook honors it post the
            Stream F6 fix in submission-created.js). adoption_stage=assess routes
            the lead into the assessment magic-link flow. #}
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-event="lead_magnet_submit" data-event-source="ai_readiness_landing">
           <input type="hidden" name="form-name" value="contact"/>
           <input type="hidden" name="adoption_stage" value="assess"/>
           <input type="hidden" name="source" value="ai_readiness_landing"/>

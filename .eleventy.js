@@ -17,7 +17,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('hero');
   eleventyConfig.addPassthroughCopy('privacy.html');
 
-  // Pass-through: shared CSS (extracted from inline styles in v2 index.html)
+  // Pass-through: SEO discovery files (AN-003).
+  eleventyConfig.addPassthroughCopy('sitemap.xml');
+  eleventyConfig.addPassthroughCopy('robots.txt');
+
+  // Pass-through: shared CSS + JS (assets dir covers both subtrees)
   eleventyConfig.addPassthroughCopy('assets');
 
   // Pass-through: brand + media assets used by index.njk and the future pages
