@@ -47,7 +47,16 @@ pageStyles: |
   }
   .podcast-section-header + .podcast-section-header { margin-top: 3.5rem; }
 
-  .podcast-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .podcast-list { display: grid; gap: 1.5rem; align-items: start; }
+  .podcast-list--live { grid-template-columns: repeat(2, 1fr); }
+  .podcast-list--upcoming { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  @media (max-width: 980px) {
+    .podcast-list--upcoming { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .podcast-list--live,
+    .podcast-list--upcoming { grid-template-columns: 1fr; }
+  }
 
   .episode-card {
     background: var(--white); border-radius: 12px;
@@ -105,16 +114,15 @@ pageStyles: |
     overflow: hidden;
     background: var(--offwhite);
     border: 1px solid var(--gray);
-    max-width: 560px;
   }
   .episode-embed iframe {
     width: 100%;
     border: 0;
     display: block;
-    height: 540px;
+    height: 460px;
   }
-  @media (max-width: 600px) {
-    .episode-embed iframe { height: 420px; }
+  @media (max-width: 640px) {
+    .episode-embed iframe { height: 400px; }
   }
   .episode-listen {
     margin-top: 0.75rem;
@@ -170,7 +178,7 @@ pageStyles: |
       <p>Live episodes on Substack. Click play to listen here, or follow the show on Substack to get new episodes the day they drop.</p>
     </div>
 
-    <div class="podcast-list">
+    <div class="podcast-list podcast-list--live">
 
       <article class="episode-card reveal">
         <div class="episode-card-header">
@@ -212,7 +220,7 @@ pageStyles: |
       <p>Each upcoming episode drops the same week as its companion blog post. The series closes with a full-stack Deep Dive paired to the Prism CM-AI Framework white paper.</p>
     </div>
 
-    <div class="podcast-list">
+    <div class="podcast-list podcast-list--upcoming">
 
       <article class="episode-card upcoming reveal">
         <div class="episode-card-header">
