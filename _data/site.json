@@ -13,6 +13,7 @@
     { "label": "About", "href": "/about/" },
     { "label": "Services", "href": "/services/" },
     { "label": "Blog", "href": "/blog/" },
+    { "label": "Podcast", "href": "/podcast/" },
     { "label": "Contact", "href": "/#contact" }
   ],
   "footer": {
@@ -21,6 +22,7 @@
       { "label": "About", "href": "/about/" },
       { "label": "Services", "href": "/services/" },
       { "label": "Blog", "href": "/blog/" },
+      { "label": "Podcast", "href": "/podcast/" },
       { "label": "Contact", "href": "/#contact" },
       { "label": "Client Login", "href": "/login/" },
       { "label": "Privacy Policy", "href": "/privacy", "rel": "nofollow" }
