@@ -47,7 +47,16 @@ pageStyles: |
   }
   .podcast-section-header + .podcast-section-header { margin-top: 3.5rem; }
 
-  .podcast-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .podcast-list { display: grid; gap: 1.5rem; }
+  .podcast-list--live { grid-template-columns: repeat(2, 1fr); }
+  .podcast-list--upcoming { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  @media (max-width: 980px) {
+    .podcast-list--upcoming { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .podcast-list--live,
+    .podcast-list--upcoming { grid-template-columns: 1fr; }
+  }
 
   .episode-card {
     background: var(--white); border-radius: 12px;
@@ -82,7 +91,12 @@ pageStyles: |
     color: var(--sky); font-size: 0.72rem; opacity: 0.85;
     letter-spacing: 0.04em;
   }
-  .episode-card-body { padding: 1.5rem 1.5rem 1.75rem; }
+  .episode-card { display: flex; flex-direction: column; }
+  .episode-card-body {
+    padding: 1.5rem 1.5rem 1.75rem;
+    display: flex; flex-direction: column;
+    flex: 1;
+  }
   .episode-card-body h2 {
     font-size: 1.25rem; font-weight: 700; color: var(--navy);
     line-height: 1.3; margin: 0 0 0.6rem; letter-spacing: -0.01em;
@@ -90,6 +104,11 @@ pageStyles: |
   .episode-card-body p {
     font-size: 0.92rem; line-height: 1.6; color: var(--text-muted);
     margin: 0 0 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: calc(0.92rem * 1.6 * 3);
   }
   .episode-source-link {
     display: inline-flex; align-items: center; gap: 0.4rem;
@@ -110,6 +129,10 @@ pageStyles: |
     width: 100%;
     border: 0;
     display: block;
+    height: 460px;
+  }
+  @media (max-width: 640px) {
+    .episode-embed iframe { height: 400px; }
   }
   .episode-listen {
     margin-top: 0.75rem;
@@ -165,7 +188,7 @@ pageStyles: |
       <p>Live episodes on Substack. Click play to listen here, or follow the show on Substack to get new episodes the day they drop.</p>
     </div>
 
-    <div class="podcast-list">
+    <div class="podcast-list podcast-list--live">
 
       <article class="episode-card reveal">
         <div class="episode-card-header">
@@ -177,7 +200,7 @@ pageStyles: |
           <h2>Closing the AI Agent Latency Gap</h2>
           <p>Orientation for the series. The central problem in agentic AI &mdash; the gap between machine-speed decisions and human-speed oversight &mdash; and why configuration management discipline is the operational layer that closes it. Start here if the CM-AI Framework is new to you.</p>
           <div class="episode-embed">
-            <iframe src="https://micheleprismai.substack.com/embed/p/closing-the-ai-agent-latency-gap" height="320" scrolling="no" loading="lazy" title="Closing the AI Agent Latency Gap on Substack"></iframe>
+            <iframe src="https://micheleprismai.substack.com/embed/p/closing-the-ai-agent-latency-gap" scrolling="no" loading="lazy" title="Closing the AI Agent Latency Gap on Substack"></iframe>
           </div>
           <p class="episode-listen">Player not loading? <a href="https://micheleprismai.substack.com/p/closing-the-ai-agent-latency-gap" target="_blank" rel="noopener">Listen on Substack &rarr;</a></p>
         </div>
@@ -194,122 +217,9 @@ pageStyles: |
           <p>A high-level walk through the Prism CM-AI Framework, anchored on a first-person field case: how a self-imposed, fabricated constraint moved the Prism Chief of Staff agent outside its baseline for a full session with no governance signal. Works as a practical preview of what the white paper covers.</p>
           <a class="episode-source-link" href="/blog/a-hallucination-on-our-own-stack/">Related reading: A Hallucination on Our Own Stack (Bonus blog) &rarr;</a>
           <div class="episode-embed">
-            <iframe src="https://micheleprismai.substack.com/embed/p/a-hallucination-on-our-own-stack" height="320" scrolling="no" loading="lazy" title="A Hallucination on Our Own Stack on Substack"></iframe>
+            <iframe src="https://micheleprismai.substack.com/embed/p/a-hallucination-on-our-own-stack" scrolling="no" loading="lazy" title="A Hallucination on Our Own Stack on Substack"></iframe>
           </div>
           <p class="episode-listen">Player not loading? <a href="https://micheleprismai.substack.com/p/a-hallucination-on-our-own-stack" target="_blank" rel="noopener">Listen on Substack &rarr;</a></p>
-        </div>
-      </article>
-
-    </div>
-
-    <div class="podcast-section-header">
-      <h2>Coming with the Series</h2>
-      <p>Each upcoming episode drops the same week as its companion blog post. The series closes with a full-stack Deep Dive paired to the Prism CM-AI Framework white paper.</p>
-    </div>
-
-    <div class="podcast-list">
-
-      <article class="episode-card upcoming reveal">
-        <div class="episode-card-header">
-          <span class="episode-card-tag">Episode 02</span>
-          <span class="episode-card-tag ai-tag">AI-Generated Overview</span>
-          <span class="episode-card-date">Drops May 16, 2026</span>
-        </div>
-        <div class="episode-card-body">
-          <h2>What Is AI Agent Governance? A Practitioner&rsquo;s Glossary</h2>
-          <p>The series primer. Working definitions of AI agent governance, the four BCDA disciplines, the KRI tier model, and how the framework connects to NIST, ISO, the EU AI Act, and the major runtime governance toolkits.</p>
-          <a class="episode-source-link" href="/blog/what-is-ai-agent-governance/">Pairs with: What Is AI Agent Governance? (Part 0 &middot; Primer) &rarr;</a>
-        </div>
-      </article>
-
-      <article class="episode-card upcoming reveal">
-        <div class="episode-card-header">
-          <span class="episode-card-tag">Episode 03</span>
-          <span class="episode-card-tag ai-tag">AI-Generated Overview</span>
-          <span class="episode-card-date">Drops May 21, 2026</span>
-        </div>
-        <div class="episode-card-body">
-          <h2>Why AI Dashboards Are Not Governance</h2>
-          <p>The latency gap, examined in depth. Why observability without state management leaves the central problem in agentic AI unaddressed &mdash; and what runtime intervention actually requires.</p>
-          <a class="episode-source-link" href="/blog/observability-isnt-governance/">Pairs with: Observability Isn&rsquo;t Governance (Part 1) &rarr;</a>
-        </div>
-      </article>
-
-      <article class="episode-card upcoming reveal">
-        <div class="episode-card-header">
-          <span class="episode-card-tag">Episode 04</span>
-          <span class="episode-card-tag ai-tag">AI-Generated Overview</span>
-          <span class="episode-card-date">Drops May 28, 2026</span>
-        </div>
-        <div class="episode-card-body">
-          <h2>The Missing Twin of Agentic Governance</h2>
-          <p>Configuration management as the operational layer the agentic stack is missing. The Baseline / Change Control / Drift Detection / Audit &amp; Remediation cycle, applied end to end to AI agents in production.</p>
-          <a class="episode-source-link" href="/blog/configuration-management-for-ai-agents/">Pairs with: Configuration Management for AI Agents (Part 2) &rarr;</a>
-        </div>
-      </article>
-
-      <article class="episode-card upcoming reveal">
-        <div class="episode-card-header">
-          <span class="episode-card-tag">Episode 05</span>
-          <span class="episode-card-tag ai-tag">AI-Generated Overview</span>
-          <span class="episode-card-date">Drops June 4, 2026</span>
-        </div>
-        <div class="episode-card-body">
-          <h2>KRIs vs KPIs for Autonomous Agents</h2>
-          <p>Borrowing 30 years of operational-risk discipline from financial services. The three-tier escalation model and why treating a KPI as a KRI is the most common production failure mode.</p>
-          <a class="episode-source-link" href="/blog/kri-vs-kpi-for-ai-agents/">Pairs with: KRIs vs KPIs for AI Agents (Part 3) &rarr;</a>
-        </div>
-      </article>
-
-      <article class="episode-card upcoming reveal">
-        <div class="episode-card-header">
-          <span class="episode-card-tag">Episode 06</span>
-          <span class="episode-card-tag ai-tag">AI-Generated Overview</span>
-          <span class="episode-card-date">Drops June 11, 2026</span>
-        </div>
-        <div class="episode-card-body">
-          <h2>NIST AI RMF, Mapped to Configuration Management</h2>
-          <p>The crosswalk between Govern, Map, Measure, and Manage and the four CM-AI disciplines &mdash; built for compliance teams that need to defend the operational layer.</p>
-          <a class="episode-source-link" href="/blog/nist-ai-rmf-meets-configuration-management/">Pairs with: NIST AI RMF Meets CM (Part 4) &rarr;</a>
-        </div>
-      </article>
-
-      <article class="episode-card upcoming reveal">
-        <div class="episode-card-header">
-          <span class="episode-card-tag">Episode 07</span>
-          <span class="episode-card-tag ai-tag">AI-Generated Overview</span>
-          <span class="episode-card-date">Drops June 18, 2026</span>
-        </div>
-        <div class="episode-card-body">
-          <h2>Microsoft&rsquo;s Agent Governance Toolkit &mdash; And the CM Layer Above It</h2>
-          <p>The April 2026 Microsoft toolkit ships the runtime kernel. CM-AI sits above it, providing the state-management layer the kernel deliberately stops short of.</p>
-          <a class="episode-source-link" href="/blog/microsoft-agent-governance-toolkit-and-the-cm-layer-above-it/">Pairs with: Microsoft Agent Governance Toolkit (Bonus) &rarr;</a>
-        </div>
-      </article>
-
-      <article class="episode-card upcoming reveal">
-        <div class="episode-card-header">
-          <span class="episode-card-tag">Episode 08</span>
-          <span class="episode-card-tag ai-tag">AI-Generated Overview</span>
-          <span class="episode-card-date">Drops June 25, 2026</span>
-        </div>
-        <div class="episode-card-body">
-          <h2>CM and the AIGP Body of Knowledge</h2>
-          <p>The IAPP AIGP curriculum defines what AI governance professionals are accountable for. Configuration management is the operational layer the curriculum implies but stops short of naming.</p>
-          <a class="episode-source-link" href="/blog/configuration-management-and-the-aigp-body-of-knowledge/">Pairs with: CM and the AIGP Body of Knowledge (Part 6) &rarr;</a>
-        </div>
-      </article>
-
-      <article class="episode-card upcoming reveal">
-        <div class="episode-card-header">
-          <span class="episode-card-tag finale-tag">Series Finale</span>
-          <span class="episode-card-tag ai-tag">AI-Generated Overview</span>
-          <span class="episode-card-date">Drops with the White Paper &middot; early July 2026</span>
-        </div>
-        <div class="episode-card-body">
-          <h2>Governing AI Agents at Machine Speed</h2>
-          <p>The full-stack Deep Dive across all eleven CM-AI sources. Released alongside the Prism Configuration Management for AI Agents white paper v0.1 as the series closer.</p>
-          <a class="episode-source-link" href="/downloads/">Pairs with: White Paper v0.1 (download) &rarr;</a>
         </div>
       </article>
 
