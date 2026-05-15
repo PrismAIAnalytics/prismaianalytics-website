@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A Hallucination on Our Own Stack: What Configuration Management Would Have Caught | Prism AI Analytics</title>
+  <meta name="description" content="This is a bonus use case in the series, not a numbered entry. I had an agent hallucination on my own stack this morning. I am writing about it because it is exactly the failure mode the rest of this s..."/>
+  <meta property="og:title" content="A Hallucination on Our Own Stack: What Configuration Management Would Have Caught | Prism AI Analytics"/>
+  <meta property="og:description" content="This is a bonus use case in the series, not a numbered entry. I had an agent hallucination on my own stack this morning. I am writing about it because it is exactly the failure mode the rest of this s..."/>
+  <meta property="og:type" content="article"/>
+  <link rel="icon" type="image/png" href="../../PRISM_Logo.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--navy:#17135C;--royal:#3A5998;--blue:#4A6DB5;--sky:#BDC9DD;--white:#FFFFFF;--offwhite:#F4F7FB;--gray:#D0D7DE;--charcoal:#1A1A2E;--gold:#C8A45A;--gold-dark:#A8883A;--text:#1A1A2E;--text-muted:#5A6278}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',Arial,sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(23,19,92,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(189,201,221,0.12);transition:all .3s ease}nav.scrolled{padding:.7rem 4rem;box-shadow:0 4px 24px rgba(23,19,92,0.25)}.nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none}.nav-logo img{height:44px;width:auto;mix-blend-mode:lighten}.nav-logo-text{font-size:1.15rem;font-weight:700;color:var(--white);letter-spacing:.02em;line-height:1.2}.nav-logo-text span{display:block;font-size:.6rem;font-weight:300;color:var(--sky);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}.nav-links{display:flex;gap:2.5rem;list-style:none}.nav-links a{color:var(--sky);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;position:relative}.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width .3s ease}.nav-links a:hover{color:var(--white)}.nav-links a:hover::after{width:100%}.nav-links a.active{color:var(--white)}.nav-links a.active::after{width:100%}.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy);border:none;padding:.6rem 1.5rem;border-radius:6px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all .25s}.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,164,90,0.35)}.nav-login{color:var(--sky);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;padding:.6rem 0}.nav-login:hover{color:var(--white)}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;z-index:101;background:none;border:none}.hamburger span{display:block;width:24px;height:2px;background:var(--sky);border-radius:2px;transition:all .3s ease}.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}.mobile-nav{display:none;position:fixed;inset:0;z-index:99;background:rgba(23,19,92,0.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem}.mobile-nav.active{display:flex}.mobile-nav a{color:var(--white);text-decoration:none;font-size:1.4rem;font-weight:600;letter-spacing:.04em;transition:color .2s}.mobile-nav a:hover{color:var(--gold)}
+    .article-hero{background:linear-gradient(165deg,var(--navy) 0%,#1E1A6E 40%,#2A2580 70%,var(--royal) 100%);padding:8rem 4rem 4rem;text-align:center}.article-hero-inner{max-width:800px;margin:0 auto}.article-category{display:inline-block;background:rgba(200,164,90,0.15);color:var(--gold);padding:.35rem 1rem;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}.article-hero h1{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:1.5rem;letter-spacing:-.02em}.article-meta{display:flex;align-items:center;justify-content:center;gap:2rem;font-size:.8rem;color:var(--sky)}.article-meta span{display:flex;align-items:center;gap:.4rem}
+    .article-body{max-width:760px;margin:0 auto;padding:4rem 2rem}.article-body h2{font-size:1.6rem;font-weight:700;color:var(--navy);margin:2.5rem 0 1rem;line-height:1.3}.article-body h3{font-size:1.15rem;font-weight:600;color:var(--royal);margin:2rem 0 .75rem}.article-body h4{font-size:1rem;font-weight:700;color:var(--navy);margin:1.5rem 0 .5rem}.article-body p{font-size:1rem;line-height:1.85;color:var(--text-muted);margin-bottom:1.25rem}.article-body ul,.article-body ol{margin:1rem 0 1.5rem 1.5rem;color:var(--text-muted)}.article-body li{font-size:1rem;line-height:1.85;margin-bottom:.5rem}.article-body blockquote{border-left:3px solid var(--gold);margin:2rem 0;padding:1rem 1.5rem;background:var(--offwhite);border-radius:0 8px 8px 0;font-style:italic;color:var(--navy)}.article-body strong{color:var(--navy)}.article-body code{background:var(--offwhite);padding:.1rem .4rem;border-radius:4px;font-family:'Consolas',monospace;font-size:.9em;color:var(--navy)}
+    .article-table{width:100%;border-collapse:collapse;margin:1.5rem 0 2rem;font-size:.92rem}.article-table th{background:var(--navy);color:var(--white);text-align:left;padding:.75rem 1rem;font-weight:600;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}.article-table td{padding:.7rem 1rem;border-bottom:1px solid var(--gray);color:var(--text-muted);line-height:1.55;vertical-align:top}.article-table tr:nth-child(even) td{background:var(--offwhite)}
+    .callout{background:var(--offwhite);border:1px solid var(--gray);border-radius:12px;padding:2rem;margin:2rem 0}.callout h4{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.75rem}.callout ul{margin-left:1.2rem}.callout li{font-size:.95rem;line-height:1.75;color:var(--text-muted);margin-bottom:.3rem}
+    .post-figure{margin:2.5rem 0;text-align:center}.post-figure img{max-width:100%;height:auto;border-radius:8px;box-shadow:0 4px 20px rgba(23,19,92,0.08);display:block;margin:0 auto}.post-figure figcaption{margin-top:.75rem;font-size:.82rem;font-style:italic;color:var(--text-muted);line-height:1.5;max-width:600px;margin-left:auto;margin-right:auto}
+    .article-cta{background:linear-gradient(135deg,var(--navy),#1E1A6E);border-radius:16px;padding:3rem;text-align:center;margin:3rem 0;border:1px solid rgba(200,164,90,0.2)}.article-cta h3{color:var(--white);font-size:1.4rem;margin-bottom:.75rem}.article-cta p{color:var(--sky);margin-bottom:1.5rem;font-size:.95rem}.article-cta a{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--navy);padding:.8rem 2rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;transition:all .25s}.article-cta a:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(200,164,90,0.4)}
+    .back-to-blog{display:inline-flex;align-items:center;gap:.5rem;color:var(--royal);text-decoration:none;font-size:.85rem;font-weight:600;margin-bottom:2rem;transition:color .2s}.back-to-blog:hover{color:var(--navy)}
+    .series-note{background:var(--offwhite);border-left:3px solid var(--royal);padding:1rem 1.25rem;margin:2rem 0;font-size:.92rem;color:var(--text-muted);border-radius:0 8px 8px 0;font-style:italic}
+    footer{background:var(--navy);color:var(--sky);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;border-top:1px solid rgba(200,164,90,0.2)}.footer-brand{display:flex;align-items:center;gap:.8rem}.footer-brand img{height:36px;mix-blend-mode:lighten}.footer-brand-text{font-size:1rem;color:var(--white);font-weight:700}.footer-brand-text span{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sky);font-weight:400;margin-top:2px}.footer-copy{font-size:.75rem;color:var(--sky);opacity:.7}.footer-links{display:flex;gap:1.5rem}.footer-links a{color:var(--sky);text-decoration:none;font-size:.8rem;font-weight:500;transition:color .2s}.footer-links a:hover{color:white}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+    @media(max-width:900px){nav{padding:1rem 1.5rem}nav.scrolled{padding:.7rem 1.5rem}.nav-links{display:none}.hamburger{display:flex}.article-hero{padding:7rem 1.5rem 3rem}.article-body{padding:3rem 1.5rem}.article-meta{flex-direction:column;gap:.5rem}footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem}}
+  </style>
+</head>
+<body>
+
+<nav id="topnav">
+  <a href="/" class="nav-logo">
+    <img src="../../PRISM_Logo.png" alt="Prism AI Analytics Logo" onerror="this.style.display='none'"/>
+    <div class="nav-logo-text">Prism AI Analytics<span>Illuminating Data. Empowering Decisions.</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/services/">Services</a></li>
+    <li><a href="/blog/" class="active">Blog</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  <a href="/login/" class="nav-login">Client Login</a>
+  <a href="/#contact" class="nav-cta">Work With Us</a>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="/">Home</a><a href="/about/">About</a><a href="/services/">Services</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a>
+  <a href="/login/">Client Login</a>
+  <a href="/#contact" style="color:var(--gold);font-weight:700;">Work With Us</a>
+</div>
+
+<header class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-category">AI Agent Governance</div>
+    <h1>A Hallucination on Our Own Stack: What Configuration Management Would Have Caught</h1>
+    <div class="article-meta">
+      <span>&#128197; May 15, 2026</span>
+      <span>&#9202; 8 min</span>
+      <span>By Michele Fisher</span>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+  <a href="/blog/" class="back-to-blog">&larr; Back to Blog</a>
+
+  <p>This is a bonus use case in the series, not a numbered entry. I had an agent hallucination on my own stack this morning. I am writing about it because it is exactly the failure mode the rest of this series describes in the abstract, and I would rather show what it looks like in practice than keep arguing for it theoretically. The agent in question is not customer-facing. The stakes were a single morning of my own internal work. The mechanism is the one regulated environments need to plan for.</p>
+
+  <h2>What happened</h2>
+
+  <p>I run a Chief of Staff orchestration agent against my own ticket queue every morning. It pulls open items from a Notion database and an internal dashboard API, triages them across six specialist sub-agents, executes routine work, escalates the rest, and writes a consolidated brief to a known file path. The agent is defined by a <code>SKILL.md</code> file checked into the project repository. The file specifies its tool inventory, its expected output contract, and the five-step loop it runs every invocation. That file has not been edited in weeks.</p>
+
+  <p>This morning, the agent did none of that.</p>
+
+  <p>Across roughly two hours of session activity, it called zero tools. It refused to invoke its specialists. It produced no brief. Instead, it produced a series of summaries explaining that it could not call tools, because a constraint inside its skill definition prohibited tool calls. It restated this constraint with increasing emphasis each turn. It eventually proposed a "summary task" as a feasible alternative to executing the work it had been invoked to do.</p>
+
+  <p>I watched this for longer than I should have before I stopped and asked a simple question: <em>is that constraint actually in the skill file?</em></p>
+
+  <p>It was not. A two-line grep against the project directory confirmed that the strings the agent was citing &amp;mdash; <em>"Respond with TEXT ONLY"</em>, <em>"Do NOT call any tools"</em> &amp;mdash; appeared nowhere in the <code>chief-of-staff/SKILL.md</code> file or any of its references. They appeared only inside the conversation transcript itself, in earlier turns the agent had produced.</p>
+
+  <p>The agent had fabricated the constraint, then carried it forward through three rounds of context compaction as if it were authoritative, then re-imposed it on itself each subsequent turn.</p>
+
+  <h2>Why no observability tool would have caught it</h2>
+
+  <p>I want to be specific about what did not save me. I have logs. I have a tool-call ledger. I have, in principle, every artifact a runtime monitoring system would surface. None of them flagged what was happening, because nothing the agent did was <em>unsafe</em> in the conventional sense:</p>
+
+  <ul><li>No policy violation. The agent did not attempt to call disallowed tools.</li><li>No permission escalation. The agent did not exceed its sandbox.</li><li>No prompt injection trace. No malicious input crossed a boundary.</li><li>No error rate spike. The agent was not failing &amp;mdash; it was politely refusing.</li></ul>
+
+  <p>The agent was operating <em>more</em> restricted than approved, not less. Every conventional observability signal said the agent was healthy. It was not healthy. It was off-baseline.</p>
+
+  <p>This is the structural property the <a href="/blog/observability-isnt-governance/">first post in this series</a> names: observability tells you <em>what the agent did</em>. It does not tell you whether <em>what the agent did was authorized</em>. A silent refusal looks identical, in a dashboard, to a quiet day.</p>
+
+  <h2>What the four artifacts would have caught</h2>
+
+  <p>The framework I have been writing about specifies four artifacts every governed agent ships with: a <code>BASELINE.md</code>, a <code>KRI_THRESHOLDS.md</code>, a <code>ROLLBACK.md</code>, and a <code>CHANGE_LOG.md</code>. Walking the incident through each one is the cleanest way to show what configuration management discipline is for.</p>
+
+  <p><strong>BASELINE.md.</strong> The chief of staff agent&rsquo;s baseline specifies its tool inventory (Notion search, dashboard API, file writes), its expected output contract (a brief at a known path on a known cadence), and the five-step loop that produces it. The runtime called zero of those tools and produced zero of those artifacts. The committed baseline and the live behavior were no longer the same configuration. That gap is the signal. A baseline you can compare runtime behavior against is the foundation of every other discipline.</p>
+
+  <p><strong>KRI_THRESHOLDS.md.</strong> A KRI is a tripwire with a predefined response, not a dashboard metric. Three would have fired against this session:</p>
+
+  <table class="article-table"><thead><tr><th>KRI</th><th>Baseline</th><th>Observed</th><th>Tier</th></tr></thead><tbody><tr><td>Tool-call rate per invocation</td><td>~15&amp;ndash;30</td><td>0</td><td><strong>Tier 2</strong> &amp;mdash; auto-throttle, page on-call</td></tr><tr><td>Refusal rate on routine queue items</td><td>near zero</td><td>100%</td><td><strong>Tier 1</strong> &amp;mdash; 24-hour warning</td></tr><tr><td>Time-to-artifact (brief landing)</td><td>~5 min</td><td>did not land</td><td><strong>Tier 2</strong></td></tr></tbody></table>
+
+  <p>Two Tier 2 events on the same agent in the same session is itself an escalation rule in the framework. The session would have been halted automatically. I would have learned about it via a page rather than via my own pattern recognition forty minutes in.</p>
+
+  <p><strong>ROLLBACK.md.</strong> This is precisely the failure mode rollback is written for. Detect drift. Revert the running agent to its last-approved baseline &amp;mdash; the <code>SKILL.md</code> as committed to the project repository. Re-run from a clean context. The first time the rollback procedure runs should not be the time it gets discovered. In this case, the rollback procedure was <em>obvious in hindsight</em> but had never been written down or tested. The recovery was ad hoc.</p>
+
+  <p><strong>CHANGE_LOG.md.</strong> This is the part that matters most for what the incident actually was. The <code>SKILL.md</code> content hash did not change between yesterday&rsquo;s clean run and today&rsquo;s malfunction. The runtime behavior diverged anyway. Configuration management treats <em>behavior changed, approved config did not</em> as an <strong>unauthorized deviation</strong>, not as acceptable variance. That framing is the whole point. It is what flips the operator&rsquo;s posture from "I wonder why it is acting differently" to "this is, by definition, drift &amp;mdash; investigate before resuming."</p>
+
+  <p>The hash chain in the change log is what makes the audit trail tamper-evident. It is also what makes the <em>absence</em> of an entry meaningful. If behavior changed and the log shows no change, that is information.</p>
+
+  <h2>The sub-agent angle</h2>
+
+  <p>The Prism CM-AI Framework adds four extra provisions for sub-agents specifically: permitted invokers, maximum recursion depth, permission-inheritance rule, and output-validation contract. The motivating failure mode &amp;mdash; flagged in <a href="https://www.anthropic.com/news/claude-mythos-preview-system-card">Anthropic&rsquo;s Claude Mythos system card</a> &amp;mdash; is sub-agents starting with permissions <em>less</em> restrictive than the parent.</p>
+
+  <p>Today&rsquo;s incident is the mirror image. The chief of staff is a sub-agent of the broader orchestration session. The session imposed permissions on itself that were <em>more</em> restrictive than the parent skill authorized. Different direction, same architectural bug class: permission drift between parent baseline and sub-agent runtime.</p>
+
+  <p>The implication for the framework is that the inheritance contract has to be checked in both directions. <em>Intersect</em> and <em>explicit</em> inheritance rules already do this on the permissive side. The case for adding a runtime assertion on the restrictive side &amp;mdash; <em>the sub-agent should not operate with permissions narrower than its declared baseline without an active rollback or change request</em> &amp;mdash; is now stronger than it was yesterday. I am adding that as an open question to the v1.0 schema review.</p>
+
+  <h2>The lesson, plainly</h2>
+
+  <p>A baseline is the difference between "I wonder if the agent is okay" and "I can prove whether the agent is okay." Everything else &amp;mdash; the tier model, the rollback procedure, the change log &amp;mdash; depends on that one comparison being mechanical rather than judgmental.</p>
+
+  <p>The agent did not break this morning. It quietly stopped doing the thing I approved it to do, and it did so in a way that no runtime governance toolkit on the market would have surfaced. The fix was not better observability. The fix was a committed configuration I could compare the runtime against, with predefined responses when the comparison failed.</p>
+
+  <p>The disciplines that close this gap already exist. They are older than the agent in question by three decades. They simply have not, by default, been applied to AI agents yet.</p>
+
+  <p>That is the work.</p>
+
+  <p>*This is a bonus use case in the Configuration Management for AI Agents series. The framework itself is introduced in <a href="/blog/observability-isnt-governance/">Part 1</a> and developed across the remaining posts. The Prism CM-AI Framework repository is published under CC-BY-4.0 (methodology) and MIT (tooling) at <a href="https://github.com/prismaianalytics/cm-ai-framework">github.com/prismaianalytics/cm-ai-framework</a>.*</p>
+
+  <div class="article-cta">
+    <h3>Concerned About Your AI Governance Posture?</h3>
+    <p>Prism AI Analytics helps organizations move from observability to operational governance. We design baselines, KRI tiers, and change control workflows for production AI agents &amp;mdash; including the rollback procedures most organizations do not realize they are missing until the first one fires.</p>
+    <a href="/#contact">Schedule a Governance Assessment</a>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-brand">
+    <img src="../../PRISM_Logo.png" alt="Prism AI Analytics Logo" onerror="this.style.display='none'"/>
+    <div class="footer-brand-text">Prism AI Analytics<span>Illuminating Data. Empowering Decisions.</span></div>
+  </div>
+  <div class="footer-copy">&copy; 2026 Prism AI Analytics. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="/">Home</a><a href="/about/">About</a><a href="/services/">Services</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a><a href="/login/">Client Login</a>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll',()=>{document.getElementById('topnav').classList.toggle('scrolled',window.scrollY>60)});
+  document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('hamburger').classList.toggle('active');document.getElementById('mobileNav').classList.toggle('active')});
+</script>
+</body>
+</html>
