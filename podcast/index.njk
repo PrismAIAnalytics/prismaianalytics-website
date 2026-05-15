@@ -105,11 +105,16 @@ pageStyles: |
     overflow: hidden;
     background: var(--offwhite);
     border: 1px solid var(--gray);
+    max-width: 560px;
   }
   .episode-embed iframe {
     width: 100%;
     border: 0;
     display: block;
+    height: 540px;
+  }
+  @media (max-width: 600px) {
+    .episode-embed iframe { height: 420px; }
   }
   .episode-listen {
     margin-top: 0.75rem;
@@ -177,7 +182,7 @@ pageStyles: |
           <h2>Closing the AI Agent Latency Gap</h2>
           <p>Orientation for the series. The central problem in agentic AI &mdash; the gap between machine-speed decisions and human-speed oversight &mdash; and why configuration management discipline is the operational layer that closes it. Start here if the CM-AI Framework is new to you.</p>
           <div class="episode-embed">
-            <iframe src="https://micheleprismai.substack.com/embed/p/closing-the-ai-agent-latency-gap" height="320" scrolling="no" loading="lazy" title="Closing the AI Agent Latency Gap on Substack"></iframe>
+            <iframe src="https://micheleprismai.substack.com/embed/p/closing-the-ai-agent-latency-gap" scrolling="no" loading="lazy" title="Closing the AI Agent Latency Gap on Substack"></iframe>
           </div>
           <p class="episode-listen">Player not loading? <a href="https://micheleprismai.substack.com/p/closing-the-ai-agent-latency-gap" target="_blank" rel="noopener">Listen on Substack &rarr;</a></p>
         </div>
@@ -194,7 +199,7 @@ pageStyles: |
           <p>A high-level walk through the Prism CM-AI Framework, anchored on a first-person field case: how a self-imposed, fabricated constraint moved the Prism Chief of Staff agent outside its baseline for a full session with no governance signal. Works as a practical preview of what the white paper covers.</p>
           <a class="episode-source-link" href="/blog/a-hallucination-on-our-own-stack/">Related reading: A Hallucination on Our Own Stack (Bonus blog) &rarr;</a>
           <div class="episode-embed">
-            <iframe src="https://micheleprismai.substack.com/embed/p/a-hallucination-on-our-own-stack" height="320" scrolling="no" loading="lazy" title="A Hallucination on Our Own Stack on Substack"></iframe>
+            <iframe src="https://micheleprismai.substack.com/embed/p/a-hallucination-on-our-own-stack" scrolling="no" loading="lazy" title="A Hallucination on Our Own Stack on Substack"></iframe>
           </div>
           <p class="episode-listen">Player not loading? <a href="https://micheleprismai.substack.com/p/a-hallucination-on-our-own-stack" target="_blank" rel="noopener">Listen on Substack &rarr;</a></p>
         </div>
