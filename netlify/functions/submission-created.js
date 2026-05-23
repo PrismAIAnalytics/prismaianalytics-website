@@ -4,7 +4,7 @@
 // Forwards the submission payload to the Prism Dashboard /api/leads endpoint.
 //
 // Required environment variables (set these in Netlify → Site settings → Env vars):
-//   DASHBOARD_API_URL          e.g. https://portal.prismaianalytics.com
+//   DASHBOARD_API_URL          e.g. https://dashboard-api-production-dabe.up.railway.app
 //   DASHBOARD_LEADS_SECRET     shared secret sent as X-Lead-Forwarder header (optional but recommended)
 //
 // Why this file is named "submission-created.js":
