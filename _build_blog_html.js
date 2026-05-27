@@ -370,6 +370,19 @@ function getInitials(name) {
   return name.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
 }
 
+// True if the post's hero_image is the same file as the first <img> in the
+// rendered body. When the deck slides do double duty (hero + inline figure
+// with caption), the body's caption is the better surface — so we suppress
+// the hero figure and let the inline image carry the visual + caption.
+// og:image still uses heroImage; only the visible page hero is suppressed.
+function firstBodyImageMatchesHero(bodyHtml, heroImage) {
+  if (!heroImage) return false;
+  const m = bodyHtml.match(/<img\s+[^>]*src="([^"]+)"/i);
+  if (!m) return false;
+  const norm = s => s.replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, '').replace(/^\/+/, '/');
+  return norm(m[1]) === norm(heroImage);
+}
+
 // Extract <h2 id="..."> headings from rendered body for the TOC.
 function extractTocItems(bodyHtml) {
   const items = [];
@@ -847,6 +860,10 @@ function convertOne(slug, allPosts) {
   const { body: bodyOnly, cta } = extractCta(fullBody);
   const tocItems = extractTocItems(bodyOnly);
 
+  // Suppress the hero figure when it would duplicate the body's first inline
+  // image. og:image still uses heroImage for social previews.
+  const heroFigureImage = firstBodyImageMatchesHero(bodyOnly, heroImage) ? '' : heroImage;
+
   const dateFormatted = formatPublishDate(date);
   const future = isFuture(date);
 
@@ -862,7 +879,7 @@ function convertOne(slug, allPosts) {
         title, dek, description, canonicalUrl, ogImage,
         dateIso: date, dateFormatted, dateModified: modified, readTime,
         author, role, authorBio, authorPhoto, authorLinkedin,
-        category, heroImage,
+        category, heroImage: heroFigureImage,
         bodyHtml: bodyOnly, ctaHtml: cta, tocItems, relatedPosts,
       });
 
