@@ -8,6 +8,7 @@ date: 2026-05-21
 read_time: 9 min
 author: Michele Fisher
 category: AI Agent Governance
+dek: "Five percent of LLM call spans fail in production. Observability tools document the latency gap between autonomous action and human intervention. They do not close it."
 series: Configuration Management for AI Agents
 series_part: 1 of 6
 ---

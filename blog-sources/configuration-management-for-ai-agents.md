@@ -8,6 +8,7 @@ date: 2026-05-28
 read_time: 11 min
 author: Michele Fisher
 category: AI Agent Governance
+dek: "What closes the latency gap is configuration management. The discipline is thirty years old and has been the operational backbone of regulated industry that entire time."
 series: Configuration Management for AI Agents
 series_part: 2 of 6
 ---

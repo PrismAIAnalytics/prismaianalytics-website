@@ -8,6 +8,7 @@ date: 2026-06-25
 read_time: 12 min
 author: Michele Fisher
 category: AI Agent Governance
+dek: "An evidence walkthrough of the four-discipline framework running in production at Prism today — not a product demo. What the implementation does, and what it does not yet do."
 series: Configuration Management for AI Agents
 series_part: 5 of 6
 ---
