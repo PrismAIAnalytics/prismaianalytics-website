@@ -25,3 +25,32 @@
 #                              for production traffic monitoring. If unset, the
 #                              post-build inject-analytics.js step skips silently
 #                              (warns but does not fail). See IM-006 in Notion.
+
+# Security headers applied to every response.
+#
+# CSP allowlist rationale:
+#   script-src    : self + GA4 (googletagmanager.com); 'unsafe-inline' needed for
+#                   the inline gtag() init + small inline nav/hamburger scripts.
+#                   Tightening to nonce-based requires SSR per request — not viable
+#                   for this static Netlify pipeline. Revisit when the site moves
+#                   to a runtime that can mint per-request nonces.
+#   style-src     : self + Google Fonts CSS + inline (current builder emits a
+#                   <style> block per blog post; insights.css extraction in Phase 1
+#                   will narrow this, but inline style attrs remain in templates).
+#   font-src      : Google Fonts woff2 from fonts.gstatic.com.
+#   frame-src     : Substack (podcast embeds, /podcast page).
+#   connect-src   : GA4 telemetry endpoints + self (contact form posts back to
+#                   the same origin via Netlify Forms).
+#   img-src       : self + data: (favicons/icons) + https: (Substack avatars,
+#                   future hero images served from a CDN).
+#   form-action   : self only — Netlify Forms posts to the same origin.
+#   frame-ancestors / X-Frame-Options : deny embedding to prevent clickjacking.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://*.substack.com https://*.substackcdn.com; connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
