@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" width="1376" height="768" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#17135C"/>
+      <stop offset="50%" stop-color="#0F0C44"/>
+      <stop offset="100%" stop-color="#3A5998"/>
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#BDC9DD" stroke-width="0.5" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <rect width="100%" height="100%" fill="url(#grid)"/>
+  <polygon points="-200,768 0,768 400,0 200,0" fill="#BDC9DD" opacity="0.12"/><polygon points="160,768 360,768 760,0 560,0" fill="#BDC9DD" opacity="0.12"/><polygon points="520,768 720,768 1120,0 920,0" fill="#C8A45A" opacity="0.6"/><polygon points="880,768 1080,768 1480,0 1280,0" fill="#BDC9DD" opacity="0.12"/><polygon points="1240,768 1440,768 1840,0 1640,0" fill="#BDC9DD" opacity="0.12"/>
+  <polygon points="692,403 588.0769515458674,583 795.9230484541326,583" fill="none" stroke="#C8A45A" stroke-width="2" opacity="0.18"/>
+</svg>

@@ -9,6 +9,7 @@ read_time: 10 min
 author: Michele Fisher
 category: AI Agent Governance
 dek: "A working glossary for the Prism CM-AI Framework. Before the rest of the series goes deep on disciplines, the foundational terms need to mean the same thing twice in a row."
+hero_image: /assets/img/blog/cm-ai-deck/image3.png
 series: Configuration Management for AI Agents
 series_part: 0 of 6
 ---

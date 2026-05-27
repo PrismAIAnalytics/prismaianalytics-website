@@ -815,7 +815,11 @@ function convertOne(slug, allPosts) {
   const category = fm.category || 'Industry Insights';
   const heroImage = fm.hero_image || '';
   const canonicalUrl = `${SITE_URL}/blog/${slug}/`;
-  const ogImage = heroImage
+  // og:image must be a raster format — Facebook rejects SVG and some Twitter
+  // / LinkedIn previewers fall back to nothing. SVG heroes still render on
+  // the site itself; the social preview falls back to the global PNG logo.
+  const heroIsRaster = /\.(png|jpg|jpeg|webp)$/i.test(heroImage);
+  const ogImage = heroIsRaster
     ? (heroImage.startsWith('http') ? heroImage : `${SITE_URL}${heroImage}`)
     : DEFAULT_OG_IMAGE;
 

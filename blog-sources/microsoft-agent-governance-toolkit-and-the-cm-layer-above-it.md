@@ -9,6 +9,7 @@ read_time: 9 min
 author: Michele Fisher
 category: AI Agent Governance
 dek: "Microsoft's Agent Governance Toolkit is the kernel for AI agents. Configuration management is the layer above it. An enterprise running production AI agents needs both."
+hero_image: /assets/img/blog/microsoft-agent-governance-toolkit-and-the-cm-layer-above-it/hero.svg
 series: Configuration Management for AI Agents
 series_part: Bonus
 ---
