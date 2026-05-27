@@ -875,6 +875,7 @@
   padding: 0 2rem 2rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start; /* override main.css nav { justify-content: space-between } */
   gap: 0.6rem;
   border-bottom: 1px solid var(--gray);
   background: transparent;
@@ -1023,6 +1024,308 @@
 @media (max-width: 1024px) {
   .insights-featured { grid-template-columns: 1fr; }
   .insights-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ========================================================================
+   Podcast page additions (Phase 3) — share the listing chrome (hero,
+   filters substitute, section groups) but add platform-link pills, latest
+   episode cards with collapsible Substack players, and a denser row list.
+   ======================================================================== */
+
+/* Platform-links row — Spotify / Apple / RSS / Substack pills.
+   Override the global nav { position: fixed; background: navy } from
+   main.css — this is in-flow page navigation, not the site header. Same
+   bug class as .insights-breadcrumb, .insights-toc, .insights-filters. */
+.platform-links {
+  position: static;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* override main.css nav { justify-content: space-between } */
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--gray);
+  background: transparent;
+  border-top: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  z-index: auto;
+}
+.platform-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.platform-link:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+.platform-link svg { width: 14px; height: 14px; }
+
+/* Episode cards — latest (2-col detailed) + row variant (denser list below) */
+.episodes-latest {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.episode-card--latest {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .episode-card--latest:hover {
+    border-color: var(--gold);
+    box-shadow: 0 14px 32px rgba(23, 19, 92, 0.08);
+  }
+}
+.episode-card-head {
+  padding: 1.5rem 1.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.episode-number {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+.episode-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.episode-meta .meta-sep {
+  width: 3px;
+  height: 3px;
+  background: var(--gray);
+  border-radius: 50%;
+}
+.episode-card-body {
+  padding: 0.75rem 1.75rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.episode-card-body h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.episode-card-body p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+.episode-related {
+  font-size: 0.82rem;
+  color: var(--royal);
+  text-decoration: none;
+  font-weight: 600;
+}
+.episode-related:hover { color: var(--navy); }
+
+/* Collapsible player via <details>. Summary becomes the Listen button. */
+.episode-player {
+  border-top: 1px solid var(--gray);
+  margin: auto 0 0;
+}
+.episode-player[open] { background: var(--offwhite); }
+.episode-player summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 1.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.2s;
+}
+.episode-player summary::-webkit-details-marker { display: none; }
+.episode-player summary::marker { content: ''; }
+.episode-player summary:hover { background: var(--offwhite); }
+.episode-player summary::after {
+  content: '▾';
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.episode-player[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* Substack iframe — aspect-ratio wrapper so the player can't reflow.
+   Replaces the legacy hardcoded 460px height that broke inside <details>
+   on Safari (per Phase 3 plan). */
+.podcast-player-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background: var(--offwhite);
+  overflow: hidden;
+}
+.podcast-player-frame::before {
+  /* Loading state — shows for the ~1s while the iframe boots */
+  content: 'Loading player…';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.podcast-player-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 1; /* covers the loading hint */
+}
+.episode-player-listen-fallback {
+  padding: 0 1.75rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.episode-player-listen-fallback a {
+  color: var(--royal);
+  text-decoration: none;
+  font-weight: 600;
+}
+.episode-player-listen-fallback a:hover { color: var(--navy); }
+
+/* All-episodes — denser row layout below the latest grid */
+.episodes-all {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 5rem;
+}
+.episodes-all-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--royal);
+  margin: 0 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.episodes-all-heading::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+}
+.episode-card--row {
+  border-top: 1px solid var(--gray);
+}
+.episode-card--row:last-child { border-bottom: 1px solid var(--gray); }
+.episode-card--row > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.25rem 0;
+  display: grid;
+  grid-template-columns: 90px 1fr auto auto;
+  gap: 1.5rem;
+  align-items: center;
+  font-size: 0.95rem;
+  color: var(--navy);
+  transition: color 0.2s;
+}
+.episode-card--row > summary::-webkit-details-marker { display: none; }
+.episode-card--row > summary::marker { content: ''; }
+.episode-card--row > summary:hover { color: var(--royal); }
+.episode-card--row > summary::after {
+  content: '▾';
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.episode-card--row[open] > summary::after { transform: rotate(180deg); }
+.episode-card--row .episode-number { margin: 0; }
+.episode-card--row .episode-row-title { font-weight: 600; }
+.episode-card--row .episode-row-date {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.episode-card--row .episode-row-body {
+  padding: 0 0 1.5rem 90px;
+}
+.episode-card--row .episode-row-body > p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0 0 1rem;
+  max-width: 70ch;
+}
+
+/* About / disclosure band below the episode lists */
+.podcast-disclosure {
+  max-width: 900px;
+  margin: 0 auto 5rem;
+  padding: 1.5rem 1.75rem;
+  background: var(--offwhite);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.podcast-disclosure strong { color: var(--navy); }
+
+@media (max-width: 1024px) {
+  .episodes-latest { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .platform-links { padding: 0 1.25rem 1.5rem; }
+  .episodes-latest { padding: 2rem 1.25rem 0; }
+  .episode-card-head, .episode-card-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .episode-player summary { padding: 1rem 1.25rem; }
+  .episodes-all { padding: 2.5rem 1.25rem 3.5rem; }
+  .episode-card--row > summary {
+    grid-template-columns: 70px 1fr;
+    gap: 0.75rem;
+  }
+  .episode-card--row .episode-row-date { grid-column: 1 / -1; padding-left: 70px; margin-top: -0.5rem; }
+  .episode-card--row > summary::after { display: none; }
+  .episode-card--row .episode-row-body { padding-left: 0; }
+  .podcast-disclosure { margin: 0 1.25rem 3rem; }
 }
 @media (max-width: 720px) {
   .insights-hero--index .insights-hero-inner { padding: 7rem 1.25rem 2rem; }
