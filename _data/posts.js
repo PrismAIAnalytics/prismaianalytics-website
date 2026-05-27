@@ -129,7 +129,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '7 min',
     dek: 'Discover how a fractional AI advisor gives small businesses access to enterprise-level AI strategy and implementation without the full-time cost.',
-    heroImage: '/assets/img/blog/how-a-fractional-ai-advisor-can-transform-your-business/hero.svg',
+    heroImage: '/assets/img/blog/how-a-fractional-ai-advisor-can-transform-your-business/hero.png',
   },
 ];
 
