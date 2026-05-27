@@ -9,7 +9,7 @@ read_time: 12 min
 author: Michele Fisher
 category: AI Agent Governance
 dek: "The most common failure mode in production AI is treating a Key Performance Indicator as if it were a Key Risk Indicator. Borrowed discipline from financial services, applied to autonomous agents."
-hero_image: /assets/img/blog/cm-ai-deck/image10.png
+hero_image: /assets/img/blog/kri-vs-kpi-for-ai-agents/hero.png
 series: Configuration Management for AI Agents
 series_part: 3 of 6
 ---
