@@ -33,7 +33,7 @@ const SITE_ROOT = path.join(__dirname, 'blog');
 const SITE_URL = 'https://prismaianalytics.com';
 
 // Cache-bust the shared stylesheet on each release. Bump when insights.css changes.
-const CSS_VERSION = '2';
+const CSS_VERSION = '3';
 
 const POSTS = [
   'what-is-ai-agent-governance',
@@ -126,9 +126,30 @@ function slugifyHeading(text) {
     .replace(/^-|-$/g, '');
 }
 
+// Decode the small set of HTML entities that appear in the source markdown
+// (e.g. "&mdash;", "&rsquo;") to their Unicode characters. Without this,
+// escHtml below turns "&mdash;" into "&amp;mdash;" which the browser then
+// renders as literal text. Order matters: &amp; must be last so we don't
+// re-decode already-decoded ampersands.
+function decodeCommonEntities(text) {
+  return text
+    .replace(/&mdash;/g, '—')
+    .replace(/&ndash;/g, '–')
+    .replace(/&hellip;/g, '…')
+    .replace(/&rsquo;/g, '’')
+    .replace(/&lsquo;/g, '‘')
+    .replace(/&rdquo;/g, '”')
+    .replace(/&ldquo;/g, '“')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, '&');
+}
+
 // Convert inline markdown formatting to HTML.
 // Handles **bold**, *italic*, `code`, [text](url).
 function renderInline(text) {
+  text = decodeCommonEntities(text);
   const codes = [];
   text = text.replace(/`([^`]+)`/g, (_, c) => {
     codes.push(c);
