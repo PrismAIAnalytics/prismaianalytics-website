@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">AI tool adoption by profession, 2025</title>
+  <desc id="desc">Horizontal bar chart showing AI tool adoption rates across four professions: Marketers 88%, Software developers 84%, FP&amp;A and finance 79%, Legal professionals 79%.</desc>
+
+  <rect width="800" height="460" fill="#ffffff"/>
+
+  <text x="40" y="40" font-size="22" font-weight="600" fill="#0f172a">AI tool adoption by profession (2025)</text>
+  <text x="40" y="64" font-size="14" fill="#475569">General AI tools across knowledge-work professions. The developer figure measures AI coding tools specifically.</text>
+
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="240" y1="95" x2="240" y2="365"/>
+    <line x1="350" y1="95" x2="350" y2="365"/>
+    <line x1="460" y1="95" x2="460" y2="365"/>
+    <line x1="570" y1="95" x2="570" y2="365"/>
+    <line x1="680" y1="95" x2="680" y2="365"/>
+  </g>
+
+  <g font-size="11" fill="#64748b" text-anchor="middle">
+    <text x="240" y="385">0%</text>
+    <text x="350" y="385">25%</text>
+    <text x="460" y="385">50%</text>
+    <text x="570" y="385">75%</text>
+    <text x="680" y="385">100%</text>
+  </g>
+
+  <text x="225" y="135" font-size="14" fill="#0f172a" text-anchor="end">Marketers</text>
+  <rect x="240" y="115" width="387" height="36" fill="#1e3a8a"/>
+  <text x="635" y="138" font-size="14" font-weight="600" fill="#1e3a8a">88%</text>
+
+  <text x="225" y="195" font-size="14" fill="#0f172a" text-anchor="end">Software developers</text>
+  <rect x="240" y="175" width="370" height="36" fill="#1e3a8a"/>
+  <text x="618" y="198" font-size="14" font-weight="600" fill="#1e3a8a">84%</text>
+
+  <text x="225" y="255" font-size="14" fill="#0f172a" text-anchor="end">FP&amp;A / finance</text>
+  <rect x="240" y="235" width="348" height="36" fill="#1e3a8a"/>
+  <text x="596" y="258" font-size="14" font-weight="600" fill="#1e3a8a">79%</text>
+
+  <text x="225" y="315" font-size="14" fill="#0f172a" text-anchor="end">Legal professionals</text>
+  <rect x="240" y="295" width="348" height="36" fill="#1e3a8a"/>
+  <text x="596" y="318" font-size="14" font-weight="600" fill="#1e3a8a">79%</text>
+
+  <text x="40" y="425" font-size="11" fill="#64748b">Sources: SurveyMonkey, AI in Marketing 2025; Stack Overflow Developer Survey 2025 (N≈49,000); Drivetrain via CFO.com (2025); Clio Legal Trends Report 2025.</text>
+  <text x="40" y="445" font-size="11" fill="#64748b">The developer figure measures AI coding tools specifically; other figures measure AI tool use generally.</text>
+</svg>
