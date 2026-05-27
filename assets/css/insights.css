@@ -443,7 +443,20 @@
   transform: translateX(-50%) translateY(0);
 }
 
-.insights-toc { font-size: 0.85rem; }
+/* Override the global nav { position: fixed } in main.css — the TOC is
+   in-flow navigation inside the sticky rail, not the site header. */
+.insights-toc {
+  position: static;
+  font-size: 0.85rem;
+  background: transparent;
+  border-top: none;
+  border-bottom: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  padding: 0;
+  z-index: auto;
+  display: block;
+}
 .insights-toc ol { list-style: none; padding: 0; margin: 0; }
 .insights-toc li { margin-bottom: 0.65rem; }
 .insights-toc a {

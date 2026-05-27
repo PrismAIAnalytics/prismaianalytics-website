@@ -24,7 +24,7 @@
   <link rel="icon" type="image/png" href="/PRISM_Logo.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/assets/css/main.css"/>
-  <link rel="stylesheet" href="/assets/css/insights.css?v=2"/>
+  <link rel="stylesheet" href="/assets/css/insights.css?v=3"/>
 </head>
 <body>
 
@@ -130,7 +130,7 @@
 
   <p>The disciplines exist whether or not anyone names them. The framework&rsquo;s contribution is the explicit naming, the cross-discipline integration, and the operational thresholds for each.</p>
 
-  <table class="article-table"><thead><tr><th>Discipline</th><th>Question it answers</th><th>What it looks like for an AI agent</th></tr></thead><tbody><tr><td><strong>B — Baseline</strong></td><td>What is <em>good</em> supposed to look like?</td><td>Approved model + version, system prompt hash, tool inventory, data scope, expected output distribution, latency band, refusal rate, cost per action</td></tr><tr><td><strong>C — Change Control</strong></td><td>Who can change the baseline, when, with what authorization?</td><td>Prompt revisions, model upgrades, tool additions, data-source expansions &amp;mdash; each routed through a defined approval path</td></tr><tr><td><strong>D — Drift Detection</strong></td><td>Has runtime diverged from baseline?</td><td>Output distribution shifts, hallucination-rate thresholds, tool-call error spikes, cost drift, refusal-rate inversion, anomaly detection</td></tr><tr><td><strong>A — Audit &amp;amp; Remediation</strong></td><td>Can we reconstruct <em>why</em>? Can we roll back?</td><td>Decision provenance, prompt + tool-call logs, change history with hash chain, kill-switch, tested rollback, post-incident review</td></tr></tbody></table>
+  <table class="article-table"><thead><tr><th>Discipline</th><th>Question it answers</th><th>What it looks like for an AI agent</th></tr></thead><tbody><tr><td><strong>B — Baseline</strong></td><td>What is <em>good</em> supposed to look like?</td><td>Approved model + version, system prompt hash, tool inventory, data scope, expected output distribution, latency band, refusal rate, cost per action</td></tr><tr><td><strong>C — Change Control</strong></td><td>Who can change the baseline, when, with what authorization?</td><td>Prompt revisions, model upgrades, tool additions, data-source expansions — each routed through a defined approval path</td></tr><tr><td><strong>D — Drift Detection</strong></td><td>Has runtime diverged from baseline?</td><td>Output distribution shifts, hallucination-rate thresholds, tool-call error spikes, cost drift, refusal-rate inversion, anomaly detection</td></tr><tr><td><strong>A — Audit &amp; Remediation</strong></td><td>Can we reconstruct <em>why</em>? Can we roll back?</td><td>Decision provenance, prompt + tool-call logs, change history with hash chain, kill-switch, tested rollback, post-incident review</td></tr></tbody></table>
 
   <h2 id="the-kri-tier-model">The KRI tier model</h2>
 
@@ -138,15 +138,15 @@
 
   <p>The vocabulary matters. A <strong>KPI</strong> — Key Performance Indicator — measures whether the agent is producing value. Output volume, conversion lift, hours saved, cost reduction. A <strong>KRI</strong> — Key Risk Indicator — measures whether the agent is operating within its approved boundaries. Hallucination rate, refusal-rate inversion, output distribution shift, tool-call error rate. The two answer different questions and trigger different responses. A high-performing agent producing harmful or out-of-policy outputs is the worst possible failure mode, and it is largely invisible to a KPI dashboard.</p>
 
-  <p>The tier model has three levels, adapted from financial-services operational risk practice &amp;mdash; specifically the discipline banks have run under <a href="https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm">SR 11-7</a> and <a href="https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html">OCC Bulletin 2011-12</a> since 2011.</p>
+  <p>The tier model has three levels, adapted from financial-services operational risk practice — specifically the discipline banks have run under <a href="https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm">SR 11-7</a> and <a href="https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html">OCC Bulletin 2011-12</a> since 2011.</p>
 
   <p><strong>Tier 1 — Warning.</strong> Statistical drift detected. The metric has moved outside the expected band but has not exceeded operational tolerance. Response time: investigate within 24 hours. Action: document the cause. If intentional, update the baseline. If unintentional, remediate. Authority: engineering or operations on-call.</p>
 
   <p><strong>Tier 2 — Action.</strong> Drift exceeds operational tolerance. The metric is materially outside the approved range. Response time: immediate. Action: auto-throttle, rate-limit, or restrict the agent&rsquo;s scope. Human review required before continued operation. Authority: engineering manager or compliance lead.</p>
 
-  <p><strong>Tier 3 &amp;mdash; Intervention.</strong> Operational risk threshold breached. The agent&rsquo;s behavior is materially outside what the organization can defensibly explain to a regulator, auditor, or board. Response time: immediate. Action: kill-switch activates. Rollback to last approved baseline. Incident report filed. Post-incident review within five business days. Authority: pre-defined incident commander; legal and executive notification required.</p>
+  <p><strong>Tier 3 — Intervention.</strong> Operational risk threshold breached. The agent&rsquo;s behavior is materially outside what the organization can defensibly explain to a regulator, auditor, or board. Response time: immediate. Action: kill-switch activates. Rollback to last approved baseline. Incident report filed. Post-incident review within five business days. Authority: pre-defined incident commander; legal and executive notification required.</p>
 
-  <table class="article-table"><thead><tr><th>Tier</th><th>Trigger</th><th>Response time</th><th>Action</th><th>Authority</th></tr></thead><tbody><tr><td><strong>Tier 1 &amp;mdash; Warning</strong></td><td>Statistical drift, within tolerance</td><td>Within 24 hours</td><td>Investigate; update baseline or remediate</td><td>Engineering or ops on-call</td></tr><tr><td><strong>Tier 2 &amp;mdash; Action</strong></td><td>Drift exceeds tolerance</td><td>Immediate</td><td>Auto-throttle; human review required</td><td>Engineering manager or compliance lead</td></tr><tr><td><strong>Tier 3 &amp;mdash; Intervention</strong></td><td>Operational risk threshold breached</td><td>Immediate</td><td>Kill-switch; rollback; incident report; review within 5 days</td><td>Pre-defined incident commander; legal + exec notification</td></tr></tbody></table>
+  <table class="article-table"><thead><tr><th>Tier</th><th>Trigger</th><th>Response time</th><th>Action</th><th>Authority</th></tr></thead><tbody><tr><td><strong>Tier 1 — Warning</strong></td><td>Statistical drift, within tolerance</td><td>Within 24 hours</td><td>Investigate; update baseline or remediate</td><td>Engineering or ops on-call</td></tr><tr><td><strong>Tier 2 — Action</strong></td><td>Drift exceeds tolerance</td><td>Immediate</td><td>Auto-throttle; human review required</td><td>Engineering manager or compliance lead</td></tr><tr><td><strong>Tier 3 — Intervention</strong></td><td>Operational risk threshold breached</td><td>Immediate</td><td>Kill-switch; rollback; incident report; review within 5 days</td><td>Pre-defined incident commander; legal + exec notification</td></tr></tbody></table>
 
   <p>The tier model is what allows governance to operate at the speed of the agent rather than the speed of human attention.</p>
 
@@ -154,23 +154,23 @@
 
   <p>The framework is designed to operationalize the policy outcomes the standards your compliance team is already accountable to require, not to replace them.</p>
 
-  <p>**<a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a>** &amp;mdash; four functions: Govern, Map, Measure, Manage. BCDA disciplines map directly. Govern is change control. Map is baseline. Measure is drift detection plus the KRI catalog. Manage is audit and remediation plus tested rollback.</p>
+  <p>**<a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework</a>** — four functions: Govern, Map, Measure, Manage. BCDA disciplines map directly. Govern is change control. Map is baseline. Measure is drift detection plus the KRI catalog. Manage is audit and remediation plus tested rollback.</p>
 
   <p>**<a href="https://www.iso.org/standard/81230.html">ISO/IEC 42001:2023</a>** mandates a Plan-Do-Check-Act cycle for AI management systems. BCDA disciplines operationalize the cycle: Plan equals Baseline, Do equals Change Control, Check equals Drift Detection, Act equals Audit and Remediation.</p>
 
   <p>**<a href="https://artificialintelligenceact.eu/the-act/">EU AI Act, Article 72</a>** requires post-market monitoring for high-risk AI providers with documented baselines. The KRI tier model plus the audit trail satisfy the operational evidence requirement.</p>
 
-  <p>**<a href="https://iapp.org/certify/aigp">IAPP AIGP Body of Knowledge</a>, Domains III and IV** &amp;mdash; governance of AI development and deployment. The framework is the operational implementation layer of what these domains describe as governance accountabilities. Domain II&rsquo;s standards crosswalks map cleanly to the BCDA &amp;times; NIST &amp;times; ISO &amp;times; EU correspondences above.</p>
+  <p>**<a href="https://iapp.org/certify/aigp">IAPP AIGP Body of Knowledge</a>, Domains III and IV** — governance of AI development and deployment. The framework is the operational implementation layer of what these domains describe as governance accountabilities. Domain II’s standards crosswalks map cleanly to the BCDA &amp;times; NIST &amp;times; ISO &amp;times; EU correspondences above.</p>
 
   <h2 id="how-these-terms-relate-to-the-runtime-layer">How these terms relate to the runtime layer</h2>
 
   <p>The framework sits above the runtime governance toolkits already shipping in 2026, not against them. Specifically:</p>
 
-  <p>**<a href="https://github.com/microsoft/agent-governance-toolkit">Microsoft Agent Governance Toolkit</a>** is the runtime kernel &amp;mdash; policy enforcement at request time, identity verification, sandboxing, SRE practices. The framework provides the configuration-management layer above the kernel. The kernel decides what an agent is allowed to do right now; the framework decides what the kernel should be enforcing in the first place and when the rules should change.</p>
+  <p>**<a href="https://github.com/microsoft/agent-governance-toolkit">Microsoft Agent Governance Toolkit</a>** is the runtime kernel — policy enforcement at request time, identity verification, sandboxing, SRE practices. The framework provides the configuration-management layer above the kernel. The kernel decides what an agent is allowed to do right now; the framework decides what the kernel should be enforcing in the first place and when the rules should change.</p>
 
-  <p>**<a href="https://www.paloaltonetworks.com/cyberpedia/what-is-agentic-ai-governance">Palo Alto Networks Prisma AIRS</a>** and the broader Cortex platform provide security-perimeter governance &amp;mdash; authority delegation, identity boundaries, runtime controls. The framework adds the quantitative KRI tier model, baseline-definition methodology, and change-authorization workflow that the perimeter-security framing does not specify.</p>
+  <p>**<a href="https://www.paloaltonetworks.com/cyberpedia/what-is-agentic-ai-governance">Palo Alto Networks Prisma AIRS</a>** and the broader Cortex platform provide security-perimeter governance — authority delegation, identity boundaries, runtime controls. The framework adds the quantitative KRI tier model, baseline-definition methodology, and change-authorization workflow that the perimeter-security framing does not specify.</p>
 
-  <p>**<a href="https://github.com/open-gitagent/gitagent">GitAgent</a>** provides git-native agent identity, behavioral constraints, and compliance metadata. The framework adds formal hash-chained CHANGE_LOG, KRI tier thresholds, tested rollback as a first-class artifact, and the financial-services lineage. Both can co-exist; agents written under GitAgent&rsquo;s structure can adopt the framework&rsquo;s four artifacts alongside their existing files.</p>
+  <p>**<a href="https://github.com/open-gitagent/gitagent">GitAgent</a>** provides git-native agent identity, behavioral constraints, and compliance metadata. The framework adds formal hash-chained CHANGE_LOG, KRI tier thresholds, tested rollback as a first-class artifact, and the financial-services lineage. Both can co-exist; agents written under GitAgent’s structure can adopt the framework’s four artifacts alongside their existing files.</p>
 
   <p>The bonus post in this series — <em>Microsoft&rsquo;s Agent Governance Toolkit Is the Kernel. Configuration Management Is the Layer Above It.</em> — goes deeper on the integration patterns. The short version: runtime engines and configuration management are complementary disciplines, not competing ones.</p>
 
@@ -200,7 +200,7 @@
 
   <p><strong>Latency Gap.</strong> The interval between a behavioral change in an agent and a human noticing and intervening. The central problem the framework addresses.</p>
 
-  <p>**<a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/">OWASP Top 10 for Agentic Applications</a>.** The OWASP Gen AI Security Project&rsquo;s canonical risk taxonomy for agentic AI systems &amp;mdash; ten categories (ASI01&amp;ndash;ASI10) released December 2025 for the 2026 edition.</p>
+  <p>**<a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/">OWASP Top 10 for Agentic Applications</a>.** The OWASP Gen AI Security Project’s canonical risk taxonomy for agentic AI systems — ten categories (ASI01–ASI10) released December 2025 for the 2026 edition.</p>
 
   <p><strong>Rollback.</strong> Reverting an agent to a previously approved baseline. Tested before production, re-exercised quarterly.</p>
 
