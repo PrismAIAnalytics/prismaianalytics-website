@@ -57,6 +57,7 @@ const CATEGORIES = [
 
 // Pre-Phase-1 posts. These live as static HTML in blog/<slug>/index.html with
 // no markdown source. Keep them on the listing until they're rewritten.
+// heroImage is the generated SVG from scripts/generate-hero-svgs.js.
 const LEGACY_POSTS = [
   {
     slug: 'the-2026-ai-regulation-clock-is-ticking',
@@ -65,6 +66,7 @@ const LEGACY_POSTS = [
     date: '2026-04-23',
     readTime: '9 min',
     dek: 'The EU AI Act, state AI laws, and new governance standards all have concrete 2026 deadlines. Here\'s the timeline every small business using AI should have on their calendar.',
+    heroImage: '/assets/img/blog/the-2026-ai-regulation-clock-is-ticking/hero.svg',
   },
   {
     slug: 'why-im-pursuing-the-claude-certified-architect',
@@ -73,6 +75,7 @@ const LEGACY_POSTS = [
     date: '2026-04-23',
     readTime: '7 min',
     dek: 'A look at the new Claude Certified Architect certification, what it covers, and why credentialed AI expertise is about to matter for every business buying AI services.',
+    heroImage: '/assets/img/blog/why-im-pursuing-the-claude-certified-architect/hero.svg',
   },
   {
     slug: 'why-most-small-businesses-are-behind-on-data',
@@ -81,6 +84,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '8 min',
     dek: 'Most small businesses know data matters but struggle to use it effectively. Learn the common barriers and practical steps to build a strong data foundation.',
+    heroImage: '/assets/img/blog/why-most-small-businesses-are-behind-on-data/hero.svg',
   },
   {
     slug: 'configuration-drift-the-silent-security-risk',
@@ -89,6 +93,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '8 min',
     dek: 'Configuration drift quietly undermines your security posture. Learn what it is, why it matters, and how small businesses can detect and prevent compliance gaps.',
+    heroImage: '/assets/img/blog/configuration-drift-the-silent-security-risk/hero.svg',
   },
   {
     slug: 'what-is-an-ai-readiness-assessment',
@@ -97,6 +102,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '7 min',
     dek: 'Learn what an AI readiness assessment covers, why it matters for small businesses, and how to determine if your organization is prepared to adopt AI successfully.',
+    heroImage: '/assets/img/blog/what-is-an-ai-readiness-assessment/hero.svg',
   },
   {
     slug: 'five-signs-your-business-is-ready-for-ai',
@@ -105,6 +111,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '6 min',
     dek: 'Not sure if your business is ready to adopt AI? Here are five clear signals that your organization is primed to benefit from artificial intelligence.',
+    heroImage: '/assets/img/blog/five-signs-your-business-is-ready-for-ai/hero.svg',
   },
   {
     slug: 'from-spreadsheets-to-dashboards',
@@ -113,6 +120,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '7 min',
     dek: 'Still relying on spreadsheets for business reporting? Learn how to transition to interactive dashboards that save time and improve decision-making.',
+    heroImage: '/assets/img/blog/from-spreadsheets-to-dashboards/hero.svg',
   },
   {
     slug: 'how-a-fractional-ai-advisor-can-transform-your-business',
@@ -121,6 +129,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '7 min',
     dek: 'Discover how a fractional AI advisor gives small businesses access to enterprise-level AI strategy and implementation without the full-time cost.',
+    heroImage: '/assets/img/blog/how-a-fractional-ai-advisor-can-transform-your-business/hero.svg',
   },
 ];
 
@@ -190,7 +199,7 @@ function loadLegacyPosts() {
     date: p.date,
     dateFormatted: formatPublishDate(p.date),
     readTime: p.readTime,
-    heroImage: '',
+    heroImage: p.heroImage || '',
     series: '',
     seriesPart: '',
     url: `/blog/${p.slug}/`,
