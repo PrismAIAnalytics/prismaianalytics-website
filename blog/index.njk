@@ -1,0 +1,70 @@
+---
+layout: base.njk
+title: "Insights | Prism AI Analytics"
+description: "Perspectives on enterprise AI governance, configuration management, and the practical work of running AI in production."
+ogTitle: "Prism Insights"
+ogDescription: "Perspectives on enterprise AI governance, configuration management, and the practical work of running AI in production."
+ogType: "website"
+permalink: /blog/index.html
+extraHead: '<link rel="stylesheet" href="/assets/css/insights.css?v=2"/>'
+---
+
+<header class="insights-hero insights-hero--index">
+  <div class="insights-hero-inner">
+    <p class="insights-eyebrow">Insights</p>
+    <h1>Perspectives on enterprise AI</h1>
+    <p class="insights-dek">Configuration management, governance discipline, and the practical work of running AI agents in production environments. Written for practitioners, not press releases.</p>
+  </div>
+</header>
+
+{# Filter chips — anchor links that jump to the matching category section #}
+<nav class="insights-filters" aria-label="Browse by category">
+  {% for cat in posts.categories %}<a class="insights-filter-chip" href="#cat-{{ cat.name | slug }}">{{ cat.name }}</a>{% endfor %}
+</nav>
+
+{# Featured post — most recent published #}
+{% if posts.featured %}
+<div class="insights-featured-wrap">
+  <a class="insights-featured reveal" href="{{ posts.featured.url }}">
+    <div class="insights-featured-image">
+      {% if posts.featured.heroImage %}<img src="{{ posts.featured.heroImage }}" alt="" loading="eager"/>{% else %}<div class="insights-featured-image-placeholder" aria-hidden="true">PRISM</div>{% endif %}
+    </div>
+    <div class="insights-featured-body">
+      <span class="insights-featured-eyebrow">Featured · {{ posts.featured.category }}</span>
+      <h2 class="insights-featured-title">{{ posts.featured.title }}</h2>
+      {% if posts.featured.dek %}<p class="insights-featured-dek">{{ posts.featured.dek }}</p>{% endif %}
+      <div class="insights-featured-meta">
+        <time datetime="{{ posts.featured.date }}">{{ posts.featured.dateFormatted }}</time>
+        {% if posts.featured.readTime %}<span class="meta-sep" aria-hidden="true"></span><span>{{ posts.featured.readTime }}</span>{% endif %}
+      </div>
+    </div>
+  </a>
+</div>
+{% endif %}
+
+{# Category sections — each grid uses the .insights-card component from insights.css #}
+{% for cat in posts.categories %}
+<section class="insights-section-group" id="cat-{{ cat.name | slug }}">
+  <header class="insights-section-header">
+    <h2>{{ cat.name }}</h2>
+    <p>{{ cat.dek }}</p>
+  </header>
+  <div class="insights-grid">
+    {% for post in cat.posts %}
+    <a class="insights-card reveal" href="{{ post.url }}">
+      <div class="insights-card-image">
+        {% if post.heroImage %}<img src="{{ post.heroImage }}" alt="" loading="lazy"/>{% else %}<div class="insights-card-image-placeholder" aria-hidden="true">PRISM</div>{% endif %}
+      </div>
+      <div class="insights-card-body">
+        <span class="insights-chip">{{ post.category }}</span>
+        <h3 class="insights-card-title">{{ post.title }}</h3>
+        <div class="insights-card-meta">
+          <time datetime="{{ post.date }}">{{ post.dateFormatted }}</time>
+          {% if post.readTime %}<span class="meta-sep" aria-hidden="true"></span><span>{{ post.readTime }}</span>{% endif %}
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}

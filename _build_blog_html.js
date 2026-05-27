@@ -33,7 +33,7 @@ const SITE_ROOT = path.join(__dirname, 'blog');
 const SITE_URL = 'https://prismaianalytics.com';
 
 // Cache-bust the shared stylesheet on each release. Bump when insights.css changes.
-const CSS_VERSION = '1';
+const CSS_VERSION = '2';
 
 const POSTS = [
   'what-is-ai-agent-governance',
