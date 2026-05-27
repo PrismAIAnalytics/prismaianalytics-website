@@ -15,12 +15,24 @@
    Breadcrumb (top of every Insights article)
    ======================================================================== */
 
+/* Override the global nav { position: fixed; background: navy; ... } in
+   main.css — the breadcrumb is in-flow page navigation, not a site header.
+   Without these resets it inherits the dark fixed nav styling and overlaps
+   the actual site nav. */
 .insights-breadcrumb {
+  position: static;
   max-width: 1040px;
   margin: 0 auto;
   padding: 7rem 2rem 0;
   font-size: 0.8rem;
   color: var(--text-muted);
+  background: transparent;
+  border-top: none;
+  border-bottom: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  z-index: auto;
+  display: block;
 }
 .insights-breadcrumb ol {
   list-style: none;
