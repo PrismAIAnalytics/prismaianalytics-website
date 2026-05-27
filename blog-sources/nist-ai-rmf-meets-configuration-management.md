@@ -9,7 +9,7 @@ read_time: 11 min
 author: Michele Fisher
 category: AI Agent Governance
 dek: "NIST tells you what governance is supposed to achieve. Configuration management tells you how the work gets done day to day. A crosswalk between the two for compliance teams."
-hero_image: /assets/img/blog/cm-ai-deck/image15.png
+hero_image: /assets/img/blog/nist-ai-rmf-meets-configuration-management/hero.png
 series: Configuration Management for AI Agents
 series_part: 4 of 6
 ---
