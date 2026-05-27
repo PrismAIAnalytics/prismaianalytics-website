@@ -8,6 +8,7 @@ date: 2026-06-25
 read_time: 11 min
 author: Michele Fisher
 category: AI Agent Governance
+dek: "The AIGP Body of Knowledge defines what AI governance professionals are accountable for. Configuration management provides the operational mechanic that turns those accountabilities into runtime control."
 series: Configuration Management for AI Agents
 series_part: 6 of 6
 ---

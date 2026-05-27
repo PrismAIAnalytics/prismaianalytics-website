@@ -1,17 +1,17 @@
-// Post-build step: inject BlogPosting JSON-LD into every blog post in _site/.
+// Post-build step: inject BlogPosting + BreadcrumbList JSON-LD into every blog
+// post in _site/.
 //
 // Mirrors the inject-analytics.js pattern. Walks _site/blog/**/index.html, pulls
-// the post's <title>, canonical URL, and <time datetime="..."> publish date from
-// the existing markup, then injects a BlogPosting schema block immediately after
-// <head> so it lives alongside the Organization schema rendered by head.njk.
+// title, canonical, description, hero image, publish + modified dates, and
+// category from the markup, then injects schema blocks immediately after
+// <head> so they sit alongside the Organization schema rendered by head.njk.
 //
 // Idempotent: skips files that already contain the BlogPosting marker. Safe on
 // the blog index (/blog/) — that page is a listing, not a post, so it's skipped
 // when no publish date is detectable.
 //
 // Runs as the final build step (eleventy → inject-analytics → inject-blog-schema)
-// so it sees the post-passthrough HTML in _site/blog/ rather than the source
-// HTML in blog/.
+// so it sees post-passthrough HTML in _site/blog/ rather than source HTML in blog/.
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -42,7 +42,6 @@ function listPosts(dir) {
 function extractTitle(html) {
   const m = html.match(/<title>([^<]+)<\/title>/i);
   if (!m) return null;
-  // Strip a trailing " — Prism AI Analytics" or similar site suffix.
   return m[1].replace(/\s*[—–\-|]\s*Prism AI Analytics.*$/i, '').trim();
 }
 
@@ -51,19 +50,50 @@ function extractCanonical(html) {
   return m ? m[1] : null;
 }
 
+function extractDescription(html) {
+  const m = html.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
+  return m ? m[1] : null;
+}
+
+function extractOgImage(html) {
+  const m = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
+  return m ? m[1] : null;
+}
+
+function extractMetaContent(html, property) {
+  const re = new RegExp(`<meta\\s+property=["']${property}["']\\s+content=["']([^"']+)["']`, 'i');
+  const m = html.match(re);
+  return m ? m[1] : null;
+}
+
+function extractCategory(html) {
+  // Prefer the visible breadcrumb chip — the second-to-last <li> in the breadcrumb.
+  // Fallback to scanning for an article:section meta tag (not currently emitted,
+  // but a reasonable extension hook).
+  const breadcrumbMatch = html.match(/<nav class="insights-breadcrumb"[\s\S]*?<\/nav>/i);
+  if (breadcrumbMatch) {
+    const lis = breadcrumbMatch[0].match(/<li[^>]*>[\s\S]*?<\/li>/gi) || [];
+    // Format: Home › Insights › <Category> › <Title aria-current="page">
+    if (lis.length >= 4) {
+      const categoryLi = lis[lis.length - 2];
+      const textMatch = categoryLi.match(/>([^<]+)</);
+      if (textMatch) return textMatch[1].trim();
+    }
+  }
+  return null;
+}
+
 const MONTHS = {
   january: '01', february: '02', march: '03', april: '04', may: '05', june: '06',
   july: '07', august: '08', september: '09', october: '10', november: '11', december: '12',
 };
 
 function extractPublishDate(html) {
-  // Preferred: a <time datetime="YYYY-MM-DD"> tag if the source ever adds one.
+  // Preferred: <time datetime="YYYY-MM-DD"> in the byline (Phase 1+).
   const dt = html.match(/<time[^>]*\bdatetime=["']([^"']+)["']/i);
   if (dt) return dt[1];
 
-  // Current pre-build output renders dates as a human string inside the
-  // article-meta span, e.g. "May 14, 2026". Match scoped to the article-meta
-  // block so we don't grab the footer copyright year by accident.
+  // Legacy: human date inside `.article-meta` block.
   const metaBlock = html.match(/<div class="article-meta">[\s\S]*?<\/div>/i);
   const scope = metaBlock ? metaBlock[0] : html;
   const human = scope.match(/(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d{2})/i);
@@ -78,13 +108,17 @@ function extractPublishDate(html) {
   return iso ? iso[1] : null;
 }
 
-function buildSchema({ title, url, datePublished }) {
-  const schema = {
+function buildSchemaBlock({ title, url, description, image, datePublished, dateModified, category }) {
+  const blogPosting = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: title,
+    description: description || undefined,
+    image: image || undefined,
     datePublished,
-    author: { '@type': 'Person', name: AUTHOR_NAME },
+    dateModified: dateModified || datePublished,
+    articleSection: category || undefined,
+    author: { '@type': 'Person', name: AUTHOR_NAME, url: SITE_URL },
     publisher: {
       '@type': 'Organization',
       name: 'Prism AI Analytics',
@@ -92,7 +126,32 @@ function buildSchema({ title, url, datePublished }) {
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
   };
-  return `\n<script type="application/ld+json">${JSON.stringify(schema)}</script>\n`;
+
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: `${SITE_URL}/blog/` },
+      ...(category
+        ? [{ '@type': 'ListItem', position: 3, name: category, item: `${SITE_URL}/blog/` }]
+        : []),
+      {
+        '@type': 'ListItem',
+        position: category ? 4 : 3,
+        name: title,
+        item: url,
+      },
+    ],
+  };
+
+  // Strip undefined fields from BlogPosting before serializing.
+  for (const k of Object.keys(blogPosting)) {
+    if (blogPosting[k] === undefined) delete blogPosting[k];
+  }
+
+  return `\n<script type="application/ld+json">${JSON.stringify(blogPosting)}</script>\n` +
+         `<script type="application/ld+json">${JSON.stringify(breadcrumb)}</script>\n`;
 }
 
 const posts = listPosts(BLOG_DIR);
@@ -110,14 +169,20 @@ for (const file of posts) {
 
   const title = extractTitle(html);
   const url = extractCanonical(html) || `${SITE_URL}/blog/${path.basename(path.dirname(file))}/`;
+  const description = extractDescription(html);
+  const image = extractOgImage(html);
   const datePublished = extractPublishDate(html);
+  const dateModified = extractMetaContent(html, 'article:modified_time') || datePublished;
+  const category = extractCategory(html);
 
   if (!title || !datePublished) {
     skippedNoData += 1;
     continue;
   }
 
-  const schemaBlock = buildSchema({ title, url, datePublished });
+  const schemaBlock = buildSchemaBlock({
+    title, url, description, image, datePublished, dateModified, category,
+  });
   const headOpen = html.match(/<head(\s[^>]*)?>/i);
   if (!headOpen) {
     skippedNoData += 1;
@@ -130,6 +195,6 @@ for (const file of posts) {
   injected += 1;
 }
 
-console.log(`[inject-blog-schema] BlogPosting schema injected into ${injected} post(s).`);
+console.log(`[inject-blog-schema] BlogPosting + BreadcrumbList injected into ${injected} post(s).`);
 if (skippedAlreadyTagged > 0) console.log(`[inject-blog-schema] Skipped (already tagged): ${skippedAlreadyTagged}.`);
 if (skippedNoData > 0) console.log(`[inject-blog-schema] Skipped (missing title or publish date): ${skippedNoData}.`);

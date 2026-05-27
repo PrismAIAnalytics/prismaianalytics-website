@@ -8,6 +8,7 @@ date: 2026-05-15
 read_time: 8 min
 author: Michele Fisher
 category: AI Agent Governance
+dek: "An agent on our own stack hallucinated a constraint that did not exist. A bonus use case in the series, not a numbered entry — what configuration management would have caught in practice."
 series: Configuration Management for AI Agents
 series_part: Bonus · CM-AI Framework
 ---
