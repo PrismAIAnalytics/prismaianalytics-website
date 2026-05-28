@@ -3,11 +3,11 @@ type: blog-paired-post
 status: ready-to-post
 platform: LinkedIn (personal profile)
 post-by: 2026-05-28
-posted: false
-post-url:
+posted: true
+post-url: https://www.linkedin.com/posts/michele-fisher_aigovernance-agenticai-configurationmanagement-share-7465797048601227264-o5Ow/
 paired-blog: https://prismaianalytics.com/blog/configuration-management-for-ai-agents/
 paired-podcast: https://micheleprismai.substack.com/p/configuration-management-for-ai-agent
-paired-company-post: (URL of the company-page post Michele already published 2026-05-28)
+paired-company-post: https://www.linkedin.com/posts/prism-ai-analytics_configuration-management-for-ai-agents-the-activity-7465774977984761858-mFUn
 audience: Michele's personal network — former colleagues from banking + data engineering, AI practitioners, regulated-industry leaders, founder-discovery network
 hashtags:
   - "#AIGovernance"
