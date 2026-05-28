@@ -40,6 +40,17 @@ const SHOW = {
 // from that. relatedPostSlug links the episode card to its companion post.
 const EPISODES = [
   {
+    number: 'EP 03',
+    title: 'Configuration Management for AI Agents',
+    date: '2026-05-28',
+    duration: '',
+    substackSlug: 'configuration-management-for-ai-agent',
+    relatedPostSlug: 'configuration-management-for-ai-agents',
+    relatedPostLabel: 'Configuration Management for AI Agents (Part 2)',
+    brief: 'The missing twin of agentic governance. Four disciplines ported from enterprise IT and financial-services operational risk — Baseline, Change Control, Drift Detection, Audit and Remediation — and the Key Risk Indicator tier model that lets governance run at the speed of the agent.',
+    tags: ['CM-AI Series'],
+  },
+  {
     number: 'EP 02',
     title: 'AI Observability Is Not Governance',
     date: '2026-05-21',
