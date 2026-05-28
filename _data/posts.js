@@ -102,7 +102,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '7 min',
     dek: 'Learn what an AI readiness assessment covers, why it matters for small businesses, and how to determine if your organization is prepared to adopt AI successfully.',
-    heroImage: '/assets/img/blog/what-is-an-ai-readiness-assessment/hero.svg',
+    heroImage: '/assets/img/blog/what-is-an-ai-readiness-assessment/hero.png',
   },
   {
     slug: 'five-signs-your-business-is-ready-for-ai',
@@ -111,7 +111,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '6 min',
     dek: 'Not sure if your business is ready to adopt AI? Here are five clear signals that your organization is primed to benefit from artificial intelligence.',
-    heroImage: '/assets/img/blog/five-signs-your-business-is-ready-for-ai/hero.svg',
+    heroImage: '/assets/img/blog/five-signs-your-business-is-ready-for-ai/hero.png',
   },
   {
     slug: 'from-spreadsheets-to-dashboards',
@@ -120,7 +120,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '7 min',
     dek: 'Still relying on spreadsheets for business reporting? Learn how to transition to interactive dashboards that save time and improve decision-making.',
-    heroImage: '/assets/img/blog/from-spreadsheets-to-dashboards/hero.svg',
+    heroImage: '/assets/img/blog/from-spreadsheets-to-dashboards/hero.png',
   },
   {
     slug: 'how-a-fractional-ai-advisor-can-transform-your-business',
