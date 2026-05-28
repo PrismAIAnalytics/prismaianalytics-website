@@ -3,8 +3,8 @@ type: blog-paired-post
 status: ready-to-post
 platform: LinkedIn
 post-by: 2026-05-28
-posted: false
-post-url:
+posted: true
+post-url: https://www.linkedin.com/posts/prism-ai-analytics_configuration-management-for-ai-agents-the-activity-7465774977984761858-mFUn
 paired-blog: https://prismaianalytics.com/blog/configuration-management-for-ai-agents/
 paired-podcast: https://micheleprismai.substack.com/p/configuration-management-for-ai-agent?r=8fh29l
 audience: AI governance practitioners, compliance and risk officers, ML engineering leaders, enterprise AI buyers
