@@ -1294,6 +1294,17 @@
   margin: 0 0 1rem;
   max-width: 70ch;
 }
+/* Cap the player width in the row layout so the Substack iframe content
+   doesn't scale up to row width (~900-1000px) and render the episode cover
+   art blurry/zoomed. Matches the proportions of a Latest grid card. */
+.episode-card--row .podcast-player-frame {
+  max-width: 560px;
+  margin: 0;
+}
+.episode-card--row .episode-player-listen-fallback {
+  padding: 0.5rem 0 0;
+  max-width: 560px;
+}
 
 /* About / disclosure band below the episode lists */
 .podcast-disclosure {
