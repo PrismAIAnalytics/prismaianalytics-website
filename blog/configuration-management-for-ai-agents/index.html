@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Configuration Management for AI Agents: The Missing Twin of Agentic Governance | Prism AI Analytics</title>
   <meta name="description" content="What closes the latency gap is configuration management. The discipline is thirty years old and has been the operational backbone of regulated industry that entire time."/>
-  <meta name="robots" content="noindex, follow"/>
+  
   <link rel="canonical" href="https://prismaianalytics.com/blog/configuration-management-for-ai-agents/"/>
   <meta property="og:title" content="Configuration Management for AI Agents: The Missing Twin of Agentic Governance | Prism AI Analytics"/>
   <meta property="og:description" content="What closes the latency gap is configuration management. The discipline is thirty years old and has been the operational backbone of regulated industry that entire time."/>
@@ -64,16 +64,254 @@
     <div class="insights-chip">AI Agent Governance</div>
     <h1>Configuration Management for AI Agents: The Missing Twin of Agentic Governance</h1>
     <p class="insights-dek">What closes the latency gap is configuration management. The discipline is thirty years old and has been the operational backbone of regulated industry that entire time.</p>
+    <div class="insights-meta">
+      <div class="insights-byline-author">
+        <div class="insights-byline-photo" aria-hidden="true"><img src="/assets/img/authors/michele-fisher.jpg" alt="" onerror="this.parentNode.textContent='MF'"/></div>
+        <span>By <a href="https://www.linkedin.com/in/michelefisher/" rel="author">Michele Fisher</a></span>
+      </div>
+      <span class="meta-sep" aria-hidden="true"></span>
+      <span class="insights-byline-role">Founder, Prism AI Analytics</span>
+      <span class="meta-sep" aria-hidden="true"></span>
+      <time datetime="2026-05-28">May 28, 2026</time>
+      <span class="meta-sep" aria-hidden="true"></span><span>11 min</span>
+    </div>
   </div>
 </header>
+<div class="insights-hero-figure"><img src="/assets/img/blog/configuration-management-for-ai-agents/hero.png" alt="" loading="eager"/></div>
 
-<section class="insights-stub">
-  <div class="insights-stub-badge">Coming Soon</div>
-  <p class="insights-stub-eyebrow">Publishing</p>
-  <p class="insights-stub-date">May 28, 2026</p>
-  <p>What closes the latency gap is configuration management. The discipline is thirty years old and has been the operational backbone of regulated industry that entire time.</p>
-  <p style="font-size:0.92rem;">Check back on the publish date for the full article.</p>
+<div class="insights-article">
+  <article class="insights-body">
+    <figure class="post-figure">
+    <img src="/assets/img/blog/cm-ai-deck/image6.png" alt="The missing mechanic is a 30-year-old operational discipline" loading="lazy" />
+    <figcaption>The missing mechanic is a 30-year-old operational discipline</figcaption>
+  </figure>
+
+  <p>The first post in this series argued that AI governance, as currently practiced, has a structural gap: a latency gap between the speed at which autonomous agents act and the speed at which humans can intervene. Observability tools document the gap. They do not close it.</p>
+
+  <p>What closes latency gaps is configuration management. The discipline is not new. It is older than the AI governance conversation by three decades, and it has been the operational backbone of enterprise IT, financial services, and critical infrastructure that entire time. The argument of this post is straightforward: applied to AI agents, configuration management is the missing twin of every agentic governance framework currently on the market.</p>
+
+  <p>Two pieces of evidence make the case before the argument starts. The frontier model labs have already built parts of it without naming it. And the professional certification body for AI governance has named what governance professionals are accountable for without operationalizing it. The opportunity in front of practitioners right now is to bridge the two.</p>
+
+  <h2 id="frontier-labs-are-already-doing-this">Frontier labs are already doing this</h2>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/cm-ai-deck/image14.png" alt="Frontier labs independently reinvented Configuration Management" loading="lazy" />
+    <figcaption>Frontier labs independently reinvented Configuration Management</figcaption>
+  </figure>
+
+  <p>Anthropic’s <a href="https://www.anthropic.com/responsible-scaling-policy">Responsible Scaling Policy v3.0</a>, effective in February 2026, defines AI Safety Levels — graduated baselines tied to specific model capabilities. When a model’s capability evaluation crosses a defined threshold, the AI Safety Level is upgraded and stronger safeguards become mandatory. The policy specifies classifier guards, monitoring, and jailbreak defenses for sensitive deployments; Anthropic’s separate Safeguards technical materials describe the multi-layered defense-in-depth architecture in more operational detail — access controls, real-time classifiers, asynchronous monitoring, granular per-role permission sets, multi-party authorization for sensitive model assets, and streaming token-level classifiers that score outputs as they are generated. Anthropic holds ISO/IEC 42001:2023 and SOC 2 Type II certifications and publishes the associated audit material on its <a href="https://trust.anthropic.com/">trust center</a>.</p>
+
+  <p>The closest publicly documented analog to a frontier-lab Tier-3-equivalent response is the <a href="https://www.anthropic.com/news/claude-mythos-preview-system-card">Claude Mythos Preview system card</a>, published April 7, 2026. Mythos is Anthropic’s most capable frontier model to date and the company decided <strong>not to make it generally available</strong> — it was routed instead to a defensive cybersecurity partner program. Anthropic is explicit in the system card that this deployment restriction did not stem from an RSP Capability Threshold breach; catastrophic risks across the policy’s threat models remain assessed as low. The decision was a deployment-strategy choice tied to dual-use cybersecurity risk — the model’s capability profile was judged better suited to a controlled partner channel than to broad commercial release. The system card is operationally important for a different reason. It publishes specific behavioral rates from internal monitoring — bypass attempts under 0.01 percent of completions, clearly dishonest behaviors under 0.0002 percent, unauthorized data transfer under 0.0002 percent — which are the first frontier-lab KRI-style numbers anyone has published in operational form. Anthropic also acknowledges in its v3.0 announcement materials: <em>"we needed to improve our process for tracking compliance with the RSP."</em> A frontier lab naming the configuration-management-tracking gap in its own published audit material. The operational pattern — capability assessment, internal monitoring at quantified rates, an organizational decision to constrain availability, partner-only release with use-case restriction — mirrors a Tier-3 intervention in everything but the vocabulary the RSP itself uses.</p>
+
+  <p>Every one of those terms has a structural analogue in configuration management discipline. AI Safety Levels play the role of baselines for the model itself. Capability thresholds function as tripwires. Multi-party authorization is change control in everything but name. Defense-in-depth with streaming classifiers is drift detection. ISO/IEC 42001 is the external audit attestation. The analogy is structural, not a one-to-one literal translation — ASLs in particular are capability tiers tied to deployment commitments, not configuration baselines in the ITIL sense — but the disciplines under different vocabulary are recognizably the same.</p>
+
+  <p>OpenAI’s recently published <a href="https://developers.openai.com/cookbook/examples/partners/agentic_governance_guide/agentic_governance_cookbook">Agentic Governance Cookbook</a> covers a different slice of the same picture. It treats policies as code that "version, travel, and deploy alongside applications." It distributes those policies as pip-installable packages so that "any team can pip install instant compliance." It captures every LLM call, tool execution, and handoff in a structured trace. Its opening posture — <em>governance drives delivery</em> — is the right framing.</p>
+
+  <p>Where the OpenAI cookbook stops is also instructive. It does not specify approval workflows for the policy itself. It does not provide live key risk indicators with predefined intervention paths. It does not include a rollback procedure when an evaluation fails post-deployment. The cookbook implements two of the four configuration management disciplines well and the other two not at all.</p>
+
+  <p>The pattern across both vendors is the same. The disciplines are real, the implementations are partial, and the vocabulary is fragmented. Each lab has solved its own problem inside its own walls. The enterprise deploying agents on top of those models inherits a partial governance layer and is responsible for closing the rest of the gap itself.</p>
+
+  <h2 id="the-professional-body-has-named-the-work-without-operationalizing-it">The professional body has named the work without operationalizing it</h2>
+
+  <p>The IAPP launched the <a href="https://iapp.org/certify/aigp">Artificial Intelligence Governance Professional certification</a> in 2023 to formalize what AI governance practitioners are accountable for. The current Body of Knowledge (version 2.1, effective February 2, 2026) defines four domains. Domain III covers governing AI development. Domain IV covers governing AI deployment and use. Together they describe the operational scope of the AI governance role.</p>
+
+  <p>Read carefully against the BoK, the curriculum points to operational governance work — establishing policies and procedures throughout the AI life cycle, performing key activities to assess the AI model — without describing the operational mechanics of how that work is done. The most-cited community resource for AIGP candidates, <a href="https://oliverpatel.substack.com/p/the-unofficial-aigp-resource-guide">Oliver Patel’s unofficial resource guide</a>, catalogs roughly a hundred references covering law, policy, risk assessment, and standards. Configuration management vocabulary does not appear. Drift thresholds do not appear. KRI frameworks do not appear. Agentic-specific governance is largely absent.</p>
+
+  <p>This is not a criticism of the certification. It is a structural observation. AIGP defines what professional AI governance is. The market has not yet defined how the work gets done day to day. The framework that follows is one practitioner’s attempt to provide an answer.</p>
+
+  <h2 id="the-prism-cm-ai-framework">The Prism CM-AI Framework</h2>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/cm-ai-deck/image7.png" alt="The Prism CM-AI Framework architecture" loading="lazy" />
+    <figcaption>The Prism CM-AI Framework architecture</figcaption>
+  </figure>
+
+  <p>The framework consists of four configuration management disciplines applied across three delivery layers, with a Key Risk Indicator tier model layered over the whole.</p>
+
+  <h3>The four disciplines</h3>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/cm-ai-deck/image8.png" alt="Prompts carry the consequence of code but lack the review of code" loading="lazy" />
+    <figcaption>Prompts carry the consequence of code but lack the review of code</figcaption>
+  </figure>
+
+  <p><strong>Baseline.</strong> A documented description of what <em>good</em> looks like for each production agent. This includes the approved model and version, the system prompt’s content hash, the inventory of tools the agent can call, the data scope it can access, the expected output distribution, the latency band, the refusal rate, and the cost-per-action target. Without a documented baseline, drift is undetectable, because there is nothing to drift from.</p>
+
+  <p><strong>Change Control.</strong> A defined approval path for any change to the baseline. This is where most current AI deployments are weakest. Organizations gate model upgrades but rarely gate prompt revisions. They gate new tool integrations but rarely gate scope expansions to existing tools. Change control is what ensures the agent currently operating in production is materially the same agent the organization approved to operate in production. Without it, the live system can drift away from the approved configuration through a thousand small unreviewed changes.</p>
+
+  <p><strong>Drift Detection.</strong> Continuous comparison of the live agent’s behavior against the baseline, at machine speed, with defined thresholds and defined responses. This is not a dashboard. It is an automated control loop that detects deviation and triggers escalation without waiting for a human to refresh a screen.</p>
+
+  <p><strong>Audit and Remediation.</strong> The ability to reconstruct, after the fact, exactly what the agent did, why, and against what baseline — combined with the ability to roll back to a previous baseline when needed. Most organizations have logs. Few have the rollback path tested. The first time an agent goes wrong is not the right time to discover that the rollback procedure is theoretical.</p>
+
+  <h3>The three delivery layers</h3>
+
+  <p>These four disciplines run across the three layers that Prism’s compliance practice uses on every engagement:</p>
+
+  <ol><li><strong>Discover and Map.</strong> Inventory the agents in production. Document each agent’s tools, data scopes, and dependencies. Establish the baseline.</li><li><strong>Automate and Enforce.</strong> Implement change control workflows, drift detection, and audit logging in code and infrastructure. Make the baseline executable.</li><li><strong>Govern and Report.</strong> Set KRI thresholds, maintain exception workflows, produce audit evidence, brief the board. Make the system defensible to a regulator, an auditor, or an insurer.</li></ol>
+
+  <p>The result is a 4&amp;times;3 matrix: four configuration management disciplines, three delivery layers, twelve cells of operational work. The matrix is not a checklist. It is the structure that ensures every discipline is implemented at every layer, rather than implemented in policy at one layer and never reaching the others.</p>
+
+  <table class="article-table"><thead><tr><th>Discipline</th><th>Discover &amp; Map</th><th>Automate &amp; Enforce</th><th>Govern &amp; Report</th></tr></thead><tbody><tr><td><strong>Baseline</strong></td><td>Inventory agents; document baseline per agent</td><td>Version-control baselines; automated baseline validation</td><td>Quarterly baseline review; baseline drift reporting</td></tr><tr><td><strong>Change Control</strong></td><td>Document approval authorities and processes</td><td>Implement change workflows in code; require approvals before deploy</td><td>Change advisory board; audit of change history</td></tr><tr><td><strong>Drift Detection</strong></td><td>Identify metrics for each baseline element</td><td>Instrument metrics; automated thresholds and routing</td><td>KRI dashboards; threshold review; tier escalation reporting</td></tr><tr><td><strong>Audit &amp; Remediation</strong></td><td>Define audit data model; document rollback procedures</td><td>Implement audit logging; test rollback procedures</td><td>Audit evidence packaging; post-incident review process</td></tr></tbody></table>
+
+  <h3>The KRI tier overlay</h3>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/cm-ai-deck/image16.png" alt="The Closed-Loop Governance Engine" loading="lazy" />
+    <figcaption>The Closed-Loop Governance Engine</figcaption>
+  </figure>
+
+  <p>The signature element of the framework is the Key Risk Indicator tier model, adapted from financial-services operational risk practice. KPIs measure value produced. KRIs measure boundary integrity. The two are complementary and answer different questions, and the failure mode in most current AI deployments is treating output volume as if it were a safety signal.</p>
+
+  <p>KRIs operate on three tiers. Tier 1 is a warning — drift detected, investigate within 24 hours, document the cause. Tier 2 is action — drift exceeds tolerance, auto-throttle the agent, human review required before continued operation. Tier 3 is intervention — operational risk threshold breached, kill-switch fires, rollback to last approved baseline, incident report filed, post-incident review within five business days. Each tier has a defined response and a defined authority. Without the tier model, KRIs are decoration.</p>
+
+  <p>The KRI tier model gets a full treatment in the next post in this series. The point for now is that it is what allows governance to operate at the speed of the agent rather than the speed of human attention.</p>
+
+  <h2 id="what-this-framework-is-not">What this framework is not</h2>
+
+  <p>The conversation around AI agent governance has accelerated in 2026. Several adjacent voices are converging on parts of the same problem from different lineages. This framework is positioned alongside, not against, each of them. The differentiation is worth naming directly.</p>
+
+  <p>**<a href="https://github.com/microsoft/agent-governance-toolkit">Microsoft’s Agent Governance Toolkit</a>** (April 2026) ships open-source runtime security infrastructure using an OS-kernel metaphor — defense in depth, execution rings, trust scoring. It is excellent runtime enforcement infrastructure. It does not use configuration management vocabulary, does not provide a Key Risk Indicator framework, and does not bridge to financial-services operational risk practice. The toolkit is the kernel; configuration management is the state-management layer that authorizes the policies the kernel enforces.</p>
+
+  <p><strong>Charli AI Labs’ Governance Control Plane</strong> and the broader "control plane" discourse argue, correctly, that observability is not control. The proposed solution is a Governance Virtual Machine with policy injection and active interception. Execution-permission models prevent unauthorized action; configuration management detects when authorized agents have drifted from the version that was authorized. Both are necessary in a mature stack.</p>
+
+  <p><strong>ITIL Foundation Version 5</strong> (<a href="https://www.peoplecert.org/browse-certifications/it-governance-and-service-management/ITIL-1">PeopleCert</a>, released February 2026) names the gap directly. AI Governance is designated as the sole extension module in the v5 qualification scheme — planned for release in Q2 2026 — alongside nine core modules. ITIL v5 is the strategic guidance for AI in service management; this framework is the operational implementation layer that sits below it.</p>
+
+  <p>**<a href="https://www.garp.org/risk-intelligence/operational/sr-11-7-age-agentic-ai-260227">GARP’s SR 11-7 strain analysis</a>** (Krishan Sharma, SVP Model Risk Management at Citigroup, February 2026) is the closest published work from the financial-services side. Sharma identifies three critical strains in SR 11-7’s application to agentic AI — dynamic validation, third-party concentration, and explainability standards — and recommends "continuous monitoring and use-based controls" without operationalizing them. This framework is the operational implementation of the response Sharma’s analysis recommends. Section 6 of the accompanying white paper provides the explicit bridge.</p>
+
+  <p>The pattern across all of these voices is consistent: each lineage names part of the problem and proposes part of the solution. None integrate the four lineages — financial-services operational risk, IT/ITIL configuration management, runtime control plane architecture, and AI governance professional certification — into one practitioner-implementable framework. That integration is what this framework offers.</p>
+
+  <h2 id="why-configuration-management-is-the-right-name">Why "configuration management" is the right name</h2>
+
+  <p>The vendor stack and the broader agentic AI conversation are converging on the term <em>control plane</em>. That language is not wrong. It captures the architectural picture: a layer that sits above the agents, manages identity and access, enforces policy, and provides visibility. <a href="https://learn.microsoft.com/en-us/microsoft-agent-365/overview">Microsoft Agent 365</a> — announced March 2026, generally available May 1, 2026 — uses exactly that framing.</p>
+
+  <p>The control plane abstraction is necessary. It is also incomplete. <em>Control plane</em> describes a place. It does not describe a discipline. The questions a control plane is supposed to answer — what is the approved configuration, who can change it, has it changed, can we prove it — are the questions configuration management has answered for thirty years in adjacent domains.</p>
+
+  <p>Naming the discipline matters because it makes the work portable. An organization that has run ITIL configuration management for its on-premises systems already knows how to run it. The skills, the tooling patterns, the audit evidence formats, the change advisory boards — all of it transfers. The framework is not a request to learn something new. It is a request to apply something the organization already knows how to do, to a class of system the organization has not yet applied it to.</p>
+
+  <p>That portability is also the framework’s defensibility. The AIGP Body of Knowledge defines the policy outcomes governance professionals are accountable for. NIST AI RMF, ISO/IEC 42001, and the EU AI Act define the standards those policies must meet. Configuration management is the operational mechanic that connects them. Without the mechanic, the policy and the standard live on paper. With it, they live in production.</p>
+
+  <h2 id="what-this-means-in-practice">What this means in practice</h2>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/cm-ai-deck/image17.png" alt="Assessing operational reality — The Guardrail Diagnostic" loading="lazy" />
+    <figcaption>Assessing operational reality — The Guardrail Diagnostic</figcaption>
+  </figure>
+
+  <p>Adopting the framework is not a tool purchase. It is the establishment of five operational practices that most organizations deploying AI agents do not currently have. A documented baseline for every production agent. A change control path that includes the prompt. Live KRIs with predefined tripwires. A kill-switch and rollback procedure tested before they are needed. An audit trail that ties any agent action to the baseline that authorized it.</p>
+
+  <p>These practices do not slow delivery. They make delivery defensible. The organizations that will scale AI agents successfully over the next two years are not the ones with the most powerful models. They are the ones whose governance is operational rather than ornamental.</p>
+
+  <p>The third post in this series goes deep on the KRI tier model — the signature element, and the part of the framework that is least developed in the broader market. After that, the series maps the framework explicitly to NIST AI RMF, walks through a working implementation in the Prism dashboard, and crosswalks the discipline against the AIGP Body of Knowledge for governance professionals studying for the certification.</p>
+
+  <p>The full framework reference is available as a single canonical document for teams that want to circulate it internally. Contact through the form below.</p>
+
+  <p><em>This is part 2 of a six-part series on Configuration Management for AI Agents. Part 1 stakes out the latency gap. Part 3 details the KRI tier model.</em></p>
+
+  <h2 id="sources-cited">Sources cited</h2>
+
+  <ul><li>Anthropic, <em>Responsible Scaling Policy v3.0</em> (effective 2026-02-24). <a href="https://www.anthropic.com/responsible-scaling-policy">anthropic.com/responsible-scaling-policy</a></li><li>Anthropic, <em>Claude Mythos Preview System Card</em> (2026-04-07). <a href="https://www.anthropic.com/news/claude-mythos-preview-system-card">anthropic.com/news/claude-mythos-preview-system-card</a></li><li>Anthropic, <em>Trust Center</em> — ISO/IEC 42001 and SOC 2 Type II certifications. <a href="https://trust.anthropic.com/">trust.anthropic.com</a></li><li>OpenAI, <em>Agentic Governance Cookbook</em>. <a href="https://developers.openai.com/cookbook/examples/partners/agentic_governance_guide/agentic_governance_cookbook">developers.openai.com/cookbook/examples/partners/agentic_governance_guide/agentic_governance_cookbook</a></li><li>Microsoft, <em>Agent Governance Toolkit</em> (open-source, April 2026). <a href="https://github.com/microsoft/agent-governance-toolkit">github.com/microsoft/agent-governance-toolkit</a></li><li>IAPP, <em>Artificial Intelligence Governance Professional (AIGP)</em> certification. <a href="https://iapp.org/certify/aigp">iapp.org/certify/aigp</a>. Body of Knowledge v2.1 effective 2026-02-02.</li><li>Oliver Patel, <em>The Unofficial AIGP Resource Guide</em> (IAPP faculty). <a href="https://oliverpatel.substack.com/p/the-unofficial-aigp-resource-guide">oliverpatel.substack.com/p/the-unofficial-aigp-resource-guide</a></li><li>Krishan Sharma, "SR 11-7 in the Age of Agentic AI: Where the Framework Holds — and Where It Strains," GARP <em>Risk Intelligence</em>, 2026-02-27. <a href="https://www.garp.org/risk-intelligence/operational/sr-11-7-age-agentic-ai-260227">garp.org/risk-intelligence/operational/sr-11-7-age-agentic-ai-260227</a></li><li>PeopleCert, <em>ITIL v5 AI Governance Extension Module</em>. <a href="https://www.peoplecert.org/itil">peoplecert.org/itil</a></li></ul>
+    
+  <div class="article-cta">
+    <h3>Want the Framework Reference?</h3>
+    <p>The Prism CM-AI Framework is documented in a single reference document with the four disciplines, the delivery model, the KRI tier definitions, and the standards crosswalk. We share it under NDA with organizations actively scaling AI agent deployments.</p>
+    <a href="/#contact">Request the Framework Reference</a>
+  </div>
+  </article>
+  <aside class="insights-rail">
+    <div class="insights-rail-label">Share</div>
+    <div class="insights-share">
+      <a class="insights-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprismaianalytics.com%2Fblog%2Fconfiguration-management-for-ai-agents%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8 19H5V8h3v11zM6.5 6.732a1.764 1.764 0 110-3.527 1.764 1.764 0 010 3.527zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+      <a class="insights-share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fprismaianalytics.com%2Fblog%2Fconfiguration-management-for-ai-agents%2F&amp;text=Configuration%20Management%20for%20AI%20Agents%3A%20The%20Missing%20Twin%20of%20Agentic%20Governance" target="_blank" rel="noopener noreferrer" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
+      <a class="insights-share-btn" href="mailto:?subject=Configuration%20Management%20for%20AI%20Agents%3A%20The%20Missing%20Twin%20of%20Agentic%20Governance&amp;body=https%3A%2F%2Fprismaianalytics.com%2Fblog%2Fconfiguration-management-for-ai-agents%2F" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7L12 13 2 7"/></svg></a>
+      <button type="button" class="insights-share-btn" id="copyLinkBtn" data-url="https://prismaianalytics.com/blog/configuration-management-for-ai-agents/" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+    </div>
+    
+    <div class="insights-rail-label">On this page</div>
+    <nav class="insights-toc" aria-label="Table of contents">
+      <ol>
+        <li class="insights-toc-item" data-toc-id="frontier-labs-are-already-doing-this"><a href="#frontier-labs-are-already-doing-this">Frontier labs are already doing this</a></li>
+        <li class="insights-toc-item" data-toc-id="the-professional-body-has-named-the-work-without-operationalizing-it"><a href="#the-professional-body-has-named-the-work-without-operationalizing-it">The professional body has named the work without operationalizing it</a></li>
+        <li class="insights-toc-item" data-toc-id="the-prism-cm-ai-framework"><a href="#the-prism-cm-ai-framework">The Prism CM-AI Framework</a></li>
+        <li class="insights-toc-item" data-toc-id="what-this-framework-is-not"><a href="#what-this-framework-is-not">What this framework is not</a></li>
+        <li class="insights-toc-item" data-toc-id="why-configuration-management-is-the-right-name"><a href="#why-configuration-management-is-the-right-name">Why &quot;configuration management&quot; is the right name</a></li>
+        <li class="insights-toc-item" data-toc-id="what-this-means-in-practice"><a href="#what-this-means-in-practice">What this means in practice</a></li>
+        <li class="insights-toc-item" data-toc-id="sources-cited"><a href="#sources-cited">Sources cited</a></li>
+      </ol>
+    </nav>
+  
+  </aside>
+</div>
+
+<div style="max-width:1040px;margin:0 auto;padding:0 2rem;">
+  <aside class="insights-author-card">
+    <div class="insights-author-photo" aria-hidden="true"><img src="/assets/img/authors/michele-fisher.jpg" alt="" onerror="this.parentNode.textContent='MF'"/></div>
+    <div>
+      <p class="insights-author-name">Michele Fisher</p>
+      <p class="insights-author-role">Founder, Prism AI Analytics</p>
+      <p class="insights-author-bio">Founder of Prism AI Analytics. BI and data-engineering background, currently focused on configuration management for AI agents in regulated enterprise environments.</p>
+      <a class="insights-author-link" href="https://www.linkedin.com/in/michelefisher/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn →</a>
+    </div>
+  </aside>
+</div>
+
+<section class="insights-newsletter">
+  <div class="insights-newsletter-inner">
+    <div>
+      <p class="insights-newsletter-eyebrow">Stay in the loop</p>
+      <h2>New Insights, straight to your inbox.</h2>
+      <p>Get the next post on enterprise AI governance the morning it publishes. No noise, one signal per week.</p>
+    </div>
+    <form class="insights-newsletter-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact"/>
+      <input type="hidden" name="source" value="blog-newsletter"/>
+      <input type="hidden" name="name" value="Newsletter subscriber"/>
+      <input type="hidden" name="message" value="Blog newsletter signup"/>
+      <div class="hp-field"><label>Do not fill: <input name="bot-field"/></label></div>
+      <label class="hp-field" for="newsletter-email">Email address</label>
+      <input id="newsletter-email" type="email" name="email" placeholder="you@company.com" required autocomplete="email"/>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
 </section>
+
+<section class="insights-related" aria-label="Related insights">
+    <h2 class="insights-related-heading">Related Insights</h2>
+    <div class="insights-related-grid">
+    <a class="insights-card" href="/blog/observability-isnt-governance/">
+      <div class="insights-card-image"><img src="/assets/img/blog/observability-isnt-governance/hero.png" alt="" loading="lazy"/></div>
+      <div class="insights-card-body">
+        <span class="insights-chip">AI Agent Governance</span>
+        <h3 class="insights-card-title">Observability Isn't Governance: The Latency Gap in Agentic AI</h3>
+        <div class="insights-card-meta">
+          <time datetime="2026-05-21">May 21, 2026</time>
+          <span class="meta-sep" aria-hidden="true"></span><span>9 min</span>
+        </div>
+      </div>
+    </a>
+    <a class="insights-card" href="/blog/a-hallucination-on-our-own-stack/">
+      <div class="insights-card-image"><img src="/assets/img/blog/a-hallucination-on-our-own-stack/hero.png" alt="" loading="lazy"/></div>
+      <div class="insights-card-body">
+        <span class="insights-chip">AI Agent Governance</span>
+        <h3 class="insights-card-title">A Hallucination on Our Own Stack: What Configuration Management Would Have Caught</h3>
+        <div class="insights-card-meta">
+          <time datetime="2026-05-15">May 15, 2026</time>
+          <span class="meta-sep" aria-hidden="true"></span><span>8 min</span>
+        </div>
+      </div>
+    </a>
+    <a class="insights-card" href="/blog/what-is-ai-agent-governance/">
+      <div class="insights-card-image"><img src="/assets/img/blog/what-is-ai-agent-governance/hero.png" alt="" loading="lazy"/></div>
+      <div class="insights-card-body">
+        <span class="insights-chip">AI Agent Governance</span>
+        <h3 class="insights-card-title">What Is AI Agent Governance? A Practitioner's Glossary for the Prism CM-AI Framework</h3>
+        <div class="insights-card-meta">
+          <time datetime="2026-05-14">May 14, 2026</time>
+          <span class="meta-sep" aria-hidden="true"></span><span>10 min</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </section>
 
 <footer>
   <div class="footer-brand">
@@ -87,6 +325,7 @@
 </footer>
 
 <script>
+  // Nav scroll + mobile menu
   window.addEventListener('scroll', () => {
     document.getElementById('topnav').classList.toggle('scrolled', window.scrollY > 60);
   });
@@ -94,6 +333,50 @@
     document.getElementById('hamburger').classList.toggle('active');
     document.getElementById('mobileNav').classList.toggle('active');
   });
+
+  // Copy-link share button — clipboard + toast
+  (function () {
+    var btn = document.getElementById('copyLinkBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var url = btn.getAttribute('data-url') || window.location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(showToast).catch(function () { showToast('Press Ctrl+C to copy'); });
+      } else {
+        showToast('Press Ctrl+C to copy');
+      }
+    });
+    function showToast(msg) {
+      var t = document.getElementById('insightsToast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'insightsToast';
+        t.className = 'insights-toast';
+        document.body.appendChild(t);
+      }
+      t.textContent = msg || 'Link copied to clipboard';
+      t.classList.add('visible');
+      setTimeout(function () { t.classList.remove('visible'); }, 2000);
+    }
+  })();
+
+  // TOC active-item highlight via IntersectionObserver
+  (function () {
+    var items = document.querySelectorAll('.insights-toc-item');
+    if (items.length === 0 || !('IntersectionObserver' in window)) return;
+    var byId = {};
+    items.forEach(function (li) { byId[li.getAttribute('data-toc-id')] = li; });
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          items.forEach(function (li) { li.classList.remove('insights-toc-item--active'); });
+          var li = byId[entry.target.id];
+          if (li) li.classList.add('insights-toc-item--active');
+        }
+      });
+    }, { rootMargin: '-96px 0px -65% 0px', threshold: 0 });
+    document.querySelectorAll('.insights-body h2[id]').forEach(function (h) { observer.observe(h); });
+  })();
 </script>
 </body>
 </html>
