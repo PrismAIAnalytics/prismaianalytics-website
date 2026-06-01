@@ -66,7 +66,7 @@ const LEGACY_POSTS = [
     date: '2026-04-23',
     readTime: '9 min',
     dek: 'The EU AI Act, state AI laws, and new governance standards all have concrete 2026 deadlines. Here\'s the timeline every small business using AI should have on their calendar.',
-    heroImage: '/assets/img/blog/the-2026-ai-regulation-clock-is-ticking/hero.svg',
+    heroImage: '/assets/img/blog/the-2026-ai-regulation-clock-is-ticking/hero.png',
   },
   {
     slug: 'why-im-pursuing-the-claude-certified-architect',
@@ -75,7 +75,7 @@ const LEGACY_POSTS = [
     date: '2026-04-23',
     readTime: '7 min',
     dek: 'A look at the new Claude Certified Architect certification, what it covers, and why credentialed AI expertise is about to matter for every business buying AI services.',
-    heroImage: '/assets/img/blog/why-im-pursuing-the-claude-certified-architect/hero.svg',
+    heroImage: '/assets/img/blog/why-im-pursuing-the-claude-certified-architect/hero.png',
   },
   {
     slug: 'why-most-small-businesses-are-behind-on-data',
@@ -84,7 +84,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '8 min',
     dek: 'Most small businesses know data matters but struggle to use it effectively. Learn the common barriers and practical steps to build a strong data foundation.',
-    heroImage: '/assets/img/blog/why-most-small-businesses-are-behind-on-data/hero.svg',
+    heroImage: '/assets/img/blog/why-most-small-businesses-are-behind-on-data/hero.png',
   },
   {
     slug: 'configuration-drift-the-silent-security-risk',
@@ -93,7 +93,7 @@ const LEGACY_POSTS = [
     date: '2026-04-06',
     readTime: '8 min',
     dek: 'Configuration drift quietly undermines your security posture. Learn what it is, why it matters, and how small businesses can detect and prevent compliance gaps.',
-    heroImage: '/assets/img/blog/configuration-drift-the-silent-security-risk/hero.svg',
+    heroImage: '/assets/img/blog/configuration-drift-the-silent-security-risk/hero.png',
   },
   {
     slug: 'what-is-an-ai-readiness-assessment',
