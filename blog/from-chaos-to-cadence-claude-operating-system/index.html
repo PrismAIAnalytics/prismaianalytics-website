@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>From Chaos to Cadence: How We Built Prism's Claude Operating System | Prism AI Analytics</title>
   <meta name="description" content="Two months into Prism AI Analytics, we figured out how to wire Claude into our business operations in a way that actually works. Here is what we learned."/>
-  <meta name="robots" content="noindex, follow"/>
+  
   <link rel="canonical" href="https://prismaianalytics.com/blog/from-chaos-to-cadence-claude-operating-system/"/>
   <meta property="og:title" content="From Chaos to Cadence: How We Built Prism&#39;s Claude Operating System | Prism AI Analytics"/>
   <meta property="og:description" content="Two months into Prism AI Analytics, we figured out how to wire Claude into our business operations in a way that actually works. Here is what we learned."/>
   <meta property="og:type" content="article"/>
   <meta property="og:url" content="https://prismaianalytics.com/blog/from-chaos-to-cadence-claude-operating-system/"/>
-  <meta property="og:image" content="https://prismaianalytics.com/PRISM_Logo.png"/>
+  <meta property="og:image" content="https://prismaianalytics.com/assets/img/blog/from-chaos-to-cadence-claude-operating-system/framework-overview.png"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:site_name" content="Prism AI Analytics"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="From Chaos to Cadence: How We Built Prism&#39;s Claude Operating System"/>
   <meta name="twitter:description" content="Two months into Prism AI Analytics, we figured out how to wire Claude into our business operations in a way that actually works. Here is what we learned."/>
-  <meta name="twitter:image" content="https://prismaianalytics.com/PRISM_Logo.png"/>
+  <meta name="twitter:image" content="https://prismaianalytics.com/assets/img/blog/from-chaos-to-cadence-claude-operating-system/framework-overview.png"/>
   <meta property="article:published_time" content="2026-06-01"/>
   <meta property="article:modified_time" content="2026-05-25"/>
   <link rel="icon" type="image/png" href="/PRISM_Logo.png"/>
@@ -64,16 +64,287 @@
     <div class="insights-chip">Claude for Business</div>
     <h1>From Chaos to Cadence: How We Built Prism's Claude Operating System</h1>
     <p class="insights-dek">Two months into Prism AI Analytics, we figured out how to wire Claude into our business operations in a way that actually works. Here is what we learned.</p>
+    <div class="insights-meta">
+      <div class="insights-byline-author">
+        <div class="insights-byline-photo" aria-hidden="true"><img src="/assets/img/authors/michele-fisher.jpg" alt="" onerror="this.parentNode.textContent='MF'"/></div>
+        <span>By <a href="https://www.linkedin.com/in/michelefisher/" rel="author">Michele Fisher</a></span>
+      </div>
+      <span class="meta-sep" aria-hidden="true"></span>
+      <span class="insights-byline-role">Founder, Prism AI Analytics</span>
+      <span class="meta-sep" aria-hidden="true"></span>
+      <time datetime="2026-06-01">June 1, 2026</time>
+      <span class="meta-sep" aria-hidden="true"></span><span>10 min</span>
+    </div>
   </div>
 </header>
+<div class="insights-hero-figure"><img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/framework-overview.png" alt="" loading="eager"/></div>
 
-<section class="insights-stub">
-  <div class="insights-stub-badge">Coming Soon</div>
-  <p class="insights-stub-eyebrow">Publishing</p>
-  <p class="insights-stub-date">June 1, 2026</p>
-  <p>Two months into Prism AI Analytics, we figured out how to wire Claude into our business operations in a way that actually works. Here is what we learned.</p>
-  <p style="font-size:0.92rem;">Check back on the publish date for the full article.</p>
+<div class="insights-article">
+  <article class="insights-body">
+    <p>When we launched Prism AI Analytics two months ago, the conviction was simple: Claude would be foundational to how we work. The execution was not. For the first three weeks, every session started the same way — pasting context, restating goals, repeating decisions that had already been made the day before. Claude was on the team in the way a senior consultant is on the team when nobody schedules a meeting with them. Present, capable, almost entirely unused.</p>
+
+  <p>The fix was not better prompting. It was a system.</p>
+
+  <p>This post is the operational record of that system — the actual configuration, agents, rules, and rituals Prism uses to run a multi-workstream consulting firm with Claude wired into every layer of the work. It is written for solopreneurs and small-team founders who have the same conviction and the same gap. The names are real. The systems are real. The order in which we built them matters more than any individual piece.</p>
+
+  <h2 id="the-problem-nobody-warns-you-about">The problem nobody warns you about</h2>
+
+  <p>The dominant narrative about Claude adoption is a prompting story. <em>Write better prompts and you will get better output.</em> That is technically true and operationally useless. The bottleneck for a working business is not prompt quality — it is the sheer cost of reconstructing context every time you open a new chat.</p>
+
+  <p>Three weeks in, we ran the numbers on a normal workday. Roughly forty percent of every Claude session was spent re-explaining: who we are, what we are working on, what was decided yesterday, where to find the relevant files, which workstreams are active, who the client is, what the brand voice rules are, what we have already tried and ruled out. The actual work — the part where Claude does something we could not have done as fast alone — was a thin slice on top of a thick base of repetition.</p>
+
+  <p>That is not a model problem. That is a <em>system</em> problem. The model has no memory of what happened last session. If we want continuity, we have to engineer it. If we want consistency, we have to specify it. If we want speed, we have to remove the friction we are introducing ourselves every time we open a fresh window.</p>
+
+  <p>This is the gap the four-phase build closes. Discovery first — understand the actual work. Then systematization — write down the rules the work runs on. Then integration — wire the rules into a control plane the agent can read at session start. Then measurement — track what is actually working and prune what is not. None of these phases is optional. Skipping any one of them leaves you with a slightly faster version of the chaos you started with.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-04.png" alt="Four phases: Discovery, Systematization, Integration, Measurement. Skipping any one of them leaves you with a slightly faster version of the chaos." loading="lazy" />
+    <figcaption>Four phases: Discovery, Systematization, Integration, Measurement. Skipping any one of them leaves you with a slightly faster version of the chaos.</figcaption>
+  </figure>
+
+  <h2 id="phase-1-discovery-and-mapping">Phase 1 — Discovery and Mapping</h2>
+
+  <p>The first step in building a Claude operating system is not learning Claude. It is <em>learning your own firm.</em></p>
+
+  <p>Prism runs ten declared workstreams: Client Work, Marketing, CRM Development, Content, Admin, Training, AI Bridge, Sales &amp; Outreach, Finance, and a generative product surface we call Prism Studio. Each one has its own cadence, its own artifacts, its own audience, its own definition of <em>done</em>. The first thing we did — before writing a single agent specification, before configuring memory, before building a single tool — was sit down and inventory every recurring task in every workstream and answer two questions about each one.</p>
+
+  <p>The first question was, <em>is this work where the bottleneck is judgment, or where the bottleneck is throughput?</em> Judgment-bottlenecked work — deciding pricing for a new engagement, picking which of three competitive directions to take a client — stays human. Throughput-bottlenecked work — drafting outreach sequences, normalizing data, producing standard-format briefs — is exactly where Claude earns its keep.</p>
+
+  <p>The second question was, <em>what context does this task actually need?</em> Most tasks need far more than a fresh chat ever has access to. A client status update needs the engagement history. A pricing decision needs the firm&rsquo;s positioning. A blog draft needs the brand voice rules. A handoff doc needs the prior session&rsquo;s decisions. Tasks that get the right context produce useful output. Tasks that do not, produce confident-sounding generic copy that is worse than nothing because it has to be unwound before it can be replaced.</p>
+
+  <p>The mapping exercise took roughly six hours over two days. The output was a single spreadsheet of every recurring task across all ten workstreams, sorted by <em>Claude zone</em> (Claude takes the first draft, human reviews) versus <em>Claude assist</em> (human drafts, Claude critiques or expands) versus <em>human only</em> (judgment, sensitive client communication, anything where the cost of a wrong call exceeds the cost of a slow call). That spreadsheet became the source of truth for everything we built after it. Without it, every subsequent decision would have been guesswork.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-05.png" alt="The Phase 1 task bottleneck matrix sorts work by stakes and bottleneck type into Claude Zone, Claude Assist, and Human Only." loading="lazy" />
+    <figcaption>The Phase 1 task bottleneck matrix sorts work by stakes and bottleneck type into Claude Zone, Claude Assist, and Human Only.</figcaption>
+  </figure>
+
+  <p>If you do nothing else from this post, do the mapping exercise. Six hours. Two columns. <em>Claude zone, human zone.</em> The system you build on top will be exactly as good as that spreadsheet.</p>
+
+  <blockquote>Building a Claude operating system for your team? <a href="/#contact">Start a conversation about what you&rsquo;re optimizing for.</a> The mapping exercise alone changes how a firm spends its hours.</blockquote>
+
+  <h2 id="phase-2-systematization">Phase 2 — Systematization</h2>
+
+  <p>Once we knew where Claude belonged, we wrote down the rules of engagement. Not prompts — rules. The distinction matters.</p>
+
+  <p>A prompt is a one-time instruction in a single chat. A rule is a persistent specification that every session inherits. Prism&rsquo;s rules of engagement live in a file called <code>CLAUDE.md</code> at the root of every project directory. When a new session starts, Claude reads it before doing anything else. The file is around 400 lines today. It specifies which projects live where, which directories are content versus build artifacts, how the firm thinks about tickets (the unit of work is a ticket, never a task), how handoffs are structured, what the deployment surfaces are, and which platform conventions apply (Windows shell, PowerShell syntax, no /dev/null).</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-06.png" alt="A prompt is a one-time instruction in a single chat. A rule is a persistent specification in CLAUDE.md that every session inherits." loading="lazy" />
+    <figcaption>A prompt is a one-time instruction in a single chat. A rule is a persistent specification in CLAUDE.md that every session inherits.</figcaption>
+  </figure>
+
+  <p>The brand has its own rules file: <code>prism-marketing/brand/do-not-do.md</code>. Every piece of public content gets swept against it before it ships. No exclamation points. No third-party statistics in the opening of a post. No fake intimacy. No fusing the Prism brand with any single framework or product. The file is opinionated on purpose. <em>Calm expert in a noisy room</em> is the voice; anything that breaks that voice gets rewritten or cut.</p>
+
+  <p>Beyond the rule files, we specialized. Prism does not run one general-purpose Claude. It runs nine domain agents, each scoped to a workstream: <code>chief-of-staff</code>, <code>finance-billing-ops</code>, <code>client-delivery-ops</code>, <code>sales-bd-ops</code>, <code>marketing-ops</code>, <code>research-analytics-ops</code>, <code>internal-admin-ops</code>, and a few others. Each agent has its own system prompt, its own preferred tools, its own escalation rules. When work belongs to a domain, we route it to the domain agent, not the generalist. The marketing agent already knows the brand rules, the active campaigns, and the channel calendar. Asking the generalist to take a marketing task means re-teaching it everything the marketing agent already knows.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-07.png" alt="Routing work to specialized domain agents that already inherit brand rules, active campaigns, and channel context, instead of re-teaching a single general-purpose Claude every session." loading="lazy" />
+    <figcaption>Routing work to specialized domain agents that already inherit brand rules, active campaigns, and channel context, instead of re-teaching a single general-purpose Claude every session.</figcaption>
+  </figure>
+
+  <p>The two-hour investment in writing the rules files paid back inside the first week. Output that used to require three turns of correction comes out usable on the first turn. Sessions that used to open with a paragraph of context-setting now open with the actual question. Multiply that across a working week and the time recovered is not a marginal gain — it is the difference between Claude being a hobby and Claude being staff.</p>
+
+  <h2 id="phase-3-integration">Phase 3 — Integration</h2>
+
+  <p>Systematization tells Claude <em>what good looks like.</em> Integration is the harder problem: making Claude part of the work itself, not an optional sidecar.</p>
+
+  <p>Prism&rsquo;s integration layer has three pieces, each of which earns its name.</p>
+
+  <p>The first is <strong>Chloe</strong>, the firm&rsquo;s strategic Chief of Staff. Chloe is not the operational <code>chief-of-staff</code> agent that dispatches tickets. Chloe sits one level above that — the thinking partner across all workstreams, the dot-connector, the voice that surfaces what is in flight before suggesting what is possible. Chloe auto-loads at the start of every Claude session. She reads the working hypotheses file, the open questions log, the last seven days of decisions, the last thirty days of Daily Logs, and the active project decision files. By the time the first human message is processed, Chloe knows the state of the firm. The opening line of every session reflects that — the Inbox count, the number of tickets awaiting a decision, the active critical path. No more pasting context. The context is already there.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-08.png" alt="Chloe assembles firm state at t equals zero from files, open questions, seven-day decisions, thirty-day daily logs, and working hypotheses." loading="lazy" />
+    <figcaption>Chloe assembles firm state at t equals zero from files, open questions, seven-day decisions, thirty-day daily logs, and working hypotheses.</figcaption>
+  </figure>
+
+  <p>The second is the <strong>Mission Control dashboard</strong>, a self-hosted Express + SQLite application running at a Railway URL. The dashboard is the firm&rsquo;s control plane. It exposes the Notion Tickets database as a queryable surface, surfaces tickets that need a decision, tracks daily reviews, captures Inbox items via a <code>POST /api/mission-control/inbox</code> endpoint that Chloe can write to mid-session, and merges financial state from Stripe and QuickBooks into a single financials view. The dashboard is not a vanity display. It is the operating surface the human owner uses to steer the agents, and it is the audit trail that proves what got decided when.</p>
+
+  <p>The third is the <strong>Handoff discipline</strong>. Every multi-session piece of work gets a structured handoff doc with required front-matter: status, created date, last-updated date, ticket ID, owner, and a <code>supersedes</code> pointer if it replaces a prior handoff. Handoffs live in a single canonical directory, never duplicated, never renamed with version suffixes. An index file is auto-generated from a script that scans the directory, parses the front-matter, and writes the active handoffs in last-updated order. Any future session — human or agent — can answer <em>what is the latest version?</em> deterministically.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-10.png" alt="Handoff discipline replaces the chaos of brief_v1, brief_FINAL, brief_FINAL_v2_really with a single canonical directory and a frontmatter contract." loading="lazy" />
+    <figcaption>Handoff discipline replaces the chaos of brief_v1, brief_FINAL, brief_FINAL_v2_really with a single canonical directory and a frontmatter contract.</figcaption>
+  </figure>
+
+  <p>Tying these three pieces together is the ticket workflow. The unit of work at Prism is a ticket in Notion, not a task. Tickets flow through six states: Backlog (proposal), To Do (sanctioned), In Progress (active), Review (agent needs a decision), Blocked (waiting on external input), and Done. When an agent mid-session needs a judgment call, it posts the question to the ticket&rsquo;s comments with the literal token <code>[NEEDS-DECISION]</code> in the body. The dashboard auto-flips the ticket to Review in the same request. The Mission Control daily tile increments. The owner sees the question on her next dashboard refresh, replies via a Reply &amp; Resume composer, and the ticket flips back to In Progress. The agent does not block silently. The owner does not get interrupted in the middle of unrelated work. The state of every open question is, at all times, visible from one screen.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-09.png" alt="Asynchronous collaboration via the ticket state loop: In Progress, Trigger, Review, Reply and Resume, Loop Back. Agents never block silently; humans never get interrupted mid-flow." loading="lazy" />
+    <figcaption>Asynchronous collaboration via the ticket state loop: In Progress, Trigger, Review, Reply and Resume, Loop Back. Agents never block silently; humans never get interrupted mid-flow.</figcaption>
+  </figure>
+
+  <p>Integration of this depth takes longer than systematization. The dashboard alone is several thousand lines of single-file Express code, an Excel importer, a Stripe webhook, a QuickBooks OAuth flow, and a scheduled job that synchronizes Daily Log entries to the production database every evening. We did not build it in a weekend. We built it iteratively over six weeks, in tickets, deployed continuously, with each piece replacing a workflow that had been done in spreadsheets and chat messages the week before. The discipline that kept the build tractable was the same discipline we were building <em>for</em> — tickets, handoffs, Chloe synthesizing weekly hypotheses about what was working and what was not.</p>
+
+  <h2 id="phase-4-measure-and-iterate">Phase 4 — Measure and Iterate</h2>
+
+  <p>A Claude operating system is not a static configuration. It is a living thing that has to be measured, pruned, and evolved or it rots faster than any other internal tool a firm owns.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-11.png" alt="Phase 4 operates on four timescales: short-term memory in daily logs, weekly synthesis, monthly retirement audit, and quarterly evolution of the rules." loading="lazy" />
+    <figcaption>Phase 4 operates on four timescales: short-term memory in daily logs, weekly synthesis, monthly retirement audit, and quarterly evolution of the rules.</figcaption>
+  </figure>
+
+  <p>Prism&rsquo;s measurement layer has four pieces, each operating on a different timescale.</p>
+
+  <p><strong>Daily Logs</strong> capture what got done in a working day — tickets moved, decisions made, blockers hit. They live in a vault directory and are written at end-of-day. The dashboard surfaces a Daily Review form that POSTs to the production database; a scheduled routine syncs the local Daily Logs to the production endpoint every evening at six o&rsquo;clock. The logs are the firm&rsquo;s short-term memory.</p>
+
+  <p><strong>The weekly synthesis</strong> is Chloe&rsquo;s job. On the first Claude session of every week, Chloe reads the last seven days of Daily Logs, the last seven days of the decisions log, and the current state of open questions, and updates the working-hypotheses file with any new patterns observed. Superseded hypotheses are marked explicitly, not deleted — the record of <em>what we used to believe</em> is itself valuable. If a full week passes with zero Claude sessions, the synthesis carries to the next week&rsquo;s first session.</p>
+
+  <p><strong>The monthly retirement audit</strong> is the harshest discipline of the four. Once a month, we look at every recurring routine, every scheduled agent, every active workstream, and ask: is this still earning its keep? In the past six weeks we have retired four <code>prism-studio</code> skills (the experimental Etsy SKU workstream did not generate signal proportional to its operational cost) and the dev-insights-sync orchestrator step (auto-ticket flow needed redesign before re-enabling). Each retirement is a memory entry, not a deletion — if the assumption underneath the retirement turns out to be wrong, we want to be able to find what we knew when we made the call.</p>
+
+  <p><strong>The quarterly evolution</strong> is where the rules files themselves get rewritten. CLAUDE.md gets new sections; the brand voice rules get tightened; agent specifications get refactored against what the past quarter actually produced. The rules are the contract; the contract evolves with the firm.</p>
+
+  <p>The crude headline metric, after the build settled, is that we recover something on the order of eight to ten hours per week of operational time compared to the manual baseline of the first three weeks. That number is a lower bound; the more honest version is that several categories of work — ticket triage, daily log synthesis, brand-voice sweeps, handoff index generation, multi-source research — are simply <em>done</em> now, where in week one they were not done at all. The recovered time is not the point. The recovered <em>headspace</em> is.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-12.png" alt="The complete Claude operating system stack: integration layer on top, logic layer in the middle, foundation layer at the base, with measurement as the feedback loop across all three." loading="lazy" />
+    <figcaption>The complete Claude operating system stack: integration layer on top, logic layer in the middle, foundation layer at the base, with measurement as the feedback loop across all three.</figcaption>
+  </figure>
+
+  <h2 id="honest-caveats">Honest caveats</h2>
+
+  <p>This is not a finished system. It is the snapshot of an iterating one.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-13.png" alt="The returns and the costs: roughly eight to ten hours recovered per week, paid for in real attention spent curating the operating system itself." loading="lazy" />
+    <figcaption>The returns and the costs: roughly eight to ten hours recovered per week, paid for in real attention spent curating the operating system itself.</figcaption>
+  </figure>
+
+  <p>Three things are still rough. First, the orchestrator step that auto-creates tickets from session activity is currently disabled — the heuristics produced too many duplicate tickets in May and we pulled the plug while we redesigned. Second, the dashboard&rsquo;s financials view merges Stripe and QuickBooks data correctly for revenue but still does some manual reconciliation for cash flow that we have not yet automated. Third, the Mission Control dashboard depends on a Railway-hosted backend that has a single point of failure in the SQLite write path; production has been wiped twice in the past quarter from operator error and we now run a strict WIP-of-one protocol on the dashboard&rsquo;s <code>main</code> branch to prevent recurrence.</p>
+
+  <p>The system is also <em>expensive in attention</em>. The rules files, the dashboard, the handoffs, the agents, the weekly synthesis — none of these maintain themselves. The firm spends real hours every week curating the operating system itself. That cost is offset by the hours recovered downstream, but only as long as the curation is done. A Claude operating system that is left to drift is, after about three weeks, indistinguishable from the chaos it was built to replace.</p>
+
+  <p>And there is a tooling caveat. Everything described above runs on Claude Code and the Claude API, plus the wider Anthropic stack of skills, agents, and MCP connectors. The same disciplines — rules files, a control plane, a ticket workflow, a synthesizer that runs at session boundaries — will work with other agentic platforms. The investment is in the <em>disciplines</em>, not in any single vendor. Choose your platform deliberately; we chose ours because of the depth of the Agent SDK and the maturity of the MCP toolchain, not because we believe the platform is permanent.</p>
+
+  <h2 id="where-to-start-if-you-are-reading-this-with-conviction-and-no-system">Where to start if you are reading this with conviction and no system</h2>
+
+  <p>You do not need ten workstreams. You do not need a dashboard. You do not need nine specialized agents. You need three honest answers.</p>
+
+  <p>What is the actual work you do every week? <em>Write it down.</em> Not the work you wish you did, the work you actually do.</p>
+
+  <p>Where are you repeating yourself when you talk to Claude? <em>Every repetition is a candidate for a rules file.</em> Write the rules down once. Read them every session.</p>
+
+  <p>What decisions, in your week, did you make twice because you forgot you had already made them? <em>That is the case for a decisions log,</em> even if it is one markdown file in a folder somewhere.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-14.png" alt="The build starts with three honest answers: what work do you actually do, where are you repeating yourself, and which decisions did you make twice?" loading="lazy" />
+    <figcaption>The build starts with three honest answers: what work do you actually do, where are you repeating yourself, and which decisions did you make twice?</figcaption>
+  </figure>
+
+  <p>Start with one task. Write the rules. Read them at session start. Iterate. By the end of the second week you will know whether the discipline is taking hold. By the end of the second month you will have an operating system.</p>
+
+  <p>The conviction that Claude can be foundational to how a firm runs is correct. The system to make that conviction real does not show up by itself. <em>Build it deliberately.</em> The compounding is real.</p>
+
+  <figure class="post-figure">
+    <img src="/assets/img/blog/from-chaos-to-cadence-claude-operating-system/slides/slide-15.png" alt="Turn ad hoc AI use into compounding firm capacity." loading="lazy" />
+    <figcaption>Turn ad hoc AI use into compounding firm capacity.</figcaption>
+  </figure>
+
+  <p>\*Prism AI Analytics helps solopreneurs and small teams design and ship Claude operating systems. If you have the conviction and want a partner on the build, <a href="/#contact">start a conversation</a>.\*</p>
+
+  <h3>Ready to Build Your Own Claude Operating System?</h3>
+
+  <p>Prism AI Analytics designs and implements Claude integration systems for solopreneurs and small teams. We bring the disciplines — rules, control planes, ticket workflows, weekly synthesis — that turn ad hoc AI use into compounding firm capacity.</p>
+
+  <p><a href="/#contact">Schedule a Discovery Call</a></p>
+    
+  </article>
+  <aside class="insights-rail">
+    <div class="insights-rail-label">Share</div>
+    <div class="insights-share">
+      <a class="insights-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprismaianalytics.com%2Fblog%2Ffrom-chaos-to-cadence-claude-operating-system%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8 19H5V8h3v11zM6.5 6.732a1.764 1.764 0 110-3.527 1.764 1.764 0 010 3.527zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg></a>
+      <a class="insights-share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fprismaianalytics.com%2Fblog%2Ffrom-chaos-to-cadence-claude-operating-system%2F&amp;text=From%20Chaos%20to%20Cadence%3A%20How%20We%20Built%20Prism&#39;s%20Claude%20Operating%20System" target="_blank" rel="noopener noreferrer" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
+      <a class="insights-share-btn" href="mailto:?subject=From%20Chaos%20to%20Cadence%3A%20How%20We%20Built%20Prism&#39;s%20Claude%20Operating%20System&amp;body=https%3A%2F%2Fprismaianalytics.com%2Fblog%2Ffrom-chaos-to-cadence-claude-operating-system%2F" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7L12 13 2 7"/></svg></a>
+      <button type="button" class="insights-share-btn" id="copyLinkBtn" data-url="https://prismaianalytics.com/blog/from-chaos-to-cadence-claude-operating-system/" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button>
+    </div>
+    
+    <div class="insights-rail-label">On this page</div>
+    <nav class="insights-toc" aria-label="Table of contents">
+      <ol>
+        <li class="insights-toc-item" data-toc-id="the-problem-nobody-warns-you-about"><a href="#the-problem-nobody-warns-you-about">The problem nobody warns you about</a></li>
+        <li class="insights-toc-item" data-toc-id="phase-1-discovery-and-mapping"><a href="#phase-1-discovery-and-mapping">Phase 1 — Discovery and Mapping</a></li>
+        <li class="insights-toc-item" data-toc-id="phase-2-systematization"><a href="#phase-2-systematization">Phase 2 — Systematization</a></li>
+        <li class="insights-toc-item" data-toc-id="phase-3-integration"><a href="#phase-3-integration">Phase 3 — Integration</a></li>
+        <li class="insights-toc-item" data-toc-id="phase-4-measure-and-iterate"><a href="#phase-4-measure-and-iterate">Phase 4 — Measure and Iterate</a></li>
+        <li class="insights-toc-item" data-toc-id="honest-caveats"><a href="#honest-caveats">Honest caveats</a></li>
+        <li class="insights-toc-item" data-toc-id="where-to-start-if-you-are-reading-this-with-conviction-and-no-system"><a href="#where-to-start-if-you-are-reading-this-with-conviction-and-no-system">Where to start if you are reading this with conviction and no system</a></li>
+      </ol>
+    </nav>
+  
+  </aside>
+</div>
+
+<div style="max-width:1040px;margin:0 auto;padding:0 2rem;">
+  <aside class="insights-author-card">
+    <div class="insights-author-photo" aria-hidden="true"><img src="/assets/img/authors/michele-fisher.jpg" alt="" onerror="this.parentNode.textContent='MF'"/></div>
+    <div>
+      <p class="insights-author-name">Michele Fisher</p>
+      <p class="insights-author-role">Founder, Prism AI Analytics</p>
+      <p class="insights-author-bio">Founder of Prism AI Analytics. BI and data-engineering background, currently focused on configuration management for AI agents in regulated enterprise environments.</p>
+      <a class="insights-author-link" href="https://www.linkedin.com/in/michelefisher/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn →</a>
+    </div>
+  </aside>
+</div>
+
+<section class="insights-newsletter">
+  <div class="insights-newsletter-inner">
+    <div>
+      <p class="insights-newsletter-eyebrow">Stay in the loop</p>
+      <h2>New Insights, straight to your inbox.</h2>
+      <p>Get the next post on enterprise AI governance the morning it publishes. No noise, one signal per week.</p>
+    </div>
+    <form class="insights-newsletter-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact"/>
+      <input type="hidden" name="source" value="blog-newsletter"/>
+      <input type="hidden" name="name" value="Newsletter subscriber"/>
+      <input type="hidden" name="message" value="Blog newsletter signup"/>
+      <div class="hp-field"><label>Do not fill: <input name="bot-field"/></label></div>
+      <label class="hp-field" for="newsletter-email">Email address</label>
+      <input id="newsletter-email" type="email" name="email" placeholder="you@company.com" required autocomplete="email"/>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
 </section>
+
+<section class="insights-related" aria-label="Related insights">
+    <h2 class="insights-related-heading">Related Insights</h2>
+    <div class="insights-related-grid">
+    <a class="insights-card" href="/blog/configuration-management-for-ai-agents/">
+      <div class="insights-card-image"><img src="/assets/img/blog/configuration-management-for-ai-agents/hero.png" alt="" loading="lazy"/></div>
+      <div class="insights-card-body">
+        <span class="insights-chip">AI Agent Governance</span>
+        <h3 class="insights-card-title">Configuration Management for AI Agents: The Missing Twin of Agentic Governance</h3>
+        <div class="insights-card-meta">
+          <time datetime="2026-05-28">May 28, 2026</time>
+          <span class="meta-sep" aria-hidden="true"></span><span>11 min</span>
+        </div>
+      </div>
+    </a>
+    <a class="insights-card" href="/blog/observability-isnt-governance/">
+      <div class="insights-card-image"><img src="/assets/img/blog/observability-isnt-governance/hero.png" alt="" loading="lazy"/></div>
+      <div class="insights-card-body">
+        <span class="insights-chip">AI Agent Governance</span>
+        <h3 class="insights-card-title">Observability Isn't Governance: The Latency Gap in Agentic AI</h3>
+        <div class="insights-card-meta">
+          <time datetime="2026-05-21">May 21, 2026</time>
+          <span class="meta-sep" aria-hidden="true"></span><span>9 min</span>
+        </div>
+      </div>
+    </a>
+    <a class="insights-card" href="/blog/a-hallucination-on-our-own-stack/">
+      <div class="insights-card-image"><img src="/assets/img/blog/a-hallucination-on-our-own-stack/hero.png" alt="" loading="lazy"/></div>
+      <div class="insights-card-body">
+        <span class="insights-chip">AI Agent Governance</span>
+        <h3 class="insights-card-title">A Hallucination on Our Own Stack: What Configuration Management Would Have Caught</h3>
+        <div class="insights-card-meta">
+          <time datetime="2026-05-15">May 15, 2026</time>
+          <span class="meta-sep" aria-hidden="true"></span><span>8 min</span>
+        </div>
+      </div>
+    </a>
+    </div>
+  </section>
 
 <footer>
   <div class="footer-brand">
@@ -87,6 +358,7 @@
 </footer>
 
 <script>
+  // Nav scroll + mobile menu
   window.addEventListener('scroll', () => {
     document.getElementById('topnav').classList.toggle('scrolled', window.scrollY > 60);
   });
@@ -94,6 +366,50 @@
     document.getElementById('hamburger').classList.toggle('active');
     document.getElementById('mobileNav').classList.toggle('active');
   });
+
+  // Copy-link share button — clipboard + toast
+  (function () {
+    var btn = document.getElementById('copyLinkBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var url = btn.getAttribute('data-url') || window.location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(showToast).catch(function () { showToast('Press Ctrl+C to copy'); });
+      } else {
+        showToast('Press Ctrl+C to copy');
+      }
+    });
+    function showToast(msg) {
+      var t = document.getElementById('insightsToast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'insightsToast';
+        t.className = 'insights-toast';
+        document.body.appendChild(t);
+      }
+      t.textContent = msg || 'Link copied to clipboard';
+      t.classList.add('visible');
+      setTimeout(function () { t.classList.remove('visible'); }, 2000);
+    }
+  })();
+
+  // TOC active-item highlight via IntersectionObserver
+  (function () {
+    var items = document.querySelectorAll('.insights-toc-item');
+    if (items.length === 0 || !('IntersectionObserver' in window)) return;
+    var byId = {};
+    items.forEach(function (li) { byId[li.getAttribute('data-toc-id')] = li; });
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          items.forEach(function (li) { li.classList.remove('insights-toc-item--active'); });
+          var li = byId[entry.target.id];
+          if (li) li.classList.add('insights-toc-item--active');
+        }
+      });
+    }, { rootMargin: '-96px 0px -65% 0px', threshold: 0 });
+    document.querySelectorAll('.insights-body h2[id]').forEach(function (h) { observer.observe(h); });
+  })();
 </script>
 </body>
 </html>
