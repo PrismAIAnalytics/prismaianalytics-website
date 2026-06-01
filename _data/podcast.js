@@ -40,6 +40,17 @@ const SHOW = {
 // from that. relatedPostSlug links the episode card to its companion post.
 const EPISODES = [
   {
+    number: 'EP 04',
+    title: 'From Chaos to Cadence: How We Built Prism\'s Claude Operating System',
+    date: '2026-06-01',
+    duration: '',
+    substackSlug: 'from-chaos-to-cadence-how-we-built',
+    relatedPostSlug: 'from-chaos-to-cadence-claude-operating-system',
+    relatedPostLabel: 'From Chaos to Cadence: How We Built Prism\'s Claude Operating System',
+    brief: 'The operational record behind the post — the four-phase build that turned Claude from present-but-unused into staff: map the work into Claude zones and human zones, write the rules every session inherits, wire a control plane the agents read at session start, then measure what works and prune what does not.',
+    tags: ['Claude for Business'],
+  },
+  {
     number: 'EP 03',
     title: 'Configuration Management for AI Agents',
     date: '2026-05-28',
