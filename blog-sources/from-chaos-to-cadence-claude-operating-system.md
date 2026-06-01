@@ -9,7 +9,7 @@ read_time: 10 min
 author: Michele Fisher
 category: Claude for Business
 dek: "Two months into Prism AI Analytics, we figured out how to wire Claude into our business operations in a way that actually works. Here is what we learned."
-hero_image: /assets/img/blog/from-chaos-to-cadence-claude-operating-system/framework-overview.png
+hero_image: /assets/img/blog/from-chaos-to-cadence-claude-operating-system/overview.png
 excerpt: "Two months into Prism AI Analytics, we figured out how to wire Claude into our business operations in a way that actually works. Here is what we learned."
 tags: ["Claude", "AI Adoption", "Workflow Automation", "Small Business"]
 featured: true
